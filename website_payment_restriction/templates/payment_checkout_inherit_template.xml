@@ -1,0 +1,11 @@
+<odoo>
+    <template id="payment_checkout_inherit" inherit_id="payment.checkout"
+              name="Payment Checkout" priority="16">
+
+        <xpath expr="//t[@t-foreach='providers']" position="attributes">
+            <attribute name="t-foreach">providers.filtered(lambda r : r.id not in env.user.partner_id.payment_restricted_ids.ids)</attribute>
+        </xpath>
+
+
+    </template>
+</odoo>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem name="Preparation" id="menu_preparation_root" sequence="40"
+        groups="stock.group_stock_manager,stock.group_stock_user"
+        web_icon="gypi_picking_order,static/description/icon.png"/>
+
+    <menuitem id="menu_preparation_order_mgmt" name="Picking Group" parent="menu_preparation_root" sequence="1" action="action_preparation_order_tree_all" groups="stock.group_stock_manager,stock.group_stock_user"/>
+    <menuitem id="menu_picking_mgmt" name="Operations" parent="menu_preparation_root" sequence="2" action="action_picking_tree_preparation"/>
+
+
+<!--    <menuitem id="all_preparation" name="Preparations" parent="menu_preparation_order_mgmt" sequence="5" action="action_preparation_order_tree_all" groups="stock.group_stock_manager,stock.group_stock_user"/>-->
+<!--    <menuitem id="all_picking" name="Operations" parent="menu_picking_mgmt" sequence="5" action="action_picking_tree_preparation" groups="stock.group_stock_manager,stock.group_stock_user"/>-->
+
+</odoo>

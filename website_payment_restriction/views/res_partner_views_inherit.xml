@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="res_partner_form_inherit" model="ir.ui.view">
+        <field name="name">res.partner.form.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Payment Method restriction">
+                    <group>
+                        <field name="payment_restricted_ids" widget="many2many_tags"
+                               domain="[('is_published', '=', True),('state','in',('enabled','test'))]" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
+
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

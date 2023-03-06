@@ -1,0 +1,42 @@
+<odoo>
+    <template id="cart_lines_inherit" inherit_id="website_sale.cart_lines"
+              name="Shopping Cart Lines" priority="16">
+
+<!--        <xpath expr="//td[hasclass('td-action')]" position="inside">-->
+<!--                            <a href="#" aria-label="Add comment" title="Add comment" class="action_add_comment "> <small><i class="fa fa-comment"/></small></a>-->
+
+<!--        </xpath>-->
+        <xpath expr="//th[hasclass('td-qty')]" position="before">
+           <th class="td-comment">Comment</th>
+        </xpath>
+        <xpath expr="//td[hasclass('td-qty')]" position="before">
+            <td class="td-comment">
+                <textarea name="input_comment" class="js_add_comment w-100 h-100" row="2"  t-att-data-line-id="line.id"><t t-esc="line.comment_customer"/></textarea>
+
+            </td>
+
+        </xpath>
+
+    </template>
+
+        <template id="website_sale_cart_inherit" inherit_id="website_sale.cart" name="Shopping Cart" priority="16">
+        <xpath expr="//div[hasclass('oe_cart')]" position="inside">
+            <div class="row mt-3 justify-content-md-end">
+                <div class="col-auto mt-auto mb-auto fw-bold">
+
+                       <strong> Order N° : </strong>
+
+                    </div>
+                   <div class="col-auto">
+                    <textarea name="input_comment" class="js_add_order_comment" row="2"  ><t t-esc="website_sale_order.comment_customer"/></textarea>
+                    </div>
+
+            </div>
+
+
+
+
+        </xpath>
+
+    </template>
+</odoo>

@@ -1,0 +1,6 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_preparation_order_manager,preparation.order.manager,model_preparation_order,stock.group_stock_manager,1,1,1,1
+access_preparation_order_user,preparation.order.user,model_preparation_order,base.group_user,1,0,0,0
+access_product_list,product.list,model_product_list,,1,1,1,1
+
+

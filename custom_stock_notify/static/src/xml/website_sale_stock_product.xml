@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+     <t t-extend="website_sale_stock.product_availability">
+         <t t-jquery="t:first" t-operation="prepend">
+            <div class="text-success fw-bold"   t-if="free_qty gt 0">
+                 <i class="fa fa-check me-1"/>
+                           In Stock
+                        </div>
+        </t>
+
+
+    <t  t-jquery="div[id='out_of_stock_message']" t-operation="replace">
+         <div id="out_of_stock_message">
+                    <div t-if='has_out_of_stock_message'  class="text-danger fw-bold">
+
+                        <t t-out='out_of_stock_message'/>
+                    </div>
+                    <t t-elif="!allow_out_of_stock_order">
+                        <div class="text-danger fw-bold">
+                            <i class="fa fa-times me-1"/>
+                            Out of Stock
+                        </div>
+                    </t>
+                </div>
+    </t>
+     </t>
+</odoo>

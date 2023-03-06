@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+<record id="sale_order_line_comment" model="ir.ui.view">
+          <field name="name">sale.order.line.comment</field>
+          <field name="model">sale.order</field>
+          <field name="inherit_id" ref="sale.view_order_form"/>
+          <field name="arch" type="xml">
+              <xpath expr="//field[@name='order_line']//tree//field[@name='name']" position="after">
+                  <field name="comment_customer"/>
+              </xpath>
+              <xpath expr="//field[@name='order_line']//form//field[@name='name']" position="after">
+                  <field name="comment_customer"/>
+              </xpath>
+              <xpath expr="//notebook" position="inside">
+                  <page string="Other">
+                      <group>
+                          <group>
+                              <field name="comment_customer" string="Order N° :"/>
+                          </group>
+                      </group>
+
+                  </page>
+              </xpath>
+   </field>
+</record>
+</odoo>

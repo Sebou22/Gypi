@@ -1,0 +1,81 @@
+<odoo>
+    <template id="template_product" inherit_id="website_sale.product"
+              name="Product" priority="16">
+         <xpath expr="//div[@id='product_details']" position="inside">
+             <div  class="oe_structure oe_empty mt16" id="product_full_info"/>
+             <div>
+                 <b>EAN Code :</b> <span t-esc="product.barcode"/>
+             </div>
+
+             <div>
+                 <b>QR Code :</b>
+                  <img t-att-src="image_data_uri(product.qr_code)" widget='image' class="pos-receipt-logo"/>
+             </div>
+
+
+         </xpath>
+                 <xpath expr="//small[hasclass('o_base_unit_price_wrapper')]" position="after">
+  <a class="btn float-end" data-bs-toggle="collapse" href="#price_cost" role="button" aria-expanded="false" aria-controls="collapseExample">
+    <img src="https://cdn-icons-png.flaticon.com/512/590/590503.png" style="width:25px;height:25%"/>
+  </a>
+                     <span class="float-end collapse h5 me-2" id="price_cost">
+                         <p class="fw-bold m-0" style="font-size:14px">Prix d'achat HT</p>
+   <span class=""  t-esc="combination_info['price']" t-options="{'widget': 'monetary', 'display_currency': product.currency_id}"/>
+
+</span>
+         </xpath>
+
+
+    </template>
+
+     <template id="website_cost_item_button" inherit_id="website_sale.products_item" name="Product Cost">
+        <xpath expr="//div[hasclass('oe_product_image')]" position="before">
+            <div class="row">
+
+                <t t-set="combination" t-value="product._get_first_possible_combination()"/>
+                <t t-set="combination_info" t-value="product.with_context(website_sale_stock_get_quantity=True)._get_combination_info(combination, add_qty=add_qty or 1, pricelist=pricelist)"/>
+                <t t-set="product_variant" t-value="product.env['product.product'].browse(combination_info['product_id'])"/>
+            <div class="col-8 div-cost ps-0">
+
+               <a class="btn  pt-0 float-end" data-bs-toggle="collapse" t-att-href="'#price_cost_%s' %product.id" role="button" aria-expanded="false" aria-controls="collapseExample">
+    <img src="https://cdn-icons-png.flaticon.com/512/590/590503.png" style="width:25px;height:25%"/>
+  </a>
+                <span class="collapse fw-bold float-end me-1"  t-att-id="'price_cost_%s' %product.id">
+                    <p class="fw-bold m-0" style="font-size:11px">Prix d'achat HT</p>
+                   <span t-esc="combination_info['price']" t-options="{'widget': 'monetary', 'display_currency': product.currency_id}"/>
+
+</span>
+            </div>
+            </div>
+        </xpath>
+         <xpath expr="//div[hasclass('product_price')]" position="replace">
+              <div class="product_price" itemprop="offers" itemscope="itemscope" itemtype="http://schema.org/Offer">
+                     <p class="fw-bold m-0" style="font-size:14px">Prix de vente TTC</p>
+                        <span class="h6 mb-0"  t-esc="product_variant.price_with_tax" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                        <span itemprop="priceCurrency" style="display:none;" t-esc="website.currency_id.name"/>
+
+
+
+                    </div>
+         </xpath>
+    </template>
+
+    <template id="product_price_custom" inherit_id="website_sale.product_price">
+         <xpath expr="//h3[hasclass('css_editable_mode_hidden')]" position="replace">
+            <h3 class="css_editable_mode_hidden">
+                <p class="fw-bold m-0" style="font-size:14px;">Prix de vente TTC</p>
+                <span class="oedd_price" style="white-space: nowrap;" t-esc="product_variant.price_with_tax" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}"/>
+                <span itemprop="priceCurrency" style="display:none;" t-esc="website.currency_id.name"/>
+
+                <!--<span itemprop="price" style="display:none;" t-esc="combination_info['price']"/>-->
+
+<!--                <span t-attf-class="text-danger oe_default_price ms-1 h5 {{'' if combination_info['has_discounted_price'] else 'd-none'}}" style="text-decoration: line-through; white-space: nowrap;" t-esc="variant" t-options="{'widget': 'monetary', 'display_currency': website.currency_id}" itemprop="listPrice"/> <span class="fw-bold h6">HT</span>-->
+<!--                <t t-if="is_view_active('website_sale.tax_indication')" t-call="website_sale.tax_indication"/>-->
+<!--                <del t-if="product.compare_list_price">-->
+<!--                    <span t-field="product.compare_list_price" groups="website_sale.group_product_price_comparison" t-options="{                            &quot;widget&quot;: &quot;monetary&quot;,                            &quot;display_currency&quot;: product.currency_id,                        }"/>-->
+<!--                </del>-->
+            </h3>
+
+        </xpath>
+    </template>
+</odoo>

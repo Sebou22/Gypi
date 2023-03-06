@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+<record id="view_partner_inherit" model="ir.ui.view">
+          <field name="name">res.partner.form.inherit</field>
+          <field name="model">res.partner</field>
+          <field name="inherit_id" ref="base.view_partner_form"/>
+          <field name="arch" type="xml">
+              <xpath expr="//notebook" position="inside">
+                  <page string="Marketing">
+                      <group >
+                          <group>
+                              <field name="website_logo" string="User Logo"  widget="image" class="oe_avatar" attrs="{'readonly': [('company_type', '!=', 'company')]}"/>
+
+                          </group>
+                      </group>
+                  </page>
+              </xpath>
+   </field>
+</record>
+</odoo>

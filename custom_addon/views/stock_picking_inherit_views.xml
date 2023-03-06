@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+<record id="view_picking_form_comment" model="ir.ui.view">
+          <field name="name">stock.picking.comment</field>
+          <field name="model">stock.picking</field>
+          <field name="inherit_id" ref="stock.view_picking_form"/>
+          <field name="arch" type="xml">
+              <xpath expr="//field[@name='move_ids_without_package']//tree//field[@name='description_picking']" position="after">
+                  <field name="comment_customer"/>
+              </xpath>
+              <xpath expr="//field[@name='move_ids_without_package']//form//field[@name='description_picking']" position="after">
+                  <field name="comment_customer"/>
+              </xpath>
+              <xpath expr="//notebook" position="inside">
+                  <page string="Other">
+                      <group>
+                          <group>
+                              <field name="comment_customer" string="Order N° :"/>
+                          </group>
+                      </group>
+
+                  </page>
+              </xpath>
+   </field>
+</record>
+</odoo>

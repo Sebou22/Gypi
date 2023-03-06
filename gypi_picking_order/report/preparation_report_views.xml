@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_report_preparation" model="ir.actions.report">
+            <field name="name">Bon Preparation</field>
+            <field name="model">preparation.order</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">gypi_picking_order.report_preparation_order</field>
+            <field name="report_file">gypi_picking_order.report_preparation_order</field>
+            <field name="print_report_name">'Preparation Order - %s' % (object.name)</field>
+            <field name="binding_model_id" ref="model_preparation_order"/>
+            <field name="binding_type">report</field>
+        </record>
+    </data>
+</odoo>

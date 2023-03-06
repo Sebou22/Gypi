@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="website_stock_item_button" inherit_id="custom_addon.website_cost_item_button" name="Product Stock">
+        <xpath expr="//div[hasclass('div-cost')]" position="before">
+                    <t t-set="combination_info_test" t-value="product._get_combination_info(only_template=True, add_qty=add_qty or 1, pricelist=pricelist)"/>
+            <div class="col-4 pe-0" t-if='product.type=="product"'>
+               <t t-if="combination_info['free_qty'] &gt;0">
+                    <span role="button" class="btn btn-sm btn-primary text-white" title="This product is in stock.">In stock</span>
+                </t>
+                <t t-else="">
+                    <span role="button" class="btn btn-sm btn-danger text-white" title="This product is out of stock.">Out stock</span>
+                </t>
+            </div>
+        </xpath>
+    </template>
+</odoo>
