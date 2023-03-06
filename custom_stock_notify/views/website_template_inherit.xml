@@ -17,7 +17,7 @@
     <template id="products_add_to_cart_custom" inherit_id="website_sale.products_add_to_cart" customize_show="True" name="Add to Cart">
         <xpath expr='//t[@t-if="product_variant_id"]' position="attributes">
 
-<attribute name="t-if">product_variant_id and (product_variant_id.free_qty &gt;0 or product_variant_id.allow_out_of_stock_order)</attribute>
+<attribute name="t-if">product_variant_id and (combination_info['free_qty'] &gt;0 or combination_info['allow_out_of_stock_order'])</attribute>
         </xpath>
     </template>
 </odoo>
