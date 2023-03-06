@@ -16,7 +16,7 @@
 
     <template id="products_add_to_cart_custom" inherit_id="website_sale.products_add_to_cart" customize_show="True" name="Add to Cart">
         <xpath expr='//t[@t-if="product_variant_id"]' posiion="after">
-            <span t-esc="product_variant_id"/>
+            <span t-esc="combination_info"/>
         </xpath>
     </template>
 </odoo>
