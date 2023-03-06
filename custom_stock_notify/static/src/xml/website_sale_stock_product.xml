@@ -4,7 +4,7 @@
          <t t-jquery="t:first" t-operation="prepend">
             <div class="text-success fw-bold"   t-if="free_qty gt 0">
                  <i class="fa fa-check me-1"/>
-                           In Stock
+                           En stock
                         </div>
         </t>
 
@@ -18,7 +18,7 @@
                     <t t-elif="!allow_out_of_stock_order">
                         <div class="text-danger fw-bold">
                             <i class="fa fa-times me-1"/>
-                            Out of Stock
+                            En rupture de stock
                         </div>
                     </t>
                 </div>
