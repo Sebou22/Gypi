@@ -4,7 +4,7 @@
          <xpath expr="//div[@id='product_details']" position="inside">
              <div  class="oe_structure oe_empty mt16" id="product_full_info"/>
              <div t-if="product.barcode">
-                 <b>EAN Code :</b>
+                 <b>EAN Code </b>
              <span>
                   <div t-field="product.barcode" t-options="{'widget': 'barcode', 'symbology': 'auto', 'width': 400, 'height': 100, 'quiet': 0, 'img_style': 'height:35px;'}"/>
              </span>

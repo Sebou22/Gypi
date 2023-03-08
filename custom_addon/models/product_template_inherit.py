@@ -39,14 +39,10 @@ class ProductTemplateInherit(models.Model):
                     box_size=3,
                     border=4,
                 )
-                qr.add_data("Product : ")
-                qr.add_data(rec.name)
+                qr.add_data("Url Produit : ")
+                qr.add_data(rec.website_url)
                 qr.add_data(", Reference : ")
                 qr.add_data(rec.default_code)
-                qr.add_data(", Price : ")
-                qr.add_data(rec.list_price)
-                qr.add_data(", Quantity : ")
-                qr.add_data(rec.qty_available)
                 qr.make(fit=True)
                 img = qr.make_image()
                 temp = BytesIO()
