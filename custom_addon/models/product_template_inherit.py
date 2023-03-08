@@ -32,6 +32,8 @@ class ProductTemplateInherit(models.Model):
         "method to generate QR code"
         for rec in self:
             if qrcode and base64:
+                base_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url') or ''
+                url = "%s%s" %(base_url,rec.website_url)
 
                 qr = qrcode.QRCode(
                     version=1,
@@ -39,14 +41,7 @@ class ProductTemplateInherit(models.Model):
                     box_size=3,
                     border=4,
                 )
-                qr.add_data("Product : ")
-                qr.add_data(rec.name)
-                qr.add_data(", Reference : ")
-                qr.add_data(rec.default_code)
-                qr.add_data(", Price : ")
-                qr.add_data(rec.list_price)
-                qr.add_data(", Quantity : ")
-                qr.add_data(rec.qty_available)
+                qr.add_data(url)
                 qr.make(fit=True)
                 img = qr.make_image()
                 temp = BytesIO()

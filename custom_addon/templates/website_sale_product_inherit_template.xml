@@ -3,16 +3,18 @@
               name="Product" priority="16">
          <xpath expr="//div[@id='product_details']" position="inside">
              <div  class="oe_structure oe_empty mt16" id="product_full_info"/>
+             <div t-if="product.barcode">
+                 <b>EAN Code </b>
+                  <div t-field="product.barcode" t-options="{'widget': 'barcode', 'symbology': 'auto', 'width': 400, 'height': 100, 'quiet': 0, 'img_style': 'height:35px;'}"/>
+                 <span  t-esc="product.barcode"/>
+              </div>
+             <br/>
              <div>
-                 <b>EAN Code :</b> <span t-esc="product.barcode"/>
+                 <b>QR Code </b>
+                 <div>
+                     <img t-att-src="image_data_uri(product.qr_code)" widget='image' class="pos-receipt-logo"/>
+                 </div>
              </div>
-
-             <div>
-                 <b>QR Code :</b>
-                  <img t-att-src="image_data_uri(product.qr_code)" widget='image' class="pos-receipt-logo"/>
-             </div>
-
-
          </xpath>
                  <xpath expr="//small[hasclass('o_base_unit_price_wrapper')]" position="after">
   <a class="btn float-end" data-bs-toggle="collapse" href="#price_cost" role="button" aria-expanded="false" aria-controls="collapseExample">
