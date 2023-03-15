@@ -3,8 +3,15 @@
               name="Product" priority="16">
          <xpath expr="//div[@id='product_details']" position="inside">
              <div  class="oe_structure oe_empty mt16" id="product_full_info"/>
+               <div>
+                 <b><span t-esc="product.default_code"/> </b>
+                 <div>
+                     <img t-att-src="image_data_uri(product.qr_code)" widget='image' class="pos-receipt-logo"/>
+                 </div>
+
+             </div>
              <div t-if="product.barcode">
-                 <b>EAN Code </b>
+                 <b><span t-esc="product.name"/>  </b>
 
                   <div t-field="product.barcode" t-options="{'widget': 'barcode', 'symbology': 'auto', 'width': 400, 'height': 100, 'quiet': 0, 'img_style': 'height:35px;'}"/>
                  <span  t-esc="product.barcode"/>
@@ -13,13 +20,7 @@
              <br/>
 
 
-             <div>
-                 <b>QR Code </b>
-                 <div>
-                     <img t-att-src="image_data_uri(product.qr_code)" widget='image' class="pos-receipt-logo"/>
-                 </div>
-
-             </div>
+           
 
 
          </xpath>
