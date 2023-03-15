@@ -5,7 +5,7 @@
              <div  class="oe_structure oe_empty mt16 " id="product_full_info"/>
                <div class="row">
                    <div class="col-4">
-                       <b><span t-esc="product.default_code"/> </b>
+                       <b style="position:relative;top: 50%;"><span t-esc="product.default_code"/> </b>
                    </div>
                  <div class="col">
                        <img t-att-src="image_data_uri(product.qr_code)" widget='image' class="pos-receipt-logo"/>
