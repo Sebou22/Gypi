@@ -8,7 +8,7 @@
                        <b style="position:relative;top: 50%;"><span t-esc="product.default_code"/> </b>
                    </div>
                  <div class="col">
-                       <img t-att-src="image_data_uri(product.qr_code)" widget='image' class="pos-receipt-logo"/>
+                       <img t-att-src="image_data_uri(product.qr_code)" widget='image' class="pos-receipt-logo" style="width:200px;"/>
                    </div>
                  <div>
                      
