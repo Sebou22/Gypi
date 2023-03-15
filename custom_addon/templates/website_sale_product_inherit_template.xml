@@ -1,20 +1,29 @@
 <odoo>
     <template id="template_product" inherit_id="website_sale.product"
               name="Product" priority="16">
-         <xpath expr="//div[@id='product_details']" position="inside">
-             <div  class="oe_structure oe_empty mt16" id="product_full_info"/>
+                  <xpath expr="//div[@id='product_details']" position="inside">
+             <div  class="oe_structure oe_empty mt16 " id="product_full_info"/>
+               <div class="row">
+                   <div class="col-3">
+                       <b class="h6" style="position:relative;top: 50%;"><span t-esc="product.default_code"/> </b>
+                   </div>
+                 <div class="col">
+                       <img t-att-src="image_data_uri(product.qr_code)" widget='image' class="pos-receipt-logo" />
+                   </div>
+                 <div>
+                     
+                 </div>
+
+             </div>
              <div t-if="product.barcode">
-                 <b>EAN Code </b>
-                  <div t-field="product.barcode" t-options="{'widget': 'barcode', 'symbology': 'auto', 'width': 400, 'height': 100, 'quiet': 0, 'img_style': 'height:35px;'}"/>
+                 <b><span t-esc="product.name"/>  </b>
+
+                  <div class="mt-1" t-field="product.barcode" t-options="{'widget': 'barcode', 'symbology': 'auto', 'width': 400, 'height': 100, 'quiet': 0, 'img_style': 'height:50px;'}"/>
                  <span  t-esc="product.barcode"/>
+
               </div>
              <br/>
-             <div>
-                 <b>QR Code </b>
-                 <div>
-                     <img t-att-src="image_data_uri(product.qr_code)" widget='image' class="pos-receipt-logo"/>
-                 </div>
-             </div>
+
          </xpath>
                  <xpath expr="//small[hasclass('o_base_unit_price_wrapper')]" position="after">
   <a class="btn float-end" data-bs-toggle="collapse" href="#price_cost" role="button" aria-expanded="false" aria-controls="collapseExample">
