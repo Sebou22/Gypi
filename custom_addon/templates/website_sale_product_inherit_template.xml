@@ -4,7 +4,7 @@
          <xpath expr="//div[@id='product_details']" position="inside">
              <div  class="oe_structure oe_empty mt16 " id="product_full_info"/>
                <div class="row">
-                   <div class="col">
+                   <div class="col-4">
                        <b><span t-esc="product.default_code"/> </b>
                    </div>
                  <div class="col">
