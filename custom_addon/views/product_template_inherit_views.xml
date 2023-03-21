@@ -23,4 +23,23 @@
               </xpath>
    </field>
 </record>
+<record id="product_public_category_form_view_inherit" model="ir.ui.view">
+          <field name="name">product.public.category.form.inherit</field>
+          <field name="model">product.public.category</field>
+          <field name="inherit_id" ref="website_sale.product_public_category_form_view"/>
+          <field name="arch" type="xml">
+              <xpath expr="//sheet" position="inside">
+                  <notebook>
+                  <page string="Restricted access">
+                      <group >
+                          <group>
+                              <field name="restriction_type"  widget="radio"/>
+                              <field name="restriction_contact"  widget="many2many_tags" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}" attrs="{'invisible': [('restriction_type', '!=', 'section')]}"/>
+                          </group>
+                      </group>
+                  </page>
+                  </notebook>
+              </xpath>
+   </field>
+</record>
 </odoo>
