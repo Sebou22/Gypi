@@ -9,6 +9,17 @@
               <xpath expr="//field[@name = 'barcode']" position="after">
                   <field name="qr_code" widget='image' class="oe_avatar"
                    />
+
+              </xpath>
+              <xpath expr="//notebook" position="inside">
+                  <page string="Restricted access">
+                      <group >
+                          <group>
+                              <field name="restriction_type"  widget="radio"/>
+                              <field name="restriction_contact"  widget="many2many_tags" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}" attrs="{'invisible': [('restriction_type', '!=', 'section')]}"/>
+                          </group>
+                      </group>
+                  </page>
               </xpath>
    </field>
 </record>

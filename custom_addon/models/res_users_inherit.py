@@ -13,3 +13,15 @@ class ResUsersInherit(models.Model):
             self.clear_caches()
         return res
 
+class ProductPublicCategoryInherit(models.Model):
+    _inherit = "product.public.category"
+
+    restriction_type = fields.Selection(
+        selection=[
+            ('all', 'All'),
+            ('section', 'Section'),
+        ],
+        string='Contact Restriction',
+    )
+    restriction_contact = fields.Many2many('res.partner', string='Contact')
+
