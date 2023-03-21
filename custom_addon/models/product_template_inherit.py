@@ -50,3 +50,7 @@ class ProductTemplateInherit(models.Model):
                 rec.update({'qr_code': qr_image})
             else:
                 raise UserError(_('Necessary Requirements To Run This Operation Is Not Satisfied'))
+
+    restriction_type = fields.Selection(selection=[('all', 'All'), ('section', 'Section')],
+                                        string='Contact Restriction')
+    restriction_contact = fields.Many2many('res.partner', string='Contact')
