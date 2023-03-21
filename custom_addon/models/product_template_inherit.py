@@ -53,3 +53,14 @@ class ProductTemplateInherit(models.Model):
 
     restriction_type = fields.Selection(selection=[('neither','Neither'),('all', 'All'),('section', 'Section')],string='Contact Restriction',default='neither',required=True)
     restriction_contact = fields.Many2many('res.users', string='Contact')
+    restrict_ok = fields.Boolean('Restriction state', compute="_get_state_restriction")
+
+    def _get_restriction(self):
+        user = self.env.user.id
+        for rec in self:
+            flag = True
+            if(rec.restriction_type=='all' or (rec.restriction_type=='section' and user in rec.restriction_contacts)):
+                flag = False
+            elif(all([x.restriction_type=='all' or (x.restriction_type=='section' and user in x.restriction_contacts) for x in rec.public_categ_ids])):
+                flag = False
+            rec.restrict_ok = flag
