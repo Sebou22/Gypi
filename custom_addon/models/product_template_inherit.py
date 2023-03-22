@@ -58,7 +58,7 @@ class ProductTemplateInherit(models.Model):
     def _get_restriction(self):
         user = self.env.user.id
         for rec in self:
-            flag = True
+            flag = False
             if(rec.restriction_type=='all' or (rec.restriction_type=='section' and user in rec.restriction_contacts)):
                 flag = False
             elif(all([x.restriction_type=='all' or (x.restriction_type=='section' and user in x.restriction_contacts) for x in rec.public_categ_ids])):
