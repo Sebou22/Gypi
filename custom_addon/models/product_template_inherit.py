@@ -66,20 +66,20 @@ class ProductTemplateInherit(models.Model):
         user = self.env.user.id
         for rec in self:
             flag = True
-            if(rec.restriction_type== "all"):
-                flag = False
-            elif((rec.restriction_type=="section" and user in rec.restriction_contacts.ids)):
-                flag=False
+            if (rec.restriction_type != "neither"):
+                if (rec.restriction_type == "all"):
+                    flag = False
+                elif ((rec.restriction_type == "section" and user in rec.restriction_contacts.ids)):
+                    flag = False
             if(flag):
                 for categ in rec.public_categ_ids:
                     if(categ.restriction_type != "neither"):
                         if (categ.restriction_type == "all"):
                             flag = False
                             break
-                        elif (categ.restriction_type == "section"):
-                            if (user in categ.restriction_contacts.ids):
-                                flag = False
-                                break
+                        elif (categ.restriction_type == "section" and user in categ.restriction_contacts.ids):
+                            flag = False
+                            break
 
             rec.restrict_ok = flag
 
