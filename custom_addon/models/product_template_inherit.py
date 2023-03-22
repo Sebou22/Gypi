@@ -9,6 +9,9 @@ except ImportError:
 from io import BytesIO
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
+import logging
+
+_logger = logging.getLogger(__name__)
 class ProductProductInherit(models.Model):
     _inherit = "product.product"
     price_with_tax = fields.Float(compute='_compute_price_with_tax')
@@ -66,20 +69,22 @@ class ProductTemplateInherit(models.Model):
         user = self.env.user.id
         for rec in self:
             flag = True
-            if (rec.restriction_type != "neither"):
-                if (rec.restriction_type == "all"):
+            _logger.info("%s de restriction type %s" %(rec.name,rec.restriction_type))
+            if(rec.restriction_type != "neither"):
+                if(rec.restriction_type == "all"):
                     flag = False
-                elif ((rec.restriction_type == "section" and user in rec.restriction_contacts.ids)):
+                elif((rec.restriction_type == "section" and user in rec.restriction_contacts.ids)):
                     flag = False
             if(flag):
                 for categ in rec.public_categ_ids:
                     if(categ.restriction_type != "neither"):
-                        if (categ.restriction_type == "all"):
+                        if(categ.restriction_type == "all"):
                             flag = False
                             break
-                        elif (categ.restriction_type == "section" and user in categ.restriction_contacts.ids):
+                        elif(categ.restriction_type == "section" and user in categ.restriction_contacts.ids):
                             flag = False
                             break
+            _logger.info("mais flag %s" %flag)
 
             rec.restrict_ok = flag
 
