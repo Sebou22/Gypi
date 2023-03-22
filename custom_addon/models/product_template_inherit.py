@@ -69,6 +69,7 @@ class ProductTemplateInherit(models.Model):
         user = self.env.user.id
         for rec in self:
             flag = True
+            _logger.info("%s de restriction type %s" % (rec.name, rec.restriction_type))
 
             # if(rec.restriction_type != "neither"):
             #     if(rec.restriction_type == "all"):
