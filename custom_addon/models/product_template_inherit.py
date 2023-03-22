@@ -70,8 +70,14 @@ class ProductTemplateInherit(models.Model):
                 flag = False
             elif(rec.restriction_type=='section' and user in rec.restriction_contacts.ids):
                 flag=False
-            elif(any([x.restriction_type=='all' or (x.restriction_type=='section' and user in x.restriction_contacts.ids) for x in rec.public_categ_ids])):
-                flag = False
+            if(flag):
+                for categ in rec.public_categ_ids:
+                    if(categ.restriction_type=='all'):
+                        flag = False
+                        break
+                    elif(categ.restriction_type=='section' and user in categ.restriction_contacts.ids):
+                        flag = False
+                        break
             rec.restrict_ok = flag
 
     # def _value_search(self, operator, value):
