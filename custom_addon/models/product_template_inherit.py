@@ -58,7 +58,7 @@ class ProductTemplateInherit(models.Model):
 
     def write(self, values):
         res = super(ProductTemplateInherit, self).write(values)
-        if 'restriction_type' in values or 'restriction_contact' in values:
+        if 'restriction_type' in values or 'restriction_contacts' in values:
             self.clear_caches()
         return res
 
