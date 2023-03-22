@@ -62,7 +62,7 @@ class ProductTemplateInherit(models.Model):
             self.clear_caches()
         return res
 
-    def _get_restriction(self):
+    def _get_state_restriction(self):
         user = self.env.user.id
         for rec in self:
             flag = True
