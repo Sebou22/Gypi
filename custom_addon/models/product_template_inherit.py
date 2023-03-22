@@ -62,9 +62,10 @@ class ProductTemplateInherit(models.Model):
     def write(self, values):
         res = super(ProductTemplateInherit, self).write(values)
         if 'restriction_type' in values or 'restriction_contacts' in values:
-            self.clear_caches()
-            if(self.restriction_type=="neither"):
+            if(values['restriction_type'] =="neither"):
                 self.restriction_contacts = False
+            self.clear_caches()
+
         return res
 
     def _get_state_restriction(self):
