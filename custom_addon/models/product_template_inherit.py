@@ -51,7 +51,7 @@ class ProductTemplateInherit(models.Model):
             else:
                 raise UserError(_('Necessary Requirements To Run This Operation Is Not Satisfied'))
 
-    restriction_type = fields.Selection(selection=[('neither','Neither'),('all', 'All'),('section', 'Section')],string='Contact Restriction',default='neither',required=True)
+    restriction_type = fields.Selection(selection=[('neither','Neither'),('all', 'All'),('section', 'Section'),],string='Contact Restriction',default='neither',required=True)
     restriction_contacts = fields.Many2many('res.users', string='Contact')
     restrict_ok = fields.Boolean('Restriction state', compute="_get_state_restriction",search="_value_search")
 
@@ -75,9 +75,11 @@ class ProductTemplateInherit(models.Model):
                     if(categ.restriction_type =='all'):
                         flag = False
                         break
-                    elif((categ.restriction_type =='section' and user in categ.restriction_contacts.ids)):
-                        flag = False
-                        break
+                    elif(categ.restriction_type == 'section'):
+                        if(user in categ.restriction_contacts.ids):
+                            flag = False
+                            break
+
             rec.restrict_ok = flag
 
     def _value_search(self, operator, value):
