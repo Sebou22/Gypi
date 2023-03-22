@@ -69,14 +69,15 @@ class ProductTemplateInherit(models.Model):
         user = self.env.user.id
         for rec in self:
             flag = True
-            _logger.info("%s de restriction type %s" %(rec.name,rec.restriction_type))
-            if(rec.restriction_type != "neither"):
-                if(rec.restriction_type == "all"):
-                    flag = False
-                elif((rec.restriction_type == "section" and user in rec.restriction_contacts.ids)):
-                    flag = False
+
+            # if(rec.restriction_type != "neither"):
+            #     if(rec.restriction_type == "all"):
+            #         flag = False
+            #     elif((rec.restriction_type == "section" and user in rec.restriction_contacts.ids)):
+            #         flag = False
             if(flag):
                 for categ in rec.public_categ_ids:
+                    _logger.info("%s de restriction type %s" % (categ.name, categ.restriction_type))
                     if(categ.restriction_type != "neither"):
                         if(categ.restriction_type == "all"):
                             flag = False
