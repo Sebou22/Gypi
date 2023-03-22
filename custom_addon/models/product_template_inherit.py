@@ -52,7 +52,7 @@ class ProductTemplateInherit(models.Model):
                 raise UserError(_('Necessary Requirements To Run This Operation Is Not Satisfied'))
 
     restriction_type = fields.Selection(selection=[('neither','Neither'),('all', 'All'),('section', 'Section')],string='Contact Restriction',default='neither',required=True)
-    restriction_contact = fields.Many2many('res.users', string='Contact')
+    restriction_contacts = fields.Many2many('res.users', string='Contact')
     restrict_ok = fields.Boolean('Restriction state', compute="_get_state_restriction",search="_value_search")
 
 
