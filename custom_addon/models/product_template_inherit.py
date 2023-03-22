@@ -55,6 +55,13 @@ class ProductTemplateInherit(models.Model):
     restriction_contact = fields.Many2many('res.users', string='Contact')
     restrict_ok = fields.Boolean('Restriction state', compute="_get_state_restriction")
 
+
+    def write(self, values):
+        res = super(ProductTemplateInherit, self).write(values)
+        if 'restriction_type' in values or 'restriction_contact' in values:
+            self.clear_caches()
+        return res
+
     def _get_restriction(self):
         user = self.env.user.id
         for rec in self:
