@@ -63,7 +63,7 @@ class ProductTemplateInherit(models.Model):
         res = super(ProductTemplateInherit, self).write(values)
         if 'restriction_type' in values or 'restriction_contacts' in values:
             if(values['restriction_type'] =="neither"):
-                self.restriction_contacts = False
+                res.restriction_contacts = False
             self.clear_caches()
 
         return res
