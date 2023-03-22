@@ -63,22 +63,21 @@ class ProductTemplateInherit(models.Model):
         res = super(ProductTemplateInherit, self).write(values)
         if 'restriction_type' in values or 'restriction_contacts' in values:
             self.clear_caches()
+            if(self.restriction_type=="neither"):
+                self.restriction_contacts = False
         return res
 
     def _get_state_restriction(self):
         user = self.env.user.id
         for rec in self:
             flag = True
-            _logger.info("%s de restriction type %s" % (rec.name, rec.restriction_type))
-
-            # if(rec.restriction_type != "neither"):
-            #     if(rec.restriction_type == "all"):
-            #         flag = False
-            #     elif((rec.restriction_type == "section" and user in rec.restriction_contacts.ids)):
-            #         flag = False
+            if(rec.restriction_type != "neither"):
+                if(rec.restriction_type == "all"):
+                    flag = False
+                elif((rec.restriction_type == "section" and user in rec.restriction_contacts.ids)):
+                    flag = False
             if(flag):
                 for categ in rec.public_categ_ids:
-                    _logger.info("%s de restriction type %s" % (categ.name, categ.restriction_type))
                     if(categ.restriction_type != "neither"):
                         if(categ.restriction_type == "all"):
                             flag = False
@@ -86,8 +85,6 @@ class ProductTemplateInherit(models.Model):
                         elif(categ.restriction_type == "section" and user in categ.restriction_contacts.ids):
                             flag = False
                             break
-            _logger.info("mais flag %s" %flag)
-
             rec.restrict_ok = flag
 
     def _value_search(self, operator, value):
