@@ -11,9 +11,7 @@ class ProductPublicCategoryInherit(models.Model):
     def write(self, values):
         res = super(ProductPublicCategoryInherit, self).write(values)
         if 'restriction_type' in values or 'restriction_contact' in values:
-            _logger.info("type restriction %s" % (self.restriction_type))
             if (self.restriction_type == "neither"):
-                _logger.info("ouiiiiiiii ss")
                 self.restriction_contacts = False
             self.clear_caches()
         return res
