@@ -73,6 +73,6 @@ class ProductTemplateInherit(models.Model):
             rec.restrict_ok = flag
 
     def _value_search(self, operator, value):
-        recs = self.search([]).filtered(lambda x: x.restrict_ok is True)
+        recs = self.search([]).filtered(lambda x: x.restrict_ok is False)
         if recs:
             return [('id', 'in', [x.id for x in recs])]
