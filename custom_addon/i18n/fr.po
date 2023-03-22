@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-23 17:00+0000\n"
-"PO-Revision-Date: 2023-02-23 17:00+0000\n"
+"POT-Creation-Date: 2023-03-22 12:27+0000\n"
+"PO-Revision-Date: 2023-03-22 12:27+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,19 +16,15 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: custom_addon
-#: model_terms:ir.ui.view,arch_db:custom_addon.template_product
-msgid "<b>EAN Code :</b>"
-msgstr ""
-
-#. module: custom_addon
-#: model_terms:ir.ui.view,arch_db:custom_addon.template_product
-msgid "<b>QR Code :</b>"
-msgstr ""
-
-#. module: custom_addon
 #: model_terms:ir.ui.view,arch_db:custom_addon.website_sale_cart_inherit
 msgid "<strong> Order N° : </strong>"
 msgstr "N° de commande Générale :"
+
+#. module: custom_addon
+#: model:ir.model.fields.selection,name:custom_addon.selection__product_public_category__restriction_type__all
+#: model:ir.model.fields.selection,name:custom_addon.selection__product_template__restriction_type__all
+msgid "All"
+msgstr "Tous"
 
 #. module: custom_addon
 #: model_terms:ir.ui.view,arch_db:custom_addon.cart_lines_inherit
@@ -42,8 +38,18 @@ msgstr "N° Cde interne"
 
 #. module: custom_addon
 #: model:ir.model,name:custom_addon.model_res_partner
+#: model:ir.model.fields,field_description:custom_addon.field_product_product__restriction_contacts
+#: model:ir.model.fields,field_description:custom_addon.field_product_public_category__restriction_contacts
+#: model:ir.model.fields,field_description:custom_addon.field_product_template__restriction_contacts
 msgid "Contact"
-msgstr ""
+msgstr "Client"
+
+#. module: custom_addon
+#: model:ir.model.fields,field_description:custom_addon.field_product_product__restriction_type
+#: model:ir.model.fields,field_description:custom_addon.field_product_public_category__restriction_type
+#: model:ir.model.fields,field_description:custom_addon.field_product_template__restriction_type
+msgid "Contact Restriction"
+msgstr "Clients a restreindre"
 
 #. module: custom_addon
 #: model_terms:ir.ui.view,arch_db:custom_addon.view_partner_inherit
@@ -56,6 +62,12 @@ msgstr ""
 #, python-format
 msgid "Necessary Requirements To Run This Operation Is Not Satisfied"
 msgstr ""
+
+#. module: custom_addon
+#: model:ir.model.fields.selection,name:custom_addon.selection__product_public_category__restriction_type__neither
+#: model:ir.model.fields.selection,name:custom_addon.selection__product_template__restriction_type__neither
+msgid "Neither"
+msgstr "Aucun"
 
 #. module: custom_addon
 #: model:ir.model.fields,field_description:custom_addon.field_sale_order__comment_customer
@@ -77,9 +89,31 @@ msgid "Other"
 msgstr "Autre"
 
 #. module: custom_addon
+#: model:ir.model.fields,field_description:custom_addon.field_product_product__price_with_tax
+msgid "Price With Tax"
+msgstr "Prix TTC"
+
+#. module: custom_addon
+#: model_terms:ir.ui.view,arch_db:custom_addon.template_product
+#: model_terms:ir.ui.view,arch_db:custom_addon.website_cost_item_button
+msgid "Prix d'achat HT"
+msgstr ""
+
+#. module: custom_addon
+#: model_terms:ir.ui.view,arch_db:custom_addon.product_price_custom
+#: model_terms:ir.ui.view,arch_db:custom_addon.website_cost_item_button
+msgid "Prix de vente TTC"
+msgstr ""
+
+#. module: custom_addon
 #: model:ir.model,name:custom_addon.model_product_template
 msgid "Product"
 msgstr "Produit"
+
+#. module: custom_addon
+#: model:ir.model,name:custom_addon.model_product_product
+msgid "Product Variant"
+msgstr "Variante de produit"
 
 #. module: custom_addon
 #: model:ir.model.fields,field_description:custom_addon.field_res_users__category_ids
@@ -95,8 +129,15 @@ msgstr "QR code"
 
 #. module: custom_addon
 #: model_terms:ir.ui.view,arch_db:custom_addon.product_inherit
+#: model_terms:ir.ui.view,arch_db:custom_addon.product_public_category_form_view_inherit
 msgid "Restricted access"
 msgstr "Restriction d'accès"
+
+#. module: custom_addon
+#: model:ir.model.fields,field_description:custom_addon.field_product_product__restrict_ok
+#: model:ir.model.fields,field_description:custom_addon.field_product_template__restrict_ok
+msgid "Restriction state"
+msgstr "Statut restriction"
 
 #. module: custom_addon
 #: model:ir.model,name:custom_addon.model_sale_order
@@ -106,7 +147,13 @@ msgstr "Bon de commande"
 #. module: custom_addon
 #: model:ir.model,name:custom_addon.model_sale_order_line
 msgid "Sales Order Line"
-msgstr "Ligne de bon de commande"
+msgstr "Ligne de commande"
+
+#. module: custom_addon
+#: model:ir.model.fields.selection,name:custom_addon.selection__product_public_category__restriction_type__section
+#: model:ir.model.fields.selection,name:custom_addon.selection__product_template__restriction_type__section
+msgid "Section"
+msgstr "Section"
 
 #. module: custom_addon
 #: model:ir.model,name:custom_addon.model_stock_move
@@ -134,3 +181,8 @@ msgstr "Logo du compte utilisateur"
 #: model:ir.model,name:custom_addon.model_website
 msgid "Website"
 msgstr "Site web"
+
+#. module: custom_addon
+#: model:ir.model,name:custom_addon.model_product_public_category
+msgid "Website Product Category"
+msgstr "Catégorie de produits du site web"
