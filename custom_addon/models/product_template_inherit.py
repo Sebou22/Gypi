@@ -68,22 +68,17 @@ class ProductTemplateInherit(models.Model):
             flag = True
             if(rec.restriction_type=='all'):
                 flag = False
-            elif(rec.restriction_type=='section' and user in rec.restriction_contacts.ids):
+            elif((rec.restriction_type=='section' and user in rec.restriction_contacts.ids)):
                 flag=False
             if(flag):
                 for categ in rec.public_categ_ids:
-                    if(categ.restriction_type=='all'):
+                    if(categ.restriction_type =='all'):
                         flag = False
                         break
-                    elif(categ.restriction_type=='section' and user in categ.restriction_contacts.ids):
+                    elif((categ.restriction_type =='section' and user in categ.restriction_contacts.ids)):
                         flag = False
                         break
             rec.restrict_ok = flag
-
-    # def _value_search(self, operator, value):
-    #     recs = self.search([]).filtered(lambda x: x.restrict_ok is False)
-    #     if recs:
-    #         return [('id', 'in', [x.id for x in recs])]
 
     def _value_search(self, operator, value):
         field_id = self.search([]).filtered(lambda x: x.restrict_ok == True)
