@@ -12,16 +12,10 @@
               <xpath expr="//field[@name='order_line']//form//field[@name='name']" position="after">
                   <field name="comment_customer"/>
               </xpath>
-              <xpath expr="//notebook" position="inside">
-                  <page string="Other">
-                      <group>
-                          <group>
-                              <field name="comment_customer" string="Order N° :"/>
-                          </group>
-                      </group>
-
-                  </page>
+              <xpath expr="//field[@name='payment_term_id']" podition="after">
+                  <field name="comment_customer" string="Order N° :"/>
               </xpath>
+              
    </field>
 </record>
 </odoo>

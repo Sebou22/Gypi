@@ -20,6 +20,7 @@
         'templates/option_header_brand_logo_inherit.xml',
         'views/stock_picking_inherit_views.xml',
         'views/res_partner_inherit_views.xml',
+        'views/account_move_inherit_views.xml',
     ],
     "installable": True,
     'assets': {
