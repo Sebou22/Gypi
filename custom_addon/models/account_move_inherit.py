@@ -7,6 +7,6 @@ class AccountMoveInherit(models.Model):
 
 
 class AccountMoveLineInherit(models.Model):
-    _inherit = "account.move.ligne"
+    _inherit = "account.move.line"
 
     comment_customer = fields.Text("Comment customer")
