@@ -16,6 +16,7 @@
                   <field name="comment_customer" string="Order N° :"/>
               </xpath>
 
+
    </field>
 </record>
 </odoo>
