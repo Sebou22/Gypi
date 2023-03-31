@@ -7,6 +7,14 @@
           <field name="inherit_id" ref="base.view_partner_form"/>
           <field name="arch" type="xml">
               <xpath expr="//notebook" position="inside">
+                  <page string="Restricted access" attrs="{'invisible': [('user_ids','=',False)]}">
+                      <group >
+                          <group>
+                              <field name="category_ids"  widget="many2many_tags" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                              <field name="product_ids"  widget="many2many_tags" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                          </group>
+                      </group>
+                  </page>
                   <page string="Marketing">
                       <group >
                           <group>
