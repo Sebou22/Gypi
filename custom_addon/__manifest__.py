@@ -13,7 +13,7 @@
     "data": [
         "views/product_template_inherit_views.xml",
         "templates/website_sale_product_inherit_template.xml",
-        "views/res_users_inherit_views.xml",
+        #"views/res_users_inherit_views.xml",
         "data/website_sale_access.xml",
         'views/cart_lines_inherit.xml',
         'views/sale_order_inherit_views.xml',

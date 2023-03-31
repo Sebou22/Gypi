@@ -19,4 +19,4 @@ class ResUsersInherit(models.Model):
         for user in users:
             category_ids = self.env['product.public.category'].search([('restriction_type','=','all')])
             user.partner_id.category_ids = [(6, 0, category_ids.ids)]
-        return
+        return users

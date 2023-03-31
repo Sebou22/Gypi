@@ -34,7 +34,7 @@ msgstr "Restreindre d'accès"
 #. module: custom_addon
 #: model:ir.model.fields,field_description:custom_addon.field_res_partner__category_ids
 msgid "Category"
-msgstr "Produits"
+msgstr "Catégories"
 
 #. module: custom_addon
 #: model_terms:ir.ui.view,arch_db:custom_addon.cart_lines_inherit
