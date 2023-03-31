@@ -23,6 +23,7 @@
         'views/account_move_inherit_views.xml',
         'views/product_public_category_inherit_views.xml',
         'templates/report_saleorder_document _inherit.xml',
+        'templates/report_invoice_document _inherit.xml',
     ],
     "installable": True,
     'assets': {
