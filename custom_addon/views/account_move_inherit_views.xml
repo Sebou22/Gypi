@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+<record id="account_move_comment" model="ir.ui.view">
+          <field name="name">account.move.comment</field>
+          <field name="model">account.move</field>
+          <field name="inherit_id" ref="account.view_move_form"/>
+          <field name="arch" type="xml">
+              <xpath expr="//field[@name='invoice_line_ids']//tree//field[@name='name']" position="after">
+                  <field name="comment_customer" readonly="1"/>
+              </xpath>
+              <xpath expr="//field[@name='invoice_line_ids']//form//field[@name='name']" position="after">
+                  <field name="comment_customer" readonly="1"/>
+              </xpath>
+              <xpath expr="//group[@id='header_right_group']" position="inside">
+                  <field name="comment_customer" string="Order N° :" readonly="1"/>
+              </xpath>
+   </field>
+</record>
+</odoo>

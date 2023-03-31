@@ -1,0 +1,24 @@
+<odoo>
+
+    <template id="report_saleorder_document_inherit" inherit_id="sale.report_saleorder_document">
+        <xpath expr="//div[@id='informations']" position="inside">
+            <div t-if="doc.comment_customer" class="col-auto col-3 mw-100 mb-2">
+                    <strong>Order N° :</strong>
+                    <p class="m-0" t-field="doc.comment_customer"/>
+                </div>
+
+        </xpath>
+
+        <xpath expr="//th[@name='th_description']" position="after">
+             <th name="th_comment_customer" class="text-end">Comment customer</th>
+
+        </xpath>
+        <xpath expr="//td[@name='td_name']" position="after">
+             <td name="td_comment_customer"><span t-field="line.comment_customer"/></td>
+
+        </xpath>
+
+
+
+    </template>
+</odoo>
