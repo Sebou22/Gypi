@@ -37,7 +37,7 @@
                                                     <span t-field="move.product_id.display_name"/><br/>
                                                     <span t-field="move.product_id.description_picking"/>
                                                     <br/>
-                                                    <p class="ms-3 fw-bold"> Emplacement(s) : <t t-esc="move.location_barcode"/></p>
+                                                    <p class="ms-3 fw-bold"> Emplacement(s) : <t t-esc="move.location_name"/></p>
                                                 </td>
                                                 <td style="border:0px !important;" class="text-center">
                                                     <span t-field="move.product_uom_qty"/>
