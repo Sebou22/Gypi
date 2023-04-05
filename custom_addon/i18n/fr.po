@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-31 15:53+0000\n"
-"PO-Revision-Date: 2023-03-31 15:53+0000\n"
+"POT-Creation-Date: 2023-04-05 09:50+0000\n"
+"PO-Revision-Date: 2023-04-05 09:50+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -32,9 +32,14 @@ msgid "All"
 msgstr "Restreindre d'accès"
 
 #. module: custom_addon
+#: model_terms:ir.ui.view,arch_db:custom_addon.view_partner_inherit
+msgid "Autoriser les catégories restreintes"
+msgstr ""
+
+#. module: custom_addon
 #: model:ir.model.fields,field_description:custom_addon.field_res_partner__category_ids
 msgid "Category"
-msgstr "Catégories"
+msgstr "Catégories restreintes"
 
 #. module: custom_addon
 #: model_terms:ir.ui.view,arch_db:custom_addon.cart_lines_inherit
@@ -95,18 +100,6 @@ msgstr "Visible pour le monde"
 #: model:ir.model.fields,field_description:custom_addon.field_stock_picking__comment_customer
 msgid "Order N°"
 msgstr "N° Cde interne"
-
-#. module: custom_addon
-#: model_terms:ir.ui.view,arch_db:custom_addon.account_move_comment
-#: model_terms:ir.ui.view,arch_db:custom_addon.sale_order_line_comment
-#: model_terms:ir.ui.view,arch_db:custom_addon.view_picking_form_comment
-msgid "Order N° :"
-msgstr "N° Cde interne"
-
-#. module: custom_addon
-#: model_terms:ir.ui.view,arch_db:custom_addon.view_picking_form_comment
-msgid "Other"
-msgstr "Autre"
 
 #. module: custom_addon
 #: model:ir.model.fields,field_description:custom_addon.field_product_product__price_with_tax

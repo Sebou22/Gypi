@@ -6,12 +6,12 @@
           <field name="model">sale.order</field>
           <field name="inherit_id" ref="sale.view_order_form"/>
           <field name="arch" type="xml">
-                            <xpath expr="//field[@name='order_line']//tree//field[@name='name']" position="after">
-                  <field name="comment_customer"/>
-              </xpath>
-              <xpath expr="//field[@name='order_line']//form//field[@name='name']" position="after">
-                  <field name="comment_customer"/>
-              </xpath>
+<!--                            <xpath expr="//field[@name='order_line']//tree//field[@name='name']" position="after">-->
+<!--                  <field name="comment_customer"/>-->
+<!--              </xpath>-->
+<!--              <xpath expr="//field[@name='order_line']//form//field[@name='name']" position="after">-->
+<!--                  <field name="comment_customer"/>-->
+<!--              </xpath>-->
               <xpath expr="//field[@name='payment_term_id']" position="after">
                   <field name="comment_customer" string="Order N° :"/>
               </xpath>
