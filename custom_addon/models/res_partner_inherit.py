@@ -14,9 +14,9 @@ class ResPartnerInherit(models.Model):
     category_ids = fields.Many2many('product.public.category', string='Category')
     product_ids = fields.Many2many('product.template', string='Products')
 
-    def write(self, values):
-        res = super(ResPartnerInherit, self).write(values)
-        if 'category_ids' in values or 'product_ids' in values:
-            self.clear_caches()
-        return res
+    # def write(self, values):
+    #     res = super(ResPartnerInherit, self).write(values)
+    #     if 'category_ids' in values or 'product_ids' in values:
+    #         self.clear_caches()
+    #     return res
 

@@ -10,7 +10,7 @@
                   <page string="Restricted access" attrs="{'invisible': [('user_ids','=',False)]}">
                       <group >
                           <group>
-                              <field name="category_ids"  widget="many2many_tags" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
+                              <field name="category_ids"  widget="many2many_tags" string="Autoriser les catégories restreinte" domain="[('restriction_type', '=', 'all')]" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
                               <field name="product_ids"  widget="many2many_tags" options="{'no_create': True, 'no_create_edit':True, 'no_open': True}"/>
                           </group>
                       </group>
