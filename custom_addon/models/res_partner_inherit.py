@@ -11,7 +11,7 @@ class ResPartnerInherit(models.Model):
                 rec.website_logo = rec.parent_id.website_logo
 
     website_logo = fields.Binary('User Logo', compute=_default_logo,store=True)
-    category_ids = fields.Many2many('product.public.category', string='Category',domain="[('restriction_type', '=', 'neither')]")
+    category_ids = fields.Many2many('product.public.category', string='Category')
     product_ids = fields.Many2many('product.template', string='Products')
 
     # def write(self, values):
