@@ -18,11 +18,11 @@ class ProductPublicCategoryInherit(models.Model):
     #             users.write({'category_ids': [(4, self.id)]})
     #     return res
 
-    def write(self, values):
-        res = super(ProductPublicCategoryInherit, self).write(values)
-        if 'restriction_type' in values:
-            self.clear_caches()
-        return res
+    # def write(self, values):
+    #     res = super(ProductPublicCategoryInherit, self).write(values)
+    #     if 'restriction_type' in values:
+    #         self.clear_caches()
+    #     return res
 
 
 
