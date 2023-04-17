@@ -5,7 +5,7 @@ class WebsiteInherit(models.Model):
     _inherit = 'website'
 
     def sale_product_domain(self):
-        categories = self.env['product.public.category'].search([('restriction_type','=','neither')])
+        categories = self.env['product.public.category'].search([('restriction_type','=','all')])
         list_ids =[]
         partner_id = self.env.user.partner_id
         for cat in categories:
