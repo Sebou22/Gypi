@@ -13,10 +13,10 @@ class ResUsersInherit(models.Model):
     #         self.clear_caches()
     #     return res
 
-    @api.model_create_multi
-    def create(self, vals_list):
-        users = super(ResUsersInherit, self).create(vals_list)
-        for user in users:
-            category_ids = self.env['product.public.category'].search([('restriction_type','=','all')])
-            user.partner_id.category_ids = [(6, 0, category_ids.ids)]
-        return users
+    # @api.model_create_multi
+    # def create(self, vals_list):
+    #     users = super(ResUsersInherit, self).create(vals_list)
+    #     for user in users:
+    #         category_ids = self.env['product.public.category'].search([('restriction_type','=','all')])
+    #         user.partner_id.category_ids = [(6, 0, category_ids.ids)]
+    #     return users
