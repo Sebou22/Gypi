@@ -20,3 +20,12 @@ class ResPartnerInherit(models.Model):
     #         self.clear_caches()
     #     return res
 
+    def get_restriction_categ(self):
+        categories = self.env['product.public.category'].search([('restriction_type','=','all')])
+        list_ids =[]
+        partner_id = self.env.user.partner_id
+        for cat in categories:
+            if cat.id not in partner_id.category_ids.ids:
+                list_ids.append(cat.id)
+        return list_ids
+
