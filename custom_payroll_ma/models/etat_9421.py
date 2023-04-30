@@ -493,6 +493,7 @@ class Etat9421(models.Model):
                     data_list[j.employee_id.id]={'id_etat':res.id,'employee_id':j.employee_id.id,'s_salaire_base':s_base,'cumul_sb':s_brut}
                 else:
                     data_list[j.employee_id.id]['s_salaire_base'] += s_base
+                    data_list[j.employee_id.id]['cumul_sb'] += s_brut
             logger.info("===========> 2 %s" %(data_list))
             for d in data_list.keys():
                 logger.info(data_list[d])
