@@ -118,16 +118,9 @@ class Etat9421(models.Model):
 
     def get_effectif(self):
         for rec in self:
-            count_pp = 0
-            count_po = 0
-            count_stg = 0
-            for line in rec.etat_line_ids:
-               if line.employee_id.contract_id.contract_type_id and line.employee_id.contract_id.contract_type_id.name == 'CDI':
-                   count_pp += 1
-               if line.employee_id.contract_id.contract_type_id and line.employee_id.contract_id.contract_type_id.name == 'CDD':
-                   count_po += 1
-               if line.employee_id.contract_id.contract_type_id and line.employee_id.contract_id.contract_type_id.name == 'STAGE':
-                   count_stg += 1
+            count_pp = len(rec.etat_line_ids.mapped('employee_d').employee_id.mapped('contract_type_id').filtered(lambda r : r.name == 'CDI'))
+            count_po = len(rec.etat_line_ids.mapped('employee_d').employee_id.mapped('contract_type_id').filtered(lambda r : r.name == 'CDD'))
+            count_stg = len(rec.etat_line_ids.mapped('employee_d').employee_id.mapped('contract_type_id').filtered(lambda r : r.name == 'STAGE')) 
             rec.nb_pp = count_pp
             rec.nb_po = count_po
             rec.nb_stg = count_stg
