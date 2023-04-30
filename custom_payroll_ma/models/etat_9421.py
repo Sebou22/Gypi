@@ -553,7 +553,7 @@ class Etat9421Line(models.Model):
     #matricule = fields.Char(related='employee_id.matricule', string="Matricule", store=True)
     #cin = fields.Char(related='employee_id.cin', string="CIN")
     #cnss = fields.Char(related='employee_id.ssnid', string=u"N°CNSS")
-    adresse = fields.Char(related='employee_id.address_home_id', string="Adresse personnelle")
+    adresse = fields.Many2one(related='employee_id.address_home_id', string="Adresse personnelle")
     situation = fields.Char(compute='get_marital_status', string="Situation")
     #period_id = fields.Many2one('date.range', domain="[('type_id.fiscal_period','=',True)]", string=u"Période")
     # les cumuls
