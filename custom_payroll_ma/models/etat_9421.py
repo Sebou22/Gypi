@@ -221,7 +221,7 @@ class Etat9421(models.Model):
                                                                            ('date_to', '<=', date_end.strftime('%Y-%m-%d 23:59:59'))])
                     salaire_base = 0
                     for bulletin in bulletins:
-                        salaire_base += bulletin.salaire_base
+                        salaire_base += bulletin.line_ids.filtered(lambda r: r.code == 'BASIC').total
 
                     etree.SubElement(liste_pp, "salaireBaseAnnuel").text = str(salaire_base)
                     etree.SubElement(liste_pp, "mtBrutTraitementSalaire").text = str(line.s_salaire_brut)
