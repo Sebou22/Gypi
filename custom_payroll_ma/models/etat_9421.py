@@ -489,17 +489,29 @@ class Etat9421(models.Model):
                 s_base = j.line_ids.filtered(lambda r: r.code == 'BASIC').total
                 s_brut = j.line_ids.filtered(lambda r: r.code == 'BRUT').total
                 cumul_avantages = sum(j.line_ids.filtered(lambda r: r.code == 'avantage').mapped('total'))
-                cumul_indemnites_fp = j.line_ids.filtered(lambda r: r.code == 'FPRO').total
+                cumul_indemnites_fp = j.line_ids.filtered(lambda r: r.code == 'FP2').total
                 cumul_exo = sum(j.line_ids.filtered(lambda r: r.category_id.code == 'INDMNT').mapped('total'))
+                cumul_igr = j.line_ids.filtered(lambda r: r.code == 'IR').total
+                cotisation_e = sum(j.line_ids.filtered(lambda r: r.code in ('CNSSE','AMOE')).mapped('total'))
+                cotisation_p = sum(j.line_ids.filtered(lambda r: r.code in ('AMOP','CNSSP')).mapped('total'))
+                cumul_sni = s_brut - cumul_igr - cotisation_e - cotisation_p
+                cumul_sbi = s_brut - cotisation_e - cotisation_p
+                cumul_work_days = sum(j.worked_days_line_ids.mapped('number_of_days'))
+
                 if  j.employee_id.id not in data_list:
 
-                    data_list[j.employee_id.id]={'id_etat':res.id,'employee_id':j.employee_id.id,'s_salaire_base':s_base,'cumul_sb':s_brut,'cumul_avantages':cumul_avantages,'cumul_indemnites_fp':cumul_indemnites_fp,'cumul_exo':cumul_exo}
+                    data_list[j.employee_id.id]={'id_etat':res.id,'employee_id':j.employee_id.id,'s_salaire_base':s_base,'cumul_sb':s_brut,'cumul_avantages':cumul_avantages,'cumul_indemnites_fp':cumul_indemnites_fp,'cumul_exo':cumul_exo,'personnes':j.employee_id.personnes,'cumul_igr':cumul_igr,'cumul_sni':cumul_sni,'cumul_ee_cotis':cotisation_e,'cumul_work_days':cumul_work_days,'cumul_sbi':cumul_sbi}
                 else:
                     data_list[j.employee_id.id]['s_salaire_base'] += s_base
                     data_list[j.employee_id.id]['cumul_sb'] += s_brut
                     data_list[j.employee_id.id]['cumul_avantages'] += cumul_avantages
                     data_list[j.employee_id.id]['cumul_indemnites_fp'] += cumul_indemnites_fp
                     data_list[j.employee_id.id]['cumul_exo'] += cumul_exo
+                    data_list[j.employee_id.id]['cumul_igr'] += cumul_igr
+                    data_list[j.employee_id.id]['cumul_sni'] += cumul_sni
+                    data_list[j.employee_id.id]['cumul_sbi'] += cumul_sbi
+                    data_list[j.employee_id.id]['cumul_ee_cotis'] += cotisation_e
+                    data_list[j.employee_id.id]['cumul_work_days'] += cumul_work_days
             logger.info("===========> 2 %s" %(data_list))
             for d in data_list.keys():
                 logger.info(data_list[d])
@@ -513,14 +525,14 @@ class Etat9421(models.Model):
                         's_ind_fp': data_list[d]['cumul_indemnites_fp'],
                         's_indemnites': data_list[d]['cumul_exo'],
                         'taux_fp': 20,
-                        # 's_sbi': bulletin.cumul_sbi,
+                        's_sbi': data_list[d]['cumul_sbi'],
                         # 's_frais_pro': bulletin.cumul_fp,
-                        # 's_cot_ass': 0.0,
-                        # 's_autres_ret': bulletin.cumul_ee_cotis,
-                        # 's_sni': bulletin.cumul_sni,
-                        # 's_jrs': bulletin.cumul_work_days,
-                        # 's_igr': bulletin.cumul_igr,
-                        # 'nbr_reductions': bulletin.personnes,
+                        's_cot_ass': 0.0,
+                        's_autres_ret': data_list[d]['cumul_ee_cotis'],
+                        's_sni': data_list[d]['cumul_sni'],
+                        's_jrs': data_list[d]['cumul_work_days'],
+                        's_igr': data_list[d]['cumul_igr'],
+                        'nbr_reductions': data_list[d]['personnes'],
                     })
 
 
