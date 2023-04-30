@@ -472,7 +472,7 @@ class Etat9421(models.Model):
             # res.env.invalidate_all()
 
             # Identification de tous les employés qui ont été déclarés durant l'année sélectionnée
-            bulletin_ids = bul.search([('date_from','>=',f'{res.annee}-01-01'),('date_to','<=',f'{res.annee}-12-31'),('state','in',('done','paid')])
+            bulletin_ids = bul.search([('date_from','>=',f'{res.annee}-01-01'),('date_to','<=',f'{res.annee}-12-31'),('state','in',('done','paid'))])
             data_list = []
 
             # requete = "select distinct(a.employee_id), (select max(period_id) " \
