@@ -201,8 +201,8 @@ class Etat9421(models.Model):
             for line in rec.etat_line_ids:
                 if line.employee_id.contract_id.contract_type_id and line.employee_id.contract_id.contract_type_id.name == 'CDI':
                     liste_pp = etree.SubElement(liste_pp1, "PersonnelPermanent")
-                    etree.SubElement(liste_pp, "nom").text = str(line.employee_id.name)
-                    etree.SubElement(liste_pp, "prenom").text = str(line.employee_id.prenom)
+                    etree.SubElement(liste_pp, "nom").text = str(line.employee_id.name.split(' ')[0])
+                    etree.SubElement(liste_pp, "prenom").text = str(line.employee_id.name.split(' ')[1])
                     adresse = ""
                     if line.employee_id.address_home:
                         adresse = line.employee_id.address_home.encode('utf8')
