@@ -487,9 +487,10 @@ class Etat9421(models.Model):
             logger.info("======>1:%s" %(bulletin_ids))
             for j in bulletin_ids:
                 s_base = j.line_ids.filtered(lambda r: r.code == 'BASIC').total
+                s_brut = j.line_ids.filtered(lambda r: r.code == 'BRUT').total
                 if  j.employee_id.id not in data_list:
 
-                    data_list[j.employee_id.id]={'id_etat':res.id,'employee_id':j.employee_id.id,'s_salaire_base':s_base}
+                    data_list[j.employee_id.id]={'id_etat':res.id,'employee_id':j.employee_id.id,'s_salaire_base':s_base,'cumul_sb':s_brut}
                 else:
                     data_list[j.employee_id.id]['s_salaire_base'] += s_base
             logger.info("===========> 2 %s" %(data_list))
@@ -500,7 +501,7 @@ class Etat9421(models.Model):
                         'id_etat': res.id,
                         'employee_id': data_list[d]['employee_id'],
                         's_salaire_base': data_list[d]['s_salaire_base'],
-                        # 's_salaire_brut': bulletin.cumul_sb,
+                        's_salaire_brut': data_list[d]['cumul_sb'],
                         # 's_avantage_nature': bulletin.cumul_avantages,
                         # 's_ind_fp': bulletin.cumul_indemnites_fp,
                         # 's_indemnites': bulletin.cumul_exo,
