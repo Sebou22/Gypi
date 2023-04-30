@@ -1,0 +1,27 @@
+<odoo>
+
+    <template id="report_saleorder_document_inherit" inherit_id="sale.report_saleorder_document">
+
+<xpath expr="//table[hasclass('o_main_table')]//thead" position="attributes">
+    <attribute name="style">background-color:#EEEEEE;color:black !important;</attribute>
+  </xpath>
+
+        <xpath expr="//th[@name='th_description']" position="replace">
+
+            <th name="th_your_description" class="text-start">Your Reference</th>
+            <th name="th_description" class="text-start">Product</th>
+            <th name="th_delivery_date">Time Delivery Request</th>
+
+        </xpath>
+
+        <xpath expr="//td[@name='td_name']" position="replace">
+            <td>---</td>
+            <td name="td_name"><span t-field="line.name"/></td>
+            <td name="td_date_request"><span t-if="doc.commitment_date" t-esc="doc.commitment_date.strftime('%d/%m/%Y')"/></td>
+
+        </xpath>
+
+
+
+    </template>
+</odoo>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_account_payment_register_form_inherit" model="ir.ui.view">
+            <field name="model">account.payment.register</field>
+            <field name="inherit_id" ref="account.view_account_payment_register_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//group[@name='group1']" position="inside">
+
+                    <field name="payment_mode_id" options="{'no_create': True, 'no_create_edit':True}"
+                                                  attrs="{'invisible': [('journal_type', '!=', 'bank')]}"/>
+                    <field name="bank_id"         options="{'no_create': True, 'no_create_edit':True}"
+                                                  attrs="{'invisible': [('journal_type', '!=', 'bank')]}"/>
+                    <field name="reference" attrs="{'invisible': [('journal_type', '!=', 'bank')]}"/>
+                    <field name="journal_type" invisible="1"/>
+
+                </xpath>
+
+                <xpath expr="//field[@name='payment_date']" position="after">
+
+                    <field name="due_date" attrs="{'invisible': [('journal_type', '!=', 'bank')]}"/>
+
+                </xpath>
+
+            </field>
+        </record>
+    </data>
+</odoo>

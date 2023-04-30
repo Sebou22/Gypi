@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="payment_mode_form_view">
+            <field name="name">payment.mode.form</field>
+            <field name="model">payment.mode</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="code"/>
+                                <field name="name"/>
+                                 <field name="is_cash"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="payment_mode_tree_view">
+            <field name="name">payment.mode.tree</field>
+            <field name="model">payment.mode</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="is_cash"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_payment_mode">
+            <field name="name">Payment Mode</field>
+            <field name="res_model">payment.mode</field>
+            <field name="binding_view_types">form,tree</field>
+        </record>
+
+        <menuitem
+                name="Payment Mode"
+                id="menu_payment_mode"
+                parent="account.account_banks_menu"
+                action="action_payment_mode"
+                sequence="99"
+        />
+    </data>
+</odoo>

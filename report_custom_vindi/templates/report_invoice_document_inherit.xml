@@ -1,0 +1,111 @@
+<odoo>
+
+    <template id="report_invoice_document_inherit" inherit_id="account.report_invoice_document">
+        <xpath expr="//p[@name='payment_communication']" position="before">
+            <p>
+                This invoice is settled at the sum of :
+                <span t-esc="o.currency_id.amount_to_text(o.amount_total)"/>
+            </p>
+
+
+        </xpath>
+        <xpath expr="//p[@name='note']" position="after">
+            <div class="col-8">
+                <table class="table table-sm mt48">
+                    <tbody>
+                        <tr>
+                            <td>Gross weight</td>
+                            <td><t t-esc="o.brut_weight"/> <t t-esc="o.weight_uom_name"/></td>
+                        </tr>
+                        <tr>
+                            <td>Net weight</td>
+                            <td><t t-esc="o.net_weight"/> <t t-esc="o.weight_uom_name"/>
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Number of pieces</td>
+                            <td><t t-esc="o.qty_count"/></td>
+                        </tr>
+                        <tr>
+                            <td>Number of boxes</td>
+                            <td><t t-esc="o.package_count"/></td>
+                        </tr>
+                        <tr t-if="o.invoice_incoterm_id">
+                            <td>Intercom</td>
+                            <td>
+                                <span t-field="o.invoice_incoterm_id.code"/>
+                                -
+                                <span t-field="o.invoice_incoterm_id.name"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-8">
+                <t t-set="currency_1" t-value="request.env['res.currency'].browse(1)"/>
+                <t t-set="currency_2" t-value="request.env['res.currency'].browse(109)"/>
+                <table class="table table-sm mt48">
+                    <thead>
+                        <tr>
+                            <th>INVOICE VALUE IN EUROS</th>
+                            <th>COURSE</th>
+                            <th>INVOICE VALUE IN DIRHAMS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <t t-esc="o.currency_id._convert(o.amount_total,currency_1,o.company_id,o.date)" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: currency_1}"/>
+                            </td>
+                            <td/>
+                            <td>
+                                 <t t-esc="o.currency_id._convert(o.amount_total,currency_2,o.company_id,o.date)" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: currency_2}"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+ <t t-if="o.payment_state != 'invoicing_legacy'">
+
+
+                                            <t t-foreach="payments_vals" t-as="payment_vals">
+            <div class="col-8">
+                <table class="table table-sm mt48">
+                    <tbody>
+                        <tr>
+                            <td>Amount</td>
+                            <td><t t-esc="payment_vals['amount']" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/> </td>
+                        </tr>
+                        <tr>
+                            <td>WAY TO PAY</td>
+                            <td><t t-esc="payment_vals['payment_mode_name']"/></td>
+                        </tr>
+                        <tr>
+                            <td>BANK</td>
+                            <td><t t-esc="payment_vals['bank_name']"/></td>
+                        </tr>
+                        <tr>
+                            <td>AGENCY</td>
+                            <td><t t-esc="payment_vals['agency']"/></td>
+                        </tr>
+                        <tr>
+                            <td>ACCOUNT NO</td>
+                            <td><t t-esc="payment_vals['payment_ref']"/></td>
+                        </tr>
+                        <tr>
+                            <td>SWIFT CODE</td>
+                            <td><t t-esc="payment_vals['swift_code']"/></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+                                            </t>
+
+ </t>
+        </xpath>
+
+
+    </template>
+</odoo>

@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="view_product_collection_tree" model="ir.ui.view">
+        <field name="name">product.collection.tree</field>
+        <field name="model">product.collection</field>
+        <field name="arch" type="xml">
+            <tree string="Product Collection" sample="1" editable="bottom">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+    <record id="action_product_collection" model="ir.actions.act_window">
+        <field name="name">Product Collection</field>
+        <field name="res_model">product.collection</field>
+        <field name="view_id" ref="view_product_collection_tree"/>
+    </record>
+
+
+    <record id="view_product_season_tree" model="ir.ui.view">
+        <field name="name">product.season.tree</field>
+        <field name="model">product.season</field>
+        <field name="arch" type="xml">
+            <tree string="Product Season" sample="1" editable="bottom">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+    <record id="action_product_season" model="ir.actions.act_window">
+        <field name="name">Product Season</field>
+        <field name="res_model">product.season</field>
+        <field name="view_id" ref="view_product_season_tree"/>
+    </record>
+
+
+    <record id="view_product_style_tree" model="ir.ui.view">
+        <field name="name">product.style.tree</field>
+        <field name="model">product.style</field>
+        <field name="arch" type="xml">
+            <tree string="Product style" sample="1" editable="bottom">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+    <record id="action_product_style" model="ir.actions.act_window">
+        <field name="name">Product style</field>
+        <field name="res_model">product.style</field>
+        <field name="view_id" ref="view_product_style_tree"/>
+    </record>
+
+
+    <record id="view_product_line_ca_tree" model="ir.ui.view">
+        <field name="name">product.line_ca.tree</field>
+        <field name="model">product.line_ca</field>
+        <field name="arch" type="xml">
+            <tree string="Product Line" sample="1" editable="bottom">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+    <record id="action_product_line_ca" model="ir.actions.act_window">
+        <field name="name">Product Line</field>
+        <field name="res_model">product.line_ca</field>
+        <field name="view_id" ref="view_product_line_ca_tree"/>
+    </record>
+
+
+    <record id="view_article_group_tree" model="ir.ui.view">
+        <field name="name">article.group.tree</field>
+        <field name="model">article.group</field>
+        <field name="arch" type="xml">
+            <tree string="Article Group" sample="1" editable="bottom">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+    <record id="action_article_group" model="ir.actions.act_window">
+        <field name="name">Article Group</field>
+        <field name="res_model">article.group</field>
+        <field name="view_id" ref="view_article_group_tree"/>
+    </record>
+
+
+    <record id="view_product_group_tree" model="ir.ui.view">
+        <field name="name">product.group.tree</field>
+        <field name="model">product.group</field>
+        <field name="arch" type="xml">
+            <tree string="Product Group" sample="1" editable="bottom">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+    <record id="action_product_group" model="ir.actions.act_window">
+        <field name="name">Product Group</field>
+        <field name="res_model">product.group</field>
+        <field name="view_id" ref="view_product_group_tree"/>
+    </record>
+
+    <!-- menus -->
+
+    <menuitem
+            id="product_collection_menu"
+            parent="sale.menu_sale_config"
+            name="Collection"
+            sequence="40"
+            action="action_product_collection"/>
+
+    <menuitem
+            id="product_season_menu"
+            parent="sale.menu_sale_config"
+            name="Season"
+            sequence="41"
+            action="action_product_season"/>
+
+    <menuitem
+            id="product_style_menu"
+            parent="sale.menu_sale_config"
+            name="Style"
+            sequence="42"
+            action="action_product_style"/>
+    <menuitem
+            id="product_line_ca_menu"
+            parent="sale.menu_sale_config"
+            name="Product Line"
+            sequence="43"
+            action="action_product_line_ca"/>
+
+    <menuitem
+            id="article_group_menu"
+            parent="sale.menu_sale_config"
+            name="Article Group"
+            sequence="44"
+            action="action_article_group"/>
+    <menuitem
+            id="product_group_menu"
+            parent="sale.menu_sale_config"
+            name="Product Group"
+            sequence="45"
+            action="action_product_group"/>
+</odoo>

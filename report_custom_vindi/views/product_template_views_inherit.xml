@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="product_template_only_form_view_inherit_l10n_eg_eta_edi" model="ir.ui.view">
+            <field name="name">product.template.features</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Features">
+                        <group>
+                            <group>
+                                <field name="collection_id" options="{'no_create': True, 'no_edit': True,'no_open':True}"/>
+                                <field name="season_id" options="{'no_create': True, 'no_edit': True,'no_open':True}"/>
+                                <field name="style_id" options="{'no_create': True, 'no_edit': True,'no_open':True}"/>
+                                <field name="supplier_id" options="{'no_create': True, 'no_edit': True,'no_open':True}"/>
+
+                            </group>
+                            <group>
+                                <field name="product_line" options="{'no_create': True, 'no_edit': True,'no_open':True}"/>
+                                <field name="article_group" options="{'no_create': True, 'no_edit': True,'no_open':True}"/>
+                                <field name="product_group" options="{'no_create': True, 'no_edit': True,'no_open':True}"/>
+                                <field name="supplier_fabric"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+
+
+</odoo>
