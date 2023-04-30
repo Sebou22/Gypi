@@ -492,13 +492,13 @@ class Etat9421(models.Model):
                 else:
                     data_list[res.employee_id.id]['s_salaire_base'] += s_base
             logger.info("===========> 2 %s" %(data_list))
-            for d in data_list:
-                logger.info(d)
+            for d in data_list.keys():
+                logger.info(data_list[d])
 
                 line_etat.create({
                         'id_etat': res.id,
-                        'employee_id': d[0]['employee_id'],
-                        's_salaire_base': d[0]['cumul_base'],
+                        'employee_id': data_list[d]['employee_id'],
+                        's_salaire_base': data_list[d]['cumul_base'],
                         # 's_salaire_brut': bulletin.cumul_sb,
                         # 's_avantage_nature': bulletin.cumul_avantages,
                         # 's_ind_fp': bulletin.cumul_indemnites_fp,
