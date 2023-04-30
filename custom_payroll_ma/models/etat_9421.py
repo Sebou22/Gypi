@@ -204,8 +204,8 @@ class Etat9421(models.Model):
                     etree.SubElement(liste_pp, "nom").text = str(line.employee_id.name.split(' ')[0])
                     etree.SubElement(liste_pp, "prenom").text = str(line.employee_id.name.split(' ')[1])
                     adresse = ""
-                    if line.employee_id.address_home:
-                        adresse = line.employee_id.address_home.encode('utf8')
+                    if line.employee_id.address_home_id:
+                        adresse = line.employee_id.address_home_id.encode('utf8')
 
                     etree.SubElement(liste_pp, "adressePersonnelle").text = adresse
                     etree.SubElement(liste_pp, "numCNI").text = "cin"
