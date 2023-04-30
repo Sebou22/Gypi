@@ -199,7 +199,7 @@ class Etat9421(models.Model):
             liste_pp1 = etree.SubElement(niv_1, "listPersonnelPermanent")
 
             for line in rec.etat_line_ids:
-                if line.employee_id.contract_id.type_id == self.env.ref('kzm_hr_contract_type.hr_contract_type_3'):
+                if line.employee_id.contract_id.contract_type_id and line.employee_id.contract_id.contract_type_id.name == 'CDI':
                     liste_pp = etree.SubElement(liste_pp1, "PersonnelPermanent")
                     etree.SubElement(liste_pp, "nom").text = str(line.employee_id.name)
                     etree.SubElement(liste_pp, "prenom").text = str(line.employee_id.prenom)
@@ -567,7 +567,7 @@ class Etat9421Line(models.Model):
     s_frais_pro = fields.Float(string="Montant Frais professionnels")
     s_cot_ass = fields.Float(string="Cotisations assurance")
     s_autres_ret = fields.Float(string="Autres retenues")
-    s_total_deductions = fields.Float(string="Total des déductions", compute='get_total_deductions')
+    s_total_deductions = fields.Float(string="Total des déductions")
     s_ech = fields.Float(string=u"Montant échéances")
     s_date_ac = fields.Date(string=u"Date de l'AC")
     s_date_ph = fields.Date(string="Date du PH")
@@ -576,10 +576,6 @@ class Etat9421Line(models.Model):
     s_jrs = fields.Float(string=u"Période en jours")
     s_igr = fields.Float(string=u"I.R prélevé")
 
-    @api.depends('s_frais_pro', 's_cot_ass', 's_autres_ret')
-    def get_total_deductions(self):
-        for rec in self:
-            rec.s_total_deductions = rec.s_frais_pro + rec.s_cot_ass + rec.s_autres_ret
 
     def get_marital_status(self):
         for res in self:
