@@ -118,9 +118,9 @@ class Etat9421(models.Model):
 
     def get_effectif(self):
         for rec in self:
-            count_pp = len(rec.etat_line_ids.mapped('employee_id').employee_id.mapped('contract_type_id').filtered(lambda r : r.name == 'CDI'))
-            count_po = len(rec.etat_line_ids.mapped('employee_id').employee_id.mapped('contract_type_id').filtered(lambda r : r.name == 'CDD'))
-            count_stg = len(rec.etat_line_ids.mapped('employee_id').employee_id.mapped('contract_type_id').filtered(lambda r : r.name == 'STAGE'))
+            count_pp = len(rec.etat_line_ids.mapped('employee_id').mapped('contract_type_id').filtered(lambda r : r.name == 'CDI'))
+            count_po = len(rec.etat_line_ids.mapped('employee_id').mapped('contract_type_id').filtered(lambda r : r.name == 'CDD'))
+            count_stg = len(rec.etat_line_ids.mapped('employee_id').mapped('contract_type_id').filtered(lambda r : r.name == 'STAGE'))
             rec.nb_pp = count_pp
             rec.nb_po = count_po
             rec.nb_stg = count_stg
