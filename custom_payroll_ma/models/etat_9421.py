@@ -231,37 +231,41 @@ class Etat9421(models.Model):
                     if len(bulletins) == 1:
                         operateur = '='
                         ids = bulletins.id
-                    sql = """SELECT r.code as code, sum(l.subtotal_employee) as subtotal_employee
-                            FROM hr_payroll_ma_bulletin_line l
-                            JOIN hr_payroll_ma_rubrique r ON (r.name=l.name)
-                            where l.id_bulletin %s %s and r.imposable = False and r.categorie = 'majoration'
-                            group by code
-                        """ % (operateur, ids)
-                    self.env.cr.execute(sql)
-                    data = self.env.cr.dictfetchall()
+                    # sql = """SELECT r.code as code, sum(l.subtotal_employee) as subtotal_employee
+                    #         FROM hr_payroll_ma_bulletin_line l
+                    #         JOIN hr_payroll_ma_rubrique r ON (r.name=l.name)
+                    #         where l.id_bulletin %s %s and r.imposable = False and r.categorie = 'majoration'
+                    #         group by code
+                    #     """ % (operateur, ids)
+                    # self.env.cr.execute(sql)
+                    # data = self.env.cr.dictfetchall()
+                    # exonere = 0
+                    # for d in data:
+                    #     exonere += d['subtotal_employee']
                     exonere = 0
-                    for d in data:
-                        exonere += d['subtotal_employee']
+                    list = self.env['hr.payslip'].browse(ids)
+                    if list:
+                        exonere = sum(list.mapped('line_ids').filtered(lambda r: r.category_id.code == 'INDMNT').mapped('total'))
                     etree.SubElement(liste_pp, "mtExonere").text = str(exonere)
                     etree.SubElement(liste_pp, "mtEcheances").text = str(0.0)
                     etree.SubElement(liste_pp, "nbrReductions").text = str(line.nbr_reductions)
                     etree.SubElement(liste_pp, "mtIndemnite").text = str(line.s_ind_fp)
-                    operateur = 'in'
-                    ids = tuple(bulletins.ids)
-                    if len(bulletins) == 1:
-                        operateur = '='
-                        ids = bulletins.id
-                    sql = """SELECT r.code as code, sum(l.subtotal_employee) as subtotal_employee
-                                                FROM hr_payroll_ma_bulletin_line l
-                                                JOIN hr_payroll_ma_rubrique r ON (r.name=l.name)
-                                                where l.id_bulletin %s %s and r.type = 'avantage' and r.categorie = 'majoration'
-                                                group by code
-                                            """ % (operateur, ids)
-                    self.env.cr.execute(sql)
-                    data_avn = self.env.cr.dictfetchall()
+                    # operateur = 'in'
+                    # ids = tuple(bulletins.ids)
+                    # if len(bulletins) == 1:
+                    #     operateur = '='
+                    #     ids = bulletins.id
+                    # sql = """SELECT r.code as code, sum(l.subtotal_employee) as subtotal_employee
+                    #                             FROM hr_payroll_ma_bulletin_line l
+                    #                             JOIN hr_payroll_ma_rubrique r ON (r.name=l.name)
+                    #                             where l.id_bulletin %s %s and r.type = 'avantage' and r.categorie = 'majoration'
+                    #                             group by code
+                    #                         """ % (operateur, ids)
+                    # self.env.cr.execute(sql)
+                    # data_avn = self.env.cr.dictfetchall()
                     avantage = 0
-                    for d in data_avn:
-                        avantage += d['subtotal_employee']
+                    # for d in data_avn:
+                    #     avantage += d['subtotal_employee']
                     etree.SubElement(liste_pp, "mtAvantages").text = str(avantage)
                     etree.SubElement(liste_pp, "mtRevenuBrutImposable").text = str(line.s_sbi)
                     etree.SubElement(liste_pp, "mtFraisProfess").text = str(line.s_frais_pro)
@@ -271,7 +275,7 @@ class Etat9421(models.Model):
                     etree.SubElement(liste_pp, "mtTotalDeduction").text = str(line.s_total_deductions)
                     etree.SubElement(liste_pp, "irPreleve").text = str(line.s_igr)
                     etree.SubElement(liste_pp, "casSportif").text = "false"
-                    #etree.SubElement(liste_pp, "numMatricule").text = str(line.employee_id.matricule)
+                    etree.SubElement(liste_pp, "numMatricule").text = str(line.employee_id.matricule_cnss)
                     etree.SubElement(liste_pp, "datePermis").text = ""
                     etree.SubElement(liste_pp, "dateAutorisation").text = ""
                     sit_fam = etree.SubElement(liste_pp, "refSituationFamiliale")
@@ -281,30 +285,31 @@ class Etat9421(models.Model):
 
                     # EXONERATION
                     exo = etree.SubElement(liste_pp, "listElementsExonere")
+                    data = list.mapped('line_ids').filtered(lambda r: r.category_id.code == 'INDMNT')
                     for d in data:
                         exopp = etree.SubElement(exo, "ElementExonerePP")
-                        etree.SubElement(exopp, "montantExonere").text = str(d['subtotal_employee'])
+                        etree.SubElement(exopp, "montantExonere").text = str(d.total)
                         exoppline = etree.SubElement(exopp, "refNatureElementExonere")
-                        etree.SubElement(exoppline, "code").text = str(d['code'])
+                        etree.SubElement(exoppline, "code").text = str(d.code)
 
             liste_pp1 = etree.SubElement(niv_1, "listPersonnelExonere")
             for line in rec.etat_line_ids:
                 if line.employee_id.contract_id.type_id == self.env.ref('kzm_edi_simplir.hr_contract_type_exempt'):
                     liste_pp = etree.SubElement(liste_pp1, "PersonnelExonere")
-                    etree.SubElement(liste_pp, "nom").text = str(line.employee_id.name)
-                    etree.SubElement(liste_pp, "prenom").text = str(line.employee_id.prenom)
+                    etree.SubElement(liste_pp, "nom").text = str(line.employee_id.name.split(' ')[0])
+                    etree.SubElement(liste_pp, "prenom").text = str(line.employee_id.split(' ')[1])
                     adresse = ""
                     if line.employee_id.address_home_id:
                         adresse = line.employee_id.address_home_id.encode('utf8')
 
                     etree.SubElement(liste_pp, "adressePersonnelle").text = adresse.decode('utf8',
                                                                                            errors='xmlcharrefreplace')
-                    etree.SubElement(liste_pp, "numCNI").text = "cin"
+                    etree.SubElement(liste_pp, "numCNI").text = str(line.employee_id.cin)
                     etree.SubElement(liste_pp, "numCE").text = str(line.employee_id.otherid)
-                    etree.SubElement(liste_pp, "numCNSS").text = "cnss"
+                    etree.SubElement(liste_pp, "numCNSS").text = str(line.employee_id.matricule_cnss)
                     etree.SubElement(liste_pp, "ifu").text = str(line.employee_id.ifu)
                     etree.SubElement(liste_pp, "periode").text = str(line.s_jrs)
-                    etree.SubElement(liste_pp, "dateRecrutement").text = str(line.employee_id.date)
+                    etree.SubElement(liste_pp, "dateRecrutement").text = str(line.employee_id.departure_date)
                     etree.SubElement(liste_pp, "mtBrutTraitementSalaire").text = str(line.s_salaire_brut)
                     etree.SubElement(liste_pp, "mtIndemniteArgentNature").text = str(line.s_avantage_nature)
                     etree.SubElement(liste_pp, "mtIndemniteFraisPro").text = str(line.s_frais_pro)
@@ -315,10 +320,10 @@ class Etat9421(models.Model):
             liste_pp1 = etree.SubElement(niv_1, "listPersonnelOccasionnel")
 
             for line in rec.etat_line_ids:
-                if line.employee_id.contract_id.type_id == self.env.ref('kzm_hr_contract_type.hr_contract_type_5'):
+                if line.employee_id.contract_id.contract_type_id and line.employee_id.contract_id.contract_type_id.name == 'CDI':
                     liste_pp = etree.SubElement(liste_pp1, "PersonnelOccasionnel")
-                    etree.SubElement(liste_pp, "nom").text = str(line.employee_id.name)
-                    etree.SubElement(liste_pp, "prenom").text = str(line.employee_id.prenom)
+                    etree.SubElement(liste_pp, "nom").text = str(line.employee_id.name.split(' ')[0])
+                    etree.SubElement(liste_pp, "prenom").text = str(line.employee_id.name.split(' ')[1])
                     adresse = ""
                     if line.employee_id.address_home_id:
                         adresse = line.employee_id.address_home_id.encode('utf8')
@@ -334,32 +339,10 @@ class Etat9421(models.Model):
 
             liste_pp1 = etree.SubElement(niv_1, "listStagiaires")
             for line in rec.etat_line_ids:
-                if line.employee_id.contract_id.type_id == self.env.ref('kzm_hr_contract_type.hr_contract_type_5'):
+                if line.employee_id.contract_id.contract_type_id and line.employee_id.contract_id.contract_type_id == 'STAGE':
                     liste_pp = etree.SubElement(liste_pp1, "Stagiaire")
-                    etree.SubElement(liste_pp, "nom").text = str(line.employee_id.name)
-                    etree.SubElement(liste_pp, "prenom").text = str(line.employee_id.prenom)
-                    adresse = ""
-                    if line.employee_id.address_home_id:
-                        adresse = line.employee_id.address_home_id.encode('utf8')
-
-                    etree.SubElement(liste_pp, "adressePersonnelle").text = adresse.decode('utf8',
-                                                                                           errors='xmlcharrefreplace')
-                    etree.SubElement(liste_pp, "numCNI").text = "cin"
-                    etree.SubElement(liste_pp, "numCE").text = str(line.employee_id.otherid)
-                    etree.SubElement(liste_pp, "numCNSS").text = "cnss"
-                    etree.SubElement(liste_pp, "ifu").text = str(line.employee_id.ifu)
-                    etree.SubElement(liste_pp, "mtBrutTraitementSalaire").text = str(line.s_salaire_brut)
-                    etree.SubElement(liste_pp, "mtBrutIndemnites").text = str(line.s_ind_fp)
-                    etree.SubElement(liste_pp, "mtRetenues").text = str(line.s_autres_ret)
-                    etree.SubElement(liste_pp, "mtRevenuNetImposable").text = str(line.s_sni)
-                    etree.SubElement(liste_pp, "periode").text = str(line.s_jrs)
-
-            liste_pp1 = etree.SubElement(niv_1, "listDoctorants")
-            for line in rec.etat_line_ids:
-                if line.employee_id.contract_id.type_id == self.env.ref('kzm_edi_simplir.hr_contract_type_phd_student'):
-                    liste_pp = etree.SubElement(liste_pp1, "Doctorant")
-                    etree.SubElement(liste_pp, "nom").text = str(line.employee_id.name)
-                    etree.SubElement(liste_pp, "prenom").text = str(line.employee_id.prenom)
+                    etree.SubElement(liste_pp, "nom").text = str(line.employee_id.name.split(' ')[0])
+                    etree.SubElement(liste_pp, "prenom").text = str(line.employee_id.name.split(' ')[1])
                     adresse = ""
                     if line.employee_id.address_home_id:
                         adresse = line.employee_id.address_home_id.encode('utf8')
@@ -368,7 +351,29 @@ class Etat9421(models.Model):
                                                                                            errors='xmlcharrefreplace')
                     etree.SubElement(liste_pp, "numCNI").text = str(line.employee_id.cin)
                     etree.SubElement(liste_pp, "numCE").text = str(line.employee_id.otherid)
+                    etree.SubElement(liste_pp, "numCNSS").text = str(line.employee_id.matricule_cnss)
+                    etree.SubElement(liste_pp, "ifu").text = str(line.employee_id.ifu)
+                    etree.SubElement(liste_pp, "mtBrutTraitementSalaire").text = str(line.s_salaire_brut)
                     etree.SubElement(liste_pp, "mtBrutIndemnites").text = str(line.s_ind_fp)
+                    etree.SubElement(liste_pp, "mtRetenues").text = str(line.s_autres_ret)
+                    etree.SubElement(liste_pp, "mtRevenuNetImposable").text = str(line.s_sni)
+                    etree.SubElement(liste_pp, "periode").text = str(line.s_jrs)
+
+            # liste_pp1 = etree.SubElement(niv_1, "listDoctorants")
+            # for line in rec.etat_line_ids:
+            #     if line.employee_id.contract_id.type_id == self.env.ref('kzm_edi_simplir.hr_contract_type_phd_student'):
+            #         liste_pp = etree.SubElement(liste_pp1, "Doctorant")
+            #         etree.SubElement(liste_pp, "nom").text = str(line.employee_id.name)
+            #         etree.SubElement(liste_pp, "prenom").text = str(line.employee_id.prenom)
+            #         adresse = ""
+            #         if line.employee_id.address_home_id:
+            #             adresse = line.employee_id.address_home_id.encode('utf8')
+            # 
+            #         etree.SubElement(liste_pp, "adressePersonnelle").text = adresse.decode('utf8',
+            #                                                                                errors='xmlcharrefreplace')
+            #         etree.SubElement(liste_pp, "numCNI").text = str(line.employee_id.cin)
+            #         etree.SubElement(liste_pp, "numCE").text = str(line.employee_id.otherid)
+            #         etree.SubElement(liste_pp, "mtBrutIndemnites").text = str(line.s_ind_fp)
 
             liste_pp = etree.SubElement(niv_1, "listBeneficiaires")
             liste_pp = etree.SubElement(niv_1, "listBeneficiairesPlanEpargne")
