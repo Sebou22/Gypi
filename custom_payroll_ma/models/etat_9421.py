@@ -497,10 +497,12 @@ class Etat9421(models.Model):
                 cumul_sni = s_brut - cumul_igr - cotisation_e - cotisation_p
                 cumul_sbi = s_brut - cotisation_e - cotisation_p
                 cumul_work_days = sum(j.worked_days_line_ids.mapped('number_of_days'))
+                personnes = 1 if j.employee_id.marital=='married' else 0
+                personnes += j.employee_id.children if j.employee_id.children else 0
 
                 if  j.employee_id.id not in data_list:
 
-                    data_list[j.employee_id.id]={'id_etat':res.id,'employee_id':j.employee_id.id,'s_salaire_base':s_base,'cumul_sb':s_brut,'cumul_avantages':cumul_avantages,'cumul_indemnites_fp':cumul_indemnites_fp,'cumul_exo':cumul_exo,'personnes':j.employee_id.personnes,'cumul_igr':cumul_igr,'cumul_sni':cumul_sni,'cumul_ee_cotis':cotisation_e,'cumul_work_days':cumul_work_days,'cumul_sbi':cumul_sbi}
+                    data_list[j.employee_id.id]={'id_etat':res.id,'employee_id':j.employee_id.id,'s_salaire_base':s_base,'cumul_sb':s_brut,'cumul_avantages':cumul_avantages,'cumul_indemnites_fp':cumul_indemnites_fp,'cumul_exo':cumul_exo,'personnes':j.employee_id.personnes,'cumul_igr':cumul_igr,'cumul_sni':cumul_sni,'cumul_ee_cotis':cotisation_e,'cumul_work_days':cumul_work_days,'cumul_sbi':cumul_sbi,'personnes':personnes}
                 else:
                     data_list[j.employee_id.id]['s_salaire_base'] += s_base
                     data_list[j.employee_id.id]['cumul_sb'] += s_brut
