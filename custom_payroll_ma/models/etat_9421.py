@@ -498,7 +498,7 @@ class Etat9421(models.Model):
                 line_etat.create({
                         'id_etat': res.id,
                         'employee_id': data_list[d]['employee_id'],
-                        's_salaire_base': data_list[d]['cumul_base'],
+                        's_salaire_base': data_list[d]['s_salaire_base'],
                         # 's_salaire_brut': bulletin.cumul_sb,
                         # 's_avantage_nature': bulletin.cumul_avantages,
                         # 's_ind_fp': bulletin.cumul_indemnites_fp,
