@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<data>
+	<template  id= "etat_cnss" >
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+				<div class="header"></div>
+                <t t-call="web.external_layout">
+			<div class="page">
+				<div class="text-center">
+					<img src="custom_payroll_ma/static/src/img/cnss.png" style="width:100px;height:100px;"/>
+				</div>
+					<h2 class="mt-4 text-center">BORDEREAU DE DECLARATION DES SALARIES ENTRANTS</h2>
+
+				<br/><br/><br/>
+				<table class="table table-sm o_main_table mt-4 text-center">
+				  <thead>
+				    <tr>
+				      <th>N° Affilié</th>
+				      <th>Agence</th>
+				      <th>Mois</th>
+				      <th>Année</th>
+				    </tr>
+
+				  </thead>
+				  <tbody>
+				    <tr>
+						<td><span t-esc="o.company_id.n_affilie"/> </td>
+						<td><span t-esc="o.company_id.agence"/></td>
+				      <td><span t-if="o.date_start" t-esc="o.date_start.year"/></td>
+				      <td><span t-if="o.date_start" t-esc="o.date_start.month"/></td>
+				    </tr>
+				  </tbody>
+
+				</table>
+			<table class="table table-sm o_main_table mt-4">
+			  <thead>
+					<tr>
+						<th style="border: 1px solid black;text-align: center;">N° immatriculé</th>
+						<th style="border: 1px solid black;text-align: center;">Nom complet</th>
+							<th style="border: 1px solid black;text-align: center;">N° CIN</th>
+
+						<th style="border: 1px solid black;text-align: center;">Nb de jours </th>
+						<th style="border: 1px solid black;text-align: center;">Salaire Brut Percus</th>
+					</tr>
+					</thead>
+
+					<t t-set="total" t-value="0"/>
+
+					<!--	<div t-foreach="b.line_ids" t-as="l">-->
+					<tbody>
+					  	<tr t-foreach="o.slip_ids" t-as="b">
+					  	  <t t-foreach="b.line_ids.filtered(lambda r: r.code=='BRUT')" t-as="line">
+					  	    <td style="border: 1px solid black;text-align: center;vertical-align:middle;"><span t-field="b.employee_id.matricule_cnss"/></td>
+								<td style="padding:5px;border: 1px solid black;text-align: left;vertical-align:middle;"><span t-field="b.employee_id.name"/></td>
+
+								<td style="border: 1px solid black;text-align: center;vertical-align:middle;"><span t-field="b.employee_id.cin"/></td>
+								<td style="border: 1px solid black;text-align: center;vertical-align:middle;"><span t-field="b.sum_worked_hours"/></td>
+									<td style="border: 1px solid black;text-align: center;vertical-align:middle;"><span t-esc="line.amount"/></td>
+
+										<t t-set="total" t-value="total+line.amount"/>
+
+
+					  	  </t>
+
+
+
+							</tr>
+					</tbody>
+					<tr>
+						<td style="border: 1px solid black;text-align: center;" colspan="3"/>
+
+						<td style="border: 1px solid black;text-align: center;"><b>TOTAL</b></td>
+						<td style="border: 1px solid black;text-align: center;"><t t-esc="total"/></td>
+					</tr>
+				</table>
+				<br/><br/>
+
+				<div class="row mt-2">
+				  <div class="col">
+				    <p class="h6 fw-bold text-end">
+				      Signature et cachet de l'employeur
+				    </p>
+				  </div>
+
+				</div>
+			</div>
+		</t>
+	</t>
+	</t>
+	</template>
+	</data>
+</odoo>

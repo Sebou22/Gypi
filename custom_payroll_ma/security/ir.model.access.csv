@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_custom_pop_message,access_custom_pop_message,model_custom_pop_message,,1,1,1,1
+access_hr_payslip_indemnities,access_hr_payslip_indemnities,model_hr_payslip_indemnities,,1,1,1,1
+access_hr_loans_line,access_hr_loans_line,model_hr_loans_line,,1,1,1,1
+access_hr_payslip_indemnities_lignes,access_hr_payslip_indemnities_lignes,model_hr_payslip_indemnities_lignes,,1,1,1,1
+access_etat_9421,access_etat_9421,model_etat_9421,,1,1,1,1
+access_etat_9421_line,access_etat_9421_line,model_etat_9421_line,,1,1,1,1
+access_bordereau_cnss,access_bordereau_cnss,model_bordereau_cnss,,1,1,1,1
+access_bordereau_payment,access_bordereau_payment,model_bordereau_payment,,1,1,1,1
+access_livre_paie,access_livre_paie,model_livre_paie,,1,1,1,1

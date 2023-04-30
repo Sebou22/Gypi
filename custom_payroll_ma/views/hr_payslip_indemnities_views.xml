@@ -1,0 +1,64 @@
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="hr_payslip_indemnities_form_view">
+            <field name="name">hr.payslip.indemnities.form</field>
+            <field name="model">hr.payslip.indemnities</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="code"/>
+                                <field name="note"/>
+                            </group>
+                            <group string="Computation">
+                                <field name="amount_select"/>
+                                <field name="amount_python_compute"
+                                       attrs="{'invisible':[('amount_select','!=','code')], 'required':[('amount_select','=','code')]}"/>
+                                <field name="amount_percentage_base"
+                                       attrs="{'invisible':[('amount_select','!=','percentage')], 'required': [('amount_select','=','percentage')]}"/>
+                                <field name="quantity"
+                                       attrs="{'invisible':[('amount_select','=','code')], 'required':[('amount_select','!=','code')]}"/>
+
+                                <field name="amount_fix"
+                                       attrs="{'invisible':[('amount_select','!=','fix')], 'required':[('amount_select','=','fix')]}"/>
+                                <field name="amount_percentage"
+                                       attrs="{'invisible':[('amount_select','!=','percentage')], 'required':[('amount_select','=','percentage')]}"/>
+
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="hr_payslip_indemnities_tree_view">
+            <field name="name">hr.payslip.indemnities.tree</field>
+            <field name="model">hr.payslip.indemnities</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="code"/>
+
+
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_hr_payslip_indemnities">
+            <field name="name">Indemnités</field>
+            <field name="res_model">hr.payslip.indemnities</field>
+            <field name="binding_view_types">form,tree</field>
+        </record>
+
+        <menuitem
+                name="Indemnités"
+                id="menu_hr_payslip_indemnities"
+                parent="hr_work_entry_contract_enterprise.menu_hr_payroll_configuration"
+                action="action_hr_payslip_indemnities"
+                sequence="10"
+        />
+    </data>
+</odoo>

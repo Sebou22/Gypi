@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="view_product_attribute_custom_dynamic">
+        <field name="name">product.attribute</field>
+        <field name="model">product.attribute</field>
+        <field name="inherit_id" ref="product.product_attribute_view_form"/>
+        <field name="arch" type="xml">
+            <page name="attribute_values" position="after">
+                <page string="Python code" name="parameters">
+                <group>
+                    <field name="convert_type" />
+                    <field name="python_name" />
+                </group>
+                </page>
+
+            </page>
+        </field>
+    </record>
+</odoo>

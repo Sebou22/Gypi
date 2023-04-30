@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+
+
+        <report
+            id="etat_cnss_id"
+            string="Bordereau CNSS"
+            model="bordereau.cnss"
+            report_type="qweb-pdf"
+            file="custom_payroll_ma.etat_cnss"
+            name="custom_payroll_ma.etat_cnss"
+        />
+        <report
+            id="bordereau_paiement_cnss_id"
+            string="Bordereau Paiement CNSS"
+            model="bordereau.payment"
+            report_type="qweb-pdf"
+            file="custom_payroll_ma.bordereau_paiement_cnss"
+            name="custom_payroll_ma.bordereau_paiement_cnss"
+        />
+        <report
+            id="livre_paie_id"
+            string="Livre de paie"
+            model="livre.paie"
+            report_type="qweb-pdf"
+            file="custom_payroll_ma.livre_paie"
+            name="custom_payroll_ma.livre_paie"
+        />
+
+
+</data>
+</odoo>

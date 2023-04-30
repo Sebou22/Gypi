@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+<!-- form view -->
+            <record model="ir.ui.view" id="livre_paie_form_view">
+            <field name="name">livre.paie.form</field>
+            <field name="model">livre.paie</field>
+            <field name="arch" type="xml">
+                   <form>
+                    <sheet>
+
+                        <group>
+                            <group>
+                                <field name="date_start"/>
+                                <field name="date_end"/>
+
+                            </group>
+                        </group>
+                        <footer>
+                            <button name="action_print_livre" string="Imprimer livre" type="object" class="oe_highlight"/>
+                            <button string="Annuler" class="btn btn-secondary" special="cancel" />
+                        </footer>
+                    </sheet>
+                   </form>
+            </field>
+            </record>
+
+
+    <!--Actions-->
+    <record id="act_livre_paie" model="ir.actions.act_window">
+        <field name="name">Livre paie</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">livre.paie</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_livre_paie" name="Livre paie" parent="hr_work_entry_contract_enterprise.menu_hr_payroll_configuration"
+              action="act_livre_paie" sequence="12"/>
+
+
+</odoo>

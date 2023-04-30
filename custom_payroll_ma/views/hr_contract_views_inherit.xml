@@ -1,0 +1,67 @@
+<odoo>
+    <data>
+        <record id="view_hr_contract_form_inherit" model="ir.ui.view">
+            <field name="name">hr.contract.form.inherit</field>
+            <field name="model">hr.contract</field>
+            <field eval="1" name="priority"/>
+            <field name="inherit_id" ref="hr_contract.hr_contract_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Salaire NET -> BASE">
+                        <div class=" col-md-6">
+                            <div class="card"
+                                 style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                                <div class="card-body">
+                                    <group>
+                                        <field name="wage_net"/>
+                                    </group>
+                                    <button string=" " class="btn btn-info button_net_brut" icon="fa-arrow-right"
+                                            type="object" name="get_wage_net_brut"
+                                            attrs="{'invisible': [('wage_net', '=', False)]}"
+                                            style="width: 80px !important;float:right !important;"/>
+                                </div>
+                            </div>
+                        </div>
+                    </page>
+
+                    <page string="Indemnités NI">
+                        <group>
+                                <field name="indemnities_ids"  colspan="2" nolabel="1">
+                                    <tree editable="bottom">
+                                        <field name="name" />
+                                        <field name="code"/>
+                                        <field name="max_total"/>
+                                        <field name="total"/>
+                                         <field name="diff_total"/>
+                                         <field name="exo_total"/>
+                                        <field name="note"/>
+                                        <button type="object" name="default_max_total" class="btn btn-primary" string="Update Max"/>
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <group>
+                                                <field name="name"/>
+                                                <field name="code"/>
+                                                <field name="note"/>
+                                            </group>
+                                            <group>
+                                                <field name="max_total"/>
+                                                <field name="total"/>
+                                                <field name="diff_total"/>
+                                                <field name="exo_total"/>
+                                            </group>
+                                        </group>
+                                    </form>
+                                </field>
+                        </group>
+                    </page>
+                    <page string="Justification du départ" attrs="{'invisible': [('state','not in',('close','cancel'))]}" groups="hr_contract.group_hr_contract_manager">
+                        <group>
+                                    <field name="reasons_leaving" nolabel="1" colspan="2" placeholder="Justification du départ"/>
+                                </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

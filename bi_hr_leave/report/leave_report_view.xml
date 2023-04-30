@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+    <report id="leave_report_absence"
+           name="bi_hr_leave.leave_report_template_absence"
+           report_type="qweb-pdf"
+           model="hr.leave"
+           file="bi_hr_leave.leave_report_template_absence"
+           string="Absence Report"
+           />
+    <report id="leave_report_exit"
+           name="bi_hr_leave.leave_report_template_exit"
+           report_type="qweb-pdf"
+           model="hr.leave"
+           file="bi_hr_leave.leave_report_template_exit"
+           string="Exit Report"
+           />
+     </data>
+</odoo>

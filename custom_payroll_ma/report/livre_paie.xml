@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+        <template id="livre_paie">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div class="header"/>
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <div class="text-center">
+					<img src="custom_payroll_ma/static/src/img/cnss.png" style="width:100px;height:100px;"/>
+				</div>
+					<h2 class="mt-4 text-center">LIVRE DE PAIE</h2>
+                            <p>
+                                Période de la paie du mois en cours:
+                                <span t-field="o.date_start" t-options="{&quot;format&quot;: &quot;dd-MM-yyyy&quot;}"/>
+                                    -    
+                                <span t-field="o.date_end" t-options="{&quot;format&quot;: &quot;dd-MM-yyyy&quot;}"/>
+                            </p>
+
+
+                            <table class="table table-sm" style="border-collapse: collapse;width:100%">
+                                <thead>
+                                    <tr>
+                                        <th>Matricule</th>
+                                        <th>Nom et prénom</th>
+                                        <th>Sal. Base</th>
+                                        <th>
+                                            Nb de jours
+                                        </th>
+                                        <th>Heures normales</th>
+                                        <th>
+                                            <b>25</b>
+                                            <br/>
+                                            <b>50%</b>
+                                            <br/>
+                                            <b>100%</b>
+
+                                        </th>
+                                        <th>
+                                            <b>Anc %</b>
+                                        </th>
+                                        <th>Primes</th>
+                                        <th>Salaire Brut</th>
+                                        <th>Retenues sociales</th>
+                                        <th>I.R</th>
+                                        <th>CSS</th>
+                                        <th>Indemnités</th>
+                                        <th>
+                                            <b>Avances / Prêt</b>
+                                        </th>
+                                        <th>Net à payer</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr t-foreach="o.slip_ids" t-as="b">
+                                            <td>
+                                                <span t-field="b.employee_id.matricule_cnss"/>
+                                            </td>
+                                        <td><span t-field="b.employee_id.name"/></td>
+                                            <td>
+                                                <span t-field="b.contract_id.wage"/>
+                                            </td>
+                                        <td><span t-esc="sum(b.worked_days_line_ids.mapped('number_of_days'))"/></td>
+                                        <td><span t-field="b.sum_worked_hours"/></td>
+                                        <td>
+                                            <span t-esc="sum(b.input_line_ids.filtered(lambda r : r.input_type_id.code=='EXTRA_HOURS_25').mapped('amount'))"/>
+                                            <br/>
+                                            <span t-esc="sum(b.input_line_ids.filtered(lambda r : r.input_type_id.code=='EXTRA_HOURS_50').mapped('amount'))"/>
+                                            <br/>
+                                            <span t-esc="sum(b.input_line_ids.filtered(lambda r : r.input_type_id.code=='EXTRA_HOURS_100').mapped('amount'))"/>
+
+
+                                        </td>
+                                        <td><span t-field="b.line_ids.filtered(lambda r: r.code=='ANC').total"/></td>
+                                        <td>
+                                            <span t-esc="sum(b.line_ids.filtered(lambda r : r.category_id.code=='INDMNT').mapped('total'))"/>
+                                        </td>
+                                        <td><span t-field="b.line_ids.filtered(lambda r: r.code=='BRUT').total"/></td>
+                                        <td><span t-esc="abs(b.line_ids.filtered(lambda r: r.code=='SALC').total)"/></td>
+                                        <td><span t-esc="abs(b.line_ids.filtered(lambda r: r.code=='IR').total)"/></td>
+                                        <td>
+                                            <span t-esc="abs(b.line_ids.filtered(lambda r: r.code=='CNSSE').total)"/>
+
+
+                                        </td>
+                                        <td><span t-esc="sum(b.line_ids.filtered(lambda r: r.code.startswith('INDMT')).mapped('total'))"/></td>
+                                        <td><span t-esc="abs(b.line_ids.filtered(lambda r: r.code=='AVS').total)"/></td>
+                                        <td><span t-field="b.line_ids.filtered(lambda r: r.code=='NET').total"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>        </template>
+    </data>
+</odoo>

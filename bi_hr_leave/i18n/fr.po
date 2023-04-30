@@ -1,0 +1,173 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* bi_hr_leave
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-10 15:30+0000\n"
+"PO-Revision-Date: 2023-03-10 15:30+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: bi_hr_leave
+#: model:ir.actions.report,name:bi_hr_leave.leave_report_absence
+msgid "Absence Report"
+msgstr "Bon d'absence"
+
+#. module: bi_hr_leave
+#: model:ir.model.fields,field_description:bi_hr_leave.field_excel_report__create_uid
+#: model:ir.model.fields,field_description:bi_hr_leave.field_hr_leave_report_wiz__create_uid
+msgid "Created by"
+msgstr "Crée par"
+
+#. module: bi_hr_leave
+#: model:ir.model.fields,field_description:bi_hr_leave.field_excel_report__create_date
+#: model:ir.model.fields,field_description:bi_hr_leave.field_hr_leave_report_wiz__create_date
+msgid "Created on"
+msgstr "Crée le "
+
+#. module: bi_hr_leave
+#: model_terms:ir.ui.view,arch_db:bi_hr_leave.leave_report_template_document
+msgid "Days"
+msgstr "Jours"
+
+#. module: bi_hr_leave
+#: model_terms:ir.ui.view,arch_db:bi_hr_leave.leave_report_template_document
+msgid "Days :"
+msgstr "Jours :"
+
+#. module: bi_hr_leave
+#: model_terms:ir.ui.view,arch_db:bi_hr_leave.leave_report_template_document
+msgid "Departement"
+msgstr "Département"
+
+#. module: bi_hr_leave
+#: model_terms:ir.ui.view,arch_db:bi_hr_leave.leave_report_template_document
+msgid "Department :"
+msgstr "Département :"
+
+#. module: bi_hr_leave
+#: model_terms:ir.ui.view,arch_db:bi_hr_leave.leave_report_template_document
+msgid "Description"
+msgstr "Description"
+
+#. module: bi_hr_leave
+#: model:ir.model.fields,field_description:bi_hr_leave.field_excel_report__display_name
+#: model:ir.model.fields,field_description:bi_hr_leave.field_hr_leave_report_wiz__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: bi_hr_leave
+#: model_terms:ir.ui.view,arch_db:bi_hr_leave.leave_report_template_document
+msgid "Email id :"
+msgstr "Email :"
+
+#. module: bi_hr_leave
+#: model_terms:ir.ui.view,arch_db:bi_hr_leave.leave_report_template_document
+msgid "Employee Details"
+msgstr "Détails de l'employé"
+
+#. module: bi_hr_leave
+#: model_terms:ir.ui.view,arch_db:bi_hr_leave.leave_report_template_document
+msgid "Employee Name"
+msgstr "Nom de l'employé"
+
+#. module: bi_hr_leave
+#: model:ir.model.fields,field_description:bi_hr_leave.field_excel_report__file_name
+msgid "Excel File"
+msgstr "Fichier Excel"
+
+#. module: bi_hr_leave
+#: model:ir.model.fields,field_description:bi_hr_leave.field_excel_report__excel_file
+msgid "Excel Report"
+msgstr "Rapport Excel"
+
+#. module: bi_hr_leave
+#: model:ir.actions.report,name:bi_hr_leave.leave_report_exit
+msgid "Exit Report"
+msgstr "Bon de sortie"
+
+#. module: bi_hr_leave
+#: model:ir.model,name:bi_hr_leave.model_hr_leave_report_wiz
+msgid "Hr Leave Report Wizard"
+msgstr "Assistant de rapport de congé RH"
+
+#. module: bi_hr_leave
+#: model:ir.model.fields,field_description:bi_hr_leave.field_excel_report__id
+#: model:ir.model.fields,field_description:bi_hr_leave.field_hr_leave_report_wiz__id
+msgid "ID"
+msgstr ""
+
+#. module: bi_hr_leave
+#: model:ir.model.fields,field_description:bi_hr_leave.field_excel_report____last_update
+#: model:ir.model.fields,field_description:bi_hr_leave.field_hr_leave_report_wiz____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: bi_hr_leave
+#: model:ir.model.fields,field_description:bi_hr_leave.field_excel_report__write_uid
+#: model:ir.model.fields,field_description:bi_hr_leave.field_hr_leave_report_wiz__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: bi_hr_leave
+#: model:ir.model.fields,field_description:bi_hr_leave.field_excel_report__write_date
+#: model:ir.model.fields,field_description:bi_hr_leave.field_hr_leave_report_wiz__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: bi_hr_leave
+#: model_terms:ir.ui.view,arch_db:bi_hr_leave.leave_report_template_document
+msgid "Leave Details"
+msgstr "Leave Details"
+
+#. module: bi_hr_leave
+#: model_terms:ir.ui.view,arch_db:bi_hr_leave.leave_report_template_document
+msgid "Motif"
+msgstr ""
+
+#. module: bi_hr_leave
+#: model_terms:ir.ui.view,arch_db:bi_hr_leave.leave_report_template_document
+msgid "Name :"
+msgstr "Nom :"
+
+#. module: bi_hr_leave
+#: model_terms:ir.ui.view,arch_db:bi_hr_leave.leave_report_template_document
+msgid "Period"
+msgstr "Période"
+
+#. module: bi_hr_leave
+#: model_terms:ir.ui.view,arch_db:bi_hr_leave.leave_report_template_document
+msgid "Period :"
+msgstr "Période :"
+
+#. module: bi_hr_leave
+#: model_terms:ir.ui.view,arch_db:bi_hr_leave.leave_report_template_document
+msgid "Position :"
+msgstr "Fonction :"
+
+#. module: bi_hr_leave
+#: model_terms:ir.ui.view,arch_db:bi_hr_leave.leave_report_template_document
+msgid "Status"
+msgstr "Statut"
+
+#. module: bi_hr_leave
+#: model_terms:ir.ui.view,arch_db:bi_hr_leave.leave_report_template_document
+msgid "Status :"
+msgstr "Statut :"
+
+#. module: bi_hr_leave
+#: model_terms:ir.ui.view,arch_db:bi_hr_leave.leave_report_template_document
+msgid "To"
+msgstr "à"
+
+#. module: bi_hr_leave
+#: model:ir.model,name:bi_hr_leave.model_excel_report
+msgid "excel.report"
+msgstr ""
