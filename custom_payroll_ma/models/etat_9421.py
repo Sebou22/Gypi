@@ -488,12 +488,18 @@ class Etat9421(models.Model):
             for j in bulletin_ids:
                 s_base = j.line_ids.filtered(lambda r: r.code == 'BASIC').total
                 s_brut = j.line_ids.filtered(lambda r: r.code == 'BRUT').total
+                cumul_avantages = j.line_ids.filtered(lambda r: r.code == 'avantage').total
+                cumul_indemnites_fp = j.line_ids.filtered(lambda r: r.code == 'FPRO').total
+                cumul_exo = j.line_ids.filtered(lambda r: r.category_id.code == 'INDMNT').total
                 if  j.employee_id.id not in data_list:
 
-                    data_list[j.employee_id.id]={'id_etat':res.id,'employee_id':j.employee_id.id,'s_salaire_base':s_base,'cumul_sb':s_brut}
+                    data_list[j.employee_id.id]={'id_etat':res.id,'employee_id':j.employee_id.id,'s_salaire_base':s_base,'cumul_sb':s_brut,'cumul_avantages':cumul_avantages,'cumul_indemnites_fp':cumul_indemnites_fp,'cumul_exo':cumul_exo}
                 else:
                     data_list[j.employee_id.id]['s_salaire_base'] += s_base
                     data_list[j.employee_id.id]['cumul_sb'] += s_brut
+                    data_list[j.employee_id.id]['cumul_avantages'] += cumul_avantages
+                    data_list[j.employee_id.id]['cumul_indemnites_fp'] += cumul_indemnites_fp
+                    data_list[j.employee_id.id]['cumul_exo'] += cumul_exo
             logger.info("===========> 2 %s" %(data_list))
             for d in data_list.keys():
                 logger.info(data_list[d])
@@ -503,10 +509,10 @@ class Etat9421(models.Model):
                         'employee_id': data_list[d]['employee_id'],
                         's_salaire_base': data_list[d]['s_salaire_base'],
                         's_salaire_brut': data_list[d]['cumul_sb'],
-                        # 's_avantage_nature': bulletin.cumul_avantages,
-                        # 's_ind_fp': bulletin.cumul_indemnites_fp,
-                        # 's_indemnites': bulletin.cumul_exo,
-                        # 'taux_fp': 20,
+                        's_avantage_nature': data_list[d]['cumul_avantages'],
+                        's_ind_fp': data_list[d]['cumul_indemnites_fp'],
+                        's_indemnites': data_list[d]['cumul_exo'],
+                        'taux_fp': 20,
                         # 's_sbi': bulletin.cumul_sbi,
                         # 's_frais_pro': bulletin.cumul_fp,
                         # 's_cot_ass': 0.0,
