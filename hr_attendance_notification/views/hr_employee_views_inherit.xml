@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <record id="view_employee_form_inherit" model="ir.ui.view">
+            <field name="name">hr.employee.form.inherit</field>
+            <field name="model">hr.employee</field>
+            <field eval="1" name="priority"/>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook" position="inside">
+                    <page string="Horaires">
+                       <field name="hours_work" widget="float_time"/>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

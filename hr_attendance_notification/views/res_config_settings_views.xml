@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_inherit" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+          <xpath expr="//div[@id='companies_setting']" position="inside">
+              <div class="o_setting_right_pane">
+                <div class="mt8">
+                        <label for="hours_work" string="Horaire Matin" class="col-lg-4 o_light_label"/>
+                        <field name="hours_work" widget="float_time"/>
+                </div>
+                <div class="mt8">
+                        <label for="marge_retard" string="Marge de retard" class="col-lg-4 o_light_label"/>
+                        <field name="marge_retard" widget="integer"/> (minutes)
+                </div>
+              </div>
+
+            </xpath>
+        </field>
+    </record>
+</odoo>

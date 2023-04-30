@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <record id="view_res_company_form_inherit" model="ir.ui.view">
+            <field name="name">res.company.form.inherit</field>
+            <field name="model">res.company</field>
+            <field eval="1" name="priority"/>
+            <field name="inherit_id" ref="l10n_ma_hr_payroll.res_company_form_l10n_ma_payroll"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='conv_coll']" position="after">
+                    <field name="agence"/>
+                    <field name="n_affilie"/>
+                    <field name="reference_structure"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
