@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <data>
+		<!-- Partner form view inherte-->
+		<record id="inherit_res_partner_extend_form" model="ir.ui.view">
+			<field name="name">inherit.res.partner.extend.form</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_partner_form"/>
+			<field name="arch" type="xml">
+                <!-- <field name="lang" position="before">
+                        <field name="fax" widget="phone"/>
+                </field> -->
+                    <field name="vat" position="after">
+                        <field name="rc" attrs="{'invisible': [('is_company','=', False), ('country_id', '!=', 136)]}"/>
+                        <field name="ice" attrs="{'invisible': [('is_company','=', False), ('country_id', '!=', 136)]}"/>
+                    </field>
+                <notebook position="inside">
+                    <page string="Autres infos" attrs="{'invisible': [('is_company','=', False), ('country_id', '!=', 136)],'required': [('is_company','=', True)]}">
+						<group>
+							<group>
+								<field name="id_fisc"/>
+								<field name="rc" />
+								<field name="capital_social" />
+								<field name="ice"/>
+							</group>
+							<group>
+								<field name="itp"/>
+								<field name="cnss" />
+								<field name="activites"/>
+							</group>
+						</group>
+                            <!-- <field name="nationalite"/> -->
+                    </page>
+                </notebook>
+            </field>
+		</record>
+        <!-- <record id="inherit_res_partner_extend_tree" model="ir.ui.view">
+			<field name="name">inherit.res.partner.extend.tree</field>
+			<field name="model">res.partner</field>
+			<field name="inherit_id" ref="base.view_partner_tree"/>
+			<field name="arch" type="xml">
+                <field name="phone" postition="after">
+                    <field name="tag_ids" widget="many2many_tags" />
+                </field>
+            </field>
+        </record> -->
+    </data>
+</odoo>
