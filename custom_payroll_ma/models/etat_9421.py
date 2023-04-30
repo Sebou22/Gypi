@@ -87,20 +87,20 @@ class Etat9421(models.Model):
         tot_ded_stg = 0
         tot_sni_stg = 0
         for rec in self:
-           # for line in rec.etat_line_ids:
-           #      if line.employee_id.contract_id.type_id == self.env.ref('kzm_hr_contract_type.hr_contract_type_3'):
-           #          tot_sbi += line.s_sbi
-           #          tot_sni += line.s_sni
-           #          tot_ir += line.s_igr
-           #          tot_ded += line.s_total_deductions
-           #      if line.employee_id.contract_id.type_id == self.env.ref('kzm_hr_contract_type.hr_contract_type_5'):
-           #          tot_sb_pp += line.s_salaire_brut
-           #          tot_ir_pp += line.s_igr
-           #      if line.employee_id.contract_id.type_id == self.env.ref('hr_contract_type_sub'):
-           #          tot_sb_stg += line.s_salaire_brut
-           #          total_indm += line.s_indemnites
-           #          tot_ded_stg += line.s_total_deductions
-           #          tot_sni_stg += line.s_sni
+           for line in rec.etat_line_ids:
+                if line.employee_id.contract_id.contract_type_id and line.employee_id.contract_id.contract_type_id.name == 'CDI':
+                    tot_sbi += line.s_sbi
+                    tot_sni += line.s_sni
+                    tot_ir += line.s_igr
+                    tot_ded += line.s_total_deductions
+                if line.employee_id.contract_id.contract_type_id and line.employee_id.contract_id.contract_type_id.name == 'CDD':
+                    tot_sb_pp += line.s_salaire_brut
+                    tot_ir_pp += line.s_igr
+                if line.employee_id.contract_id.contract_type_id and line.employee_id.contract_id.contract_type_id.name == 'STAGE':
+                    tot_sb_stg += line.s_salaire_brut
+                    total_indm += line.s_indemnites
+                    tot_ded_stg += line.s_total_deductions
+                    tot_sni_stg += line.s_sni
            # personnel permanent
            rec.total_sbi_pp = tot_sbi
            rec.total_sni_pp = tot_sni
@@ -494,15 +494,16 @@ class Etat9421(models.Model):
                 cumul_igr = j.line_ids.filtered(lambda r: r.code == 'IR').total
                 cotisation_e = sum(j.line_ids.filtered(lambda r: r.code in ('CNSSE','AMOE')).mapped('total'))
                 cotisation_p = sum(j.line_ids.filtered(lambda r: r.code in ('AMOP','CNSSP')).mapped('total'))
+                s_total_deductions = j.line_ids.filtered(lambda r: r.code == 'RET').total
                 cumul_sni = s_brut - cumul_igr - cotisation_e - cotisation_p
                 cumul_sbi = s_brut - cotisation_e - cotisation_p
                 cumul_work_days = sum(j.worked_days_line_ids.mapped('number_of_days'))
-                personnes = 1 if j.employee_id.marital=='married' else 0
+                personnes = 1 if j.employee_id.marital == 'married' else 0
                 personnes += j.employee_id.children if j.employee_id.children else 0
 
                 if  j.employee_id.id not in data_list:
 
-                    data_list[j.employee_id.id]={'id_etat':res.id,'employee_id':j.employee_id.id,'s_salaire_base':s_base,'cumul_sb':s_brut,'cumul_avantages':cumul_avantages,'cumul_indemnites_fp':cumul_indemnites_fp,'cumul_exo':cumul_exo,'cumul_igr':cumul_igr,'cumul_sni':cumul_sni,'cumul_ee_cotis':cotisation_e,'cumul_work_days':cumul_work_days,'cumul_sbi':cumul_sbi,'personnes':personnes}
+                    data_list[j.employee_id.id]={'id_etat':res.id,'employee_id':j.employee_id.id,'s_salaire_base':s_base,'cumul_sb':s_brut,'cumul_avantages':cumul_avantages,'cumul_indemnites_fp':cumul_indemnites_fp,'cumul_exo':cumul_exo,'cumul_igr':cumul_igr,'cumul_sni':cumul_sni,'cumul_ee_cotis':cotisation_e,'cumul_work_days':cumul_work_days,'cumul_sbi':cumul_sbi,'personnes':personnes,'s_total_deductions':s_total_deductions}
                 else:
                     data_list[j.employee_id.id]['s_salaire_base'] += s_base
                     data_list[j.employee_id.id]['cumul_sb'] += s_brut
@@ -512,6 +513,7 @@ class Etat9421(models.Model):
                     data_list[j.employee_id.id]['cumul_igr'] += cumul_igr
                     data_list[j.employee_id.id]['cumul_sni'] += cumul_sni
                     data_list[j.employee_id.id]['cumul_sbi'] += cumul_sbi
+                    data_list[j.employee_id.id]['s_total_deductions'] += s_total_deductions
                     data_list[j.employee_id.id]['cumul_ee_cotis'] += cotisation_e
                     data_list[j.employee_id.id]['cumul_work_days'] += cumul_work_days
             logger.info("===========> 2 %s" %(data_list))
@@ -535,6 +537,7 @@ class Etat9421(models.Model):
                         's_jrs': data_list[d]['cumul_work_days'],
                         's_igr': data_list[d]['cumul_igr'],
                         'nbr_reductions': data_list[d]['personnes'],
+                        's_total_deductions':data_list[d]['s_total_deductions'],
                     })
 
 
