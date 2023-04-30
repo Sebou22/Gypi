@@ -205,7 +205,9 @@ class Etat9421(models.Model):
                     etree.SubElement(liste_pp, "prenom").text = str(line.employee_id.name.split(' ')[1])
                     adresse = ""
                     if line.employee_id.address_home_id:
-                        adresse = line.employee_id.address_home_id.encode('utf8')
+                        adress = line.employee_id.address_home_id
+                        list_part = [adress.street if adress.street,adress.street2 if adress.street2,adress.city if adress.city,adress.state_id.name if adress.state_id,adress.zip if adress.zip,adress.country_id.name if adress.country_id]
+                        adresse = ','.join(list_part)
 
                     etree.SubElement(liste_pp, "adressePersonnelle").text = adresse
                     etree.SubElement(liste_pp, "numCNI").text = "cin"
@@ -300,7 +302,11 @@ class Etat9421(models.Model):
                     etree.SubElement(liste_pp, "prenom").text = str(line.employee_id.split(' ')[1])
                     adresse = ""
                     if line.employee_id.address_home_id:
-                        adresse = line.employee_id.address_home_id.encode('utf8')
+                        adress = line.employee_id.address_home_id
+                        list_part = [adress.street if adress.street, adress.street2 if adress.street2,
+                                     adress.city if adress.city, adress.state_id.name if adress.state_id,
+                                     adress.zip if adress.zip, adress.country_id.name if adress.country_id]
+                        adresse = ','.join(list_part)
 
                     etree.SubElement(liste_pp, "adressePersonnelle").text = adresse.decode('utf8',
                                                                                            errors='xmlcharrefreplace')
@@ -326,7 +332,11 @@ class Etat9421(models.Model):
                     etree.SubElement(liste_pp, "prenom").text = str(line.employee_id.name.split(' ')[1])
                     adresse = ""
                     if line.employee_id.address_home_id:
-                        adresse = line.employee_id.address_home_id.encode('utf8')
+                        adress = line.employee_id.address_home_id
+                        list_part = [adress.street if adress.street, adress.street2 if adress.street2,
+                                     adress.city if adress.city, adress.state_id.name if adress.state_id,
+                                     adress.zip if adress.zip, adress.country_id.name if adress.country_id]
+                        adresse = ','.join(list_part)
 
                     etree.SubElement(liste_pp, "adressePersonnelle").text = adresse.decode('utf8',
                                                                                            errors='xmlcharrefreplace')
@@ -345,7 +355,11 @@ class Etat9421(models.Model):
                     etree.SubElement(liste_pp, "prenom").text = str(line.employee_id.name.split(' ')[1])
                     adresse = ""
                     if line.employee_id.address_home_id:
-                        adresse = line.employee_id.address_home_id.encode('utf8')
+                        adress = line.employee_id.address_home_id
+                        list_part = [adress.street if adress.street, adress.street2 if adress.street2,
+                                     adress.city if adress.city, adress.state_id.name if adress.state_id,
+                                     adress.zip if adress.zip, adress.country_id.name if adress.country_id]
+                        adresse = ','.join(list_part)
 
                     etree.SubElement(liste_pp, "adressePersonnelle").text = adresse.decode('utf8',
                                                                                            errors='xmlcharrefreplace')
@@ -368,7 +382,7 @@ class Etat9421(models.Model):
             #         adresse = ""
             #         if line.employee_id.address_home_id:
             #             adresse = line.employee_id.address_home_id.encode('utf8')
-            # 
+            #
             #         etree.SubElement(liste_pp, "adressePersonnelle").text = adresse.decode('utf8',
             #                                                                                errors='xmlcharrefreplace')
             #         etree.SubElement(liste_pp, "numCNI").text = str(line.employee_id.cin)
