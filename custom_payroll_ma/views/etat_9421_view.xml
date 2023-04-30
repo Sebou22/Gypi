@@ -59,7 +59,7 @@
                                     <!--<field name="cnss"/>-->
                                     <field name="employee_id"/>
                                     <field name="situation"/>
-                                    <field name="period_id"/>
+                                   <!-- <field name="period_id"/>-->
                                     <field name="s_salaire_brut"/>
                                     <field name="s_avantage_nature"/>
                                     <field name="s_ind_fp"/>
