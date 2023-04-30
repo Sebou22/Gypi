@@ -493,7 +493,7 @@ class Etat9421(models.Model):
                     data_list[res.employee_id.id]['s_salaire_base'] += s_base
             logger.info("===========> 2 %s" %(data_list))
             for d in data_list:
-              logger.info(d)
+                logger.info(d)
 
                 line_etat.create({
                         'id_etat': res.id,
