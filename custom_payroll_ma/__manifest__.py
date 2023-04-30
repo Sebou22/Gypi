@@ -20,7 +20,7 @@
         'report/livre_paie.xml',
         'report/reports_views.xml',
         'views/etat_9421_view.xml',
-        'report/etat_9421.xml',
+        #'report/etat_9421.xml',
         'views/report_payslip_template_inherit.xml',
         'views/bordereau_cnss.xml',
         'views/bordereau_payment.xml',
