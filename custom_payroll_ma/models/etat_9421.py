@@ -121,17 +121,17 @@ class Etat9421(models.Model):
             count_pp = 0
             count_po = 0
             count_stg = 0
-#            for line in rec.etat_line_ids:
-#                if line.employee_id.contract_id.type_id == self.env.ref('kzm_hr_contract_type.hr_contract_type_3'):
-#                    count_pp += 1
-#                if line.employee_id.contract_id.type_id == self.env.ref('kzm_hr_contract_type.hr_contract_type_5'):
-#                    count_po += 1
-#                if line.employee_id.contract_id.type_id == self.env.ref('hr_contract_type_sub'):
-#                    count_stg += 1
+            for line in rec.etat_line_ids:
+               if line.employee_id.contract_id.type_id.name == 'CDI':
+                   count_pp += 1
+               if line.employee_id.contract_id.type_id.name == 'CDD':
+                   count_po += 1
+               if line.employee_id.contract_id.type_id.name == 'STAGE':
+                   count_stg += 1
             rec.nb_pp = count_pp
             rec.nb_po = count_po
             rec.nb_stg = count_stg
-            rec.effectif = count_pp + count_po + count_stg
+            rec.effectif = len(rec.etat_line_ids)
 
     def generate_edi_file(self):
         societe = self.env['res.company'].search([('id', '=', 1)])
