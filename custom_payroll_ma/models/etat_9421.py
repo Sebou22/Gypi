@@ -86,21 +86,21 @@ class Etat9421(models.Model):
         total_indm = 0
         tot_ded_stg = 0
         tot_sni_stg = 0
-        for rec in self:
-            for line in rec.etat_line_ids:
-                if line.employee_id.contract_id.type_id == self.env.ref('kzm_hr_contract_type.hr_contract_type_3'):
-                    tot_sbi += line.s_sbi
-                    tot_sni += line.s_sni
-                    tot_ir += line.s_igr
-                    tot_ded += line.s_total_deductions
-                if line.employee_id.contract_id.type_id == self.env.ref('kzm_hr_contract_type.hr_contract_type_5'):
-                    tot_sb_pp += line.s_salaire_brut
-                    tot_ir_pp += line.s_igr
-                if line.employee_id.contract_id.type_id == self.env.ref('hr_contract_type_sub'):
-                    tot_sb_stg += line.s_salaire_brut
-                    total_indm += line.s_indemnites
-                    tot_ded_stg += line.s_total_deductions
-                    tot_sni_stg += line.s_sni
+#        for rec in self:
+#            for line in rec.etat_line_ids:
+#                 if line.employee_id.contract_id.type_id == self.env.ref('kzm_hr_contract_type.hr_contract_type_3'):
+#                     tot_sbi += line.s_sbi
+#                     tot_sni += line.s_sni
+#                     tot_ir += line.s_igr
+#                     tot_ded += line.s_total_deductions
+#                 if line.employee_id.contract_id.type_id == self.env.ref('kzm_hr_contract_type.hr_contract_type_5'):
+#                     tot_sb_pp += line.s_salaire_brut
+#                     tot_ir_pp += line.s_igr
+#                 if line.employee_id.contract_id.type_id == self.env.ref('hr_contract_type_sub'):
+#                     tot_sb_stg += line.s_salaire_brut
+#                     total_indm += line.s_indemnites
+#                     tot_ded_stg += line.s_total_deductions
+#                     tot_sni_stg += line.s_sni
         # personnel permanent
         rec.total_sbi_pp = tot_sbi
         rec.total_sni_pp = tot_sni
