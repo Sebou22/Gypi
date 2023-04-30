@@ -320,8 +320,8 @@ class Etat9421(models.Model):
                     etree.SubElement(liste_pp, "nom").text = str(line.employee_id.name)
                     etree.SubElement(liste_pp, "prenom").text = str(line.employee_id.prenom)
                     adresse = ""
-                    if line.employee_id.address_home:
-                        adresse = line.employee_id.address_home.encode('utf8')
+                    if line.employee_id.address_home_id:
+                        adresse = line.employee_id.address_home_id.encode('utf8')
 
                     etree.SubElement(liste_pp, "adressePersonnelle").text = adresse.decode('utf8',
                                                                                            errors='xmlcharrefreplace')
@@ -339,8 +339,8 @@ class Etat9421(models.Model):
                     etree.SubElement(liste_pp, "nom").text = str(line.employee_id.name)
                     etree.SubElement(liste_pp, "prenom").text = str(line.employee_id.prenom)
                     adresse = ""
-                    if line.employee_id.address_home:
-                        adresse = line.employee_id.address_home.encode('utf8')
+                    if line.employee_id.address_home_id:
+                        adresse = line.employee_id.address_home_id.encode('utf8')
 
                     etree.SubElement(liste_pp, "adressePersonnelle").text = adresse.decode('utf8',
                                                                                            errors='xmlcharrefreplace')
@@ -361,8 +361,8 @@ class Etat9421(models.Model):
                     etree.SubElement(liste_pp, "nom").text = str(line.employee_id.name)
                     etree.SubElement(liste_pp, "prenom").text = str(line.employee_id.prenom)
                     adresse = ""
-                    if line.employee_id.address_home:
-                        adresse = line.employee_id.address_home.encode('utf8')
+                    if line.employee_id.address_home_id:
+                        adresse = line.employee_id.address_home_id.encode('utf8')
 
                     etree.SubElement(liste_pp, "adressePersonnelle").text = adresse.decode('utf8',
                                                                                            errors='xmlcharrefreplace')
@@ -553,7 +553,7 @@ class Etat9421Line(models.Model):
     #matricule = fields.Char(related='employee_id.matricule', string="Matricule", store=True)
     #cin = fields.Char(related='employee_id.cin', string="CIN")
     #cnss = fields.Char(related='employee_id.ssnid', string=u"N°CNSS")
-    #adresse = fields.Char(related='employee_id.address_home', string="Adresse personnelle")
+    adresse = fields.Char(related='employee_id.address_home_id', string="Adresse personnelle")
     situation = fields.Char(compute='get_marital_status', string="Situation")
     #period_id = fields.Many2one('date.range', domain="[('type_id.fiscal_period','=',True)]", string=u"Période")
     # les cumuls
