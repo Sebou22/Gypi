@@ -488,7 +488,7 @@ class Etat9421(models.Model):
                 s_base = j.line_ids.filtered(lambda r: r.code == 'BASIC').total
                 if  j.employee_id.id not in data_list:
 
-                    data_list.[j.employee_id.id]={'id_etat':res.id,'employee_id':j.employee_id.id,'s_salaire_base':s_base}
+                    data_list[j.employee_id.id]={'id_etat':res.id,'employee_id':j.employee_id.id,'s_salaire_base':s_base}
                 else:
                     data_list[j.employee_id.id]['s_salaire_base'] += s_base
             logger.info("===========> 2 %s" %(data_list))
