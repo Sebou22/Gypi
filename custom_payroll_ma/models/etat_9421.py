@@ -488,9 +488,9 @@ class Etat9421(models.Model):
             for j in bulletin_ids:
                 s_base = j.line_ids.filtered(lambda r: r.code == 'BASIC').total
                 s_brut = j.line_ids.filtered(lambda r: r.code == 'BRUT').total
-                cumul_avantages = j.line_ids.filtered(lambda r: r.code == 'avantage').total
+                cumul_avantages = sum(j.line_ids.filtered(lambda r: r.code == 'avantage').mapped('total'))
                 cumul_indemnites_fp = j.line_ids.filtered(lambda r: r.code == 'FPRO').total
-                cumul_exo = j.line_ids.filtered(lambda r: r.category_id.code == 'INDMNT').total
+                cumul_exo = sum(j.line_ids.filtered(lambda r: r.category_id.code == 'INDMNT').mapped('total'))
                 if  j.employee_id.id not in data_list:
 
                     data_list[j.employee_id.id]={'id_etat':res.id,'employee_id':j.employee_id.id,'s_salaire_base':s_base,'cumul_sb':s_brut,'cumul_avantages':cumul_avantages,'cumul_indemnites_fp':cumul_indemnites_fp,'cumul_exo':cumul_exo}
