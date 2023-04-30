@@ -15,6 +15,16 @@
                            </tree>
                        </field>
                     </page>
+                    <page string="Autres">
+                        <group>
+                            <group>
+                                <field name="otherid"/>
+                                <field name="n_ppr"/>
+                                <field name="ifu"/>
+                            </group>
+                        </group>
+                        
+                    </page>
                 </xpath>
             </field>
         </record>
