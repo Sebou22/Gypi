@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="intercompany_transfer_tree_view" model="ir.ui.view">
+        <field name="name">intercompany.transfer.tree.view</field>
+        <field name="model">stock.picking</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="location_id"/>
+                <field name="location_dest_id"/>
+                <field name="scheduled_date"/>
+                <field name="origin"/>
+                <field name="backorder_id"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_stock_picking_inter_company_view" model="ir.actions.act_window">
+        <field name="name">Inter-Company Transfers</field>
+        <field name="res_model">stock.picking</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="intercompany_transfer_tree_view"/>
+        <field name="domain">[('intercompany_transfer', '=', True)]</field>
+    </record>
+
+    <menuitem id="menu_intercompany_transfers"
+            name="Inter-Company Transfers"
+            action="action_stock_picking_inter_company_view"
+            parent="inter_company_stock_transfer.menu_inter_company_transfer_root"/>
+</odoo>
