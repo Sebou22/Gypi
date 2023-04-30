@@ -206,7 +206,7 @@ class Etat9421(models.Model):
                     adresse = ""
                     if line.employee_id.address_home_id:
                         adress = line.employee_id.address_home_id
-                        list_part = [adress.street if adress.street,adress.street2 if adress.street2,adress.city if adress.city,adress.state_id.name if adress.state_id,adress.zip if adress.zip,adress.country_id.name if adress.country_id]
+                        list_part = [adress.street or '',adress.street2 or '',adress.city or '',adress.state_id.name if adress.state_id else '',adress.zip or '',adress.country_id.name if adress.country_id else '']
                         adresse = ','.join(list_part)
 
                     etree.SubElement(liste_pp, "adressePersonnelle").text = adresse
@@ -303,9 +303,7 @@ class Etat9421(models.Model):
                     adresse = ""
                     if line.employee_id.address_home_id:
                         adress = line.employee_id.address_home_id
-                        list_part = [adress.street if adress.street, adress.street2 if adress.street2,
-                                     adress.city if adress.city, adress.state_id.name if adress.state_id,
-                                     adress.zip if adress.zip, adress.country_id.name if adress.country_id]
+                        list_part = [adress.street or '',adress.street2 or '',adress.city or '',adress.state_id.name if adress.state_id else '',adress.zip or '',adress.country_id.name if adress.country_id else '']
                         adresse = ','.join(list_part)
 
                     etree.SubElement(liste_pp, "adressePersonnelle").text = adresse.decode('utf8',
@@ -333,9 +331,7 @@ class Etat9421(models.Model):
                     adresse = ""
                     if line.employee_id.address_home_id:
                         adress = line.employee_id.address_home_id
-                        list_part = [adress.street if adress.street, adress.street2 if adress.street2,
-                                     adress.city if adress.city, adress.state_id.name if adress.state_id,
-                                     adress.zip if adress.zip, adress.country_id.name if adress.country_id]
+                        list_part = [adress.street or '',adress.street2 or '',adress.city or '',adress.state_id.name if adress.state_id else '',adress.zip or '',adress.country_id.name if adress.country_id else '']
                         adresse = ','.join(list_part)
 
                     etree.SubElement(liste_pp, "adressePersonnelle").text = adresse.decode('utf8',
@@ -356,9 +352,7 @@ class Etat9421(models.Model):
                     adresse = ""
                     if line.employee_id.address_home_id:
                         adress = line.employee_id.address_home_id
-                        list_part = [adress.street if adress.street, adress.street2 if adress.street2,
-                                     adress.city if adress.city, adress.state_id.name if adress.state_id,
-                                     adress.zip if adress.zip, adress.country_id.name if adress.country_id]
+                        list_part = [adress.street or '',adress.street2 or '',adress.city or '',adress.state_id.name if adress.state_id else '',adress.zip or '',adress.country_id.name if adress.country_id else '']
                         adresse = ','.join(list_part)
 
                     etree.SubElement(liste_pp, "adressePersonnelle").text = adresse.decode('utf8',
