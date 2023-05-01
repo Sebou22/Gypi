@@ -334,8 +334,7 @@ class Etat9421(models.Model):
                         list_part = [adress.street or '',adress.street2 or '',adress.city or '',adress.state_id.name if adress.state_id else '',adress.zip or '',adress.country_id.name if adress.country_id else '']
                         adresse = ','.join(list_part)
 
-                    etree.SubElement(liste_pp, "adressePersonnelle").text = adresse.decode('utf8',
-                                                                                           errors='xmlcharrefreplace')
+                    etree.SubElement(liste_pp, "adressePersonnelle").text = adresse
                     etree.SubElement(liste_pp, "numCNI").text = str(line.employee_id.cin)
                     etree.SubElement(liste_pp, "numCE").text = str(line.employee_id.otherid)
                     etree.SubElement(liste_pp, "ifu").text = str(line.employee_id.ifu)
@@ -355,8 +354,7 @@ class Etat9421(models.Model):
                         list_part = [adress.street or '',adress.street2 or '',adress.city or '',adress.state_id.name if adress.state_id else '',adress.zip or '',adress.country_id.name if adress.country_id else '']
                         adresse = ','.join(list_part)
 
-                    etree.SubElement(liste_pp, "adressePersonnelle").text = adresse.decode('utf8',
-                                                                                           errors='xmlcharrefreplace')
+                    etree.SubElement(liste_pp, "adressePersonnelle").text = adresse
                     etree.SubElement(liste_pp, "numCNI").text = str(line.employee_id.cin)
                     etree.SubElement(liste_pp, "numCE").text = str(line.employee_id.otherid)
                     etree.SubElement(liste_pp, "numCNSS").text = str(line.employee_id.matricule_cnss)
