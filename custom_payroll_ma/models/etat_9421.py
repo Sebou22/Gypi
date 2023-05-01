@@ -210,10 +210,10 @@ class Etat9421(models.Model):
                         adresse = ','.join(list_part)
 
                     etree.SubElement(liste_pp, "adressePersonnelle").text = adresse
-                    etree.SubElement(liste_pp, "numCNI").text = "cin"
+                    etree.SubElement(liste_pp, "numCNI").text = str(line.employee_id.cin)
                     etree.SubElement(liste_pp, "numCE").text = str(line.employee_id.otherid)
                     etree.SubElement(liste_pp, "numPPR").text = str(line.employee_id.n_ppr)
-                    etree.SubElement(liste_pp, "numCNSS").text = "cnss"
+                    etree.SubElement(liste_pp, "numCNSS").text = str(line.employee_id.matricule_cnss)
                     etree.SubElement(liste_pp, "ifu").text = str(line.employee_id.ifu)
 
                     date_start = datetime.date(year=rec.annee, month=1, day=1)
