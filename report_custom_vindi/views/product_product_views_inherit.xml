@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record id="product_variant_easy_edit_view_inherit" model="ir.ui.view">
+            <field name="name">product.product.easy.form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_variant_easy_edit_view"/>
+            <field name="arch" type="xml">
+                <field name="default_code" position="after">
+                    <field name="reference_customer"/>
+                </field>
+
+
+            </field>
+        </record>
+
+    <record id="product.product_template_form_view_inherit" model="ir.ui.view">
+            <field name="name">product.product.easy.form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <field name="default_code" position="after">
+                    <field name="reference_customer"/>
+                </field>
+
+
+            </field>
+        </record>
+
+
+
+</odoo>

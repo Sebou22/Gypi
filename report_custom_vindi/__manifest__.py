@@ -7,6 +7,8 @@
     'depends': ['stock'],
     'data': [
         'security/ir.model.access.csv',
+        'views/product_product_views_inherit.xml',
+        'views/sale_order_inherit.xml',
         'views/product_template_features_views.xml',
         'views/product_template_views_inherit.xml',
         'templates/report_delivery_document_inherit.xml',

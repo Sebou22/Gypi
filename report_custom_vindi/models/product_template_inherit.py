@@ -12,3 +12,17 @@ class ProductTemplateInherit(models.Model):
     article_group = fields.Many2one('article.group', string="Article group")
     product_group = fields.Many2one('product.group', string="Product group")
     supplier_fabric = fields.Char('Supplier Fabric')
+    reference_customer = fields.Char('Reference customer', compute='_compute_reference_customer',inverse='_set_reference_customer', store=True)
+
+    @api.depends('product_variant_ids', 'product_variant_ids.reference_customer')
+    def _compute_reference_customer(self):
+        unique_variants = self.filtered(lambda template: len(template.product_variant_ids) == 1)
+        for template in unique_variants:
+            template.reference_customer = template.product_variant_ids.reference_customer
+        for template in (self - unique_variants):
+            template.reference_customer = False
+
+    def _set_reference_customer(self):
+        for template in self:
+            if len(template.product_variant_ids) == 1:
+                template.product_variant_ids.reference_customer = template.reference_customer
