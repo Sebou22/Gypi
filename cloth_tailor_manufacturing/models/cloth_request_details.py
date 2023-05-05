@@ -98,7 +98,6 @@ class ClothRequestDetails(models.Model):
                 'default_product_id': rec.mrp_product_id.id,
                 'default_bom_id': rec.custom_bom_id.id,
                 'default_custom_tailor_request_id': rec.id,
-                'default_qty_producing': rec.quantity,
                 'default_cloth_image_line_ids':rec.images_ids.ids,
                 'default_cloth_measurement_details_line_ids':rec.measurement_ids.ids,
             }
