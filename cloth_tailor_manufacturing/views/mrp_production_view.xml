@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <record id="custom_mrp_production_inherit_tailor" model="ir.ui.view">
+            <field name="name">mrp.production.form.inherit.tailor</field>
+            <field name="model">mrp.production</field>
+            <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group" position="after">
+                    <group string="Cloth Request Details">
+                        <group>
+                            <field name="cloth_request_ref"/>
+                            <field name="partner_id"/>
+                            <field name="employee_id"/>
+                            <field name="total"/>
+                            <field name="deposit"/>
+                            <field name="reminder"/>
+                            <field name="fabric_color"/>
+                        </group>
+                        <group>
+                            <field name="quantity"/>
+                            <field name="uom_id"/>
+                            <field name="user_id"/>
+                            <field name="company_id"/>
+                            <field name="request_date"/>
+                            <field name="deadline_date"/>
+                            <field name="gender"/>
+                        </group>
+                    </group>
+                </xpath>
+
+                <xpath expr="//notebook//page[@name='miscellaneous']//field[@name='origin']" position="after">
+                    <field name="custom_tailor_request_id"/>
+                </xpath>
+                <xpath expr="//notebook//page[@name='miscellaneous']" position="after">
+                    <page string="Measurements">
+                        <field name="cloth_measurement_details_line_ids">
+                            <tree>
+                                <field name="cloth_measurement_type_id"/>
+                                <field name="measurement"/>
+                                <field name="uom_id"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page string="Images">
+                        <field name="cloth_image_line_ids">
+                            <tree>
+                                <field name="cloth_image_id"/>
+                                <field name="image" widget="image"/>
+                                <field name="note"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page name="internal_note" string="Internal Note">
+                        <field name="internal_note" placeholder="Add an internal note..." nolabel="1" height="50"/>
+                    </page>
+                    <page name="special_note" string="Special Note">
+                        <field name="special_note" placeholder="Add an special note..." nolabel="1" height="50"/>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

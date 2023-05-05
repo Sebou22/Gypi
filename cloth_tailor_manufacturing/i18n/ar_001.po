@@ -1,0 +1,189 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* cloth_tailor_manufacturing
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-16 20:34+0000\n"
+"PO-Revision-Date: 2023-03-18 12:44+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ar_EG\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+"X-Generator: Poedit 3.2.2\n"
+
+#. module: cloth_tailor_manufacturing
+#: model:ir.model.fields,field_description:cloth_tailor_manufacturing.field_cloth_request_details__custom_bom_id
+#: model_terms:ir.ui.view,arch_db:cloth_tailor_manufacturing.custom_cloth_request_inherit_bom_line
+msgid "BOM"
+msgstr "فاتورة المواد"
+
+#. module: cloth_tailor_manufacturing
+#: model:ir.model.fields,field_description:cloth_tailor_manufacturing.field_cloth_request_details__custom_bom_type
+msgid "BOM Selection"
+msgstr "اختيار فاتورة المواد"
+
+#. module: cloth_tailor_manufacturing
+#: model:ir.model,name:cloth_tailor_manufacturing.model_mrp_bom
+msgid "Bill of Material"
+msgstr "فاتورة المواد"
+
+#. module: cloth_tailor_manufacturing
+#: model:ir.model.fields,field_description:cloth_tailor_manufacturing.field_cloth_request_details__custom_mrp_bom_line_ids
+msgid "Bom Line"
+msgstr "خط فاتورة المواد"
+
+#. module: cloth_tailor_manufacturing
+#: model:ir.model.fields,field_description:cloth_tailor_manufacturing.field_custom_mrp_bom_line__custom_cloth_request_id
+msgid "Cloth Request"
+msgstr "طلب القماش"
+
+#. module: cloth_tailor_manufacturing
+#: model:ir.model,name:cloth_tailor_manufacturing.model_cloth_request_details
+msgid "Cloth Request Details"
+msgstr "تفاصيل طلب القماش"
+
+#. module: cloth_tailor_manufacturing
+#: model_terms:ir.ui.view,arch_db:cloth_tailor_manufacturing.custom_mrp_bom_inherit_tailor
+msgid "Cloth Requests"
+msgstr "طلبات القماش"
+
+#. module: cloth_tailor_manufacturing
+#: model_terms:ir.ui.view,arch_db:cloth_tailor_manufacturing.custom_cloth_request_inherit_bom_line
+msgid "Components"
+msgstr "العناصر"
+
+#. module: cloth_tailor_manufacturing
+#: model:ir.model.fields.selection,name:cloth_tailor_manufacturing.selection__cloth_request_details__custom_bom_type__new_bom
+msgid "Create BOM"
+msgstr "إنشاء فاتورة المواد"
+
+#. module: cloth_tailor_manufacturing
+#: model_terms:ir.ui.view,arch_db:cloth_tailor_manufacturing.custom_cloth_request_inherit_bom_line
+msgid "Create BoM"
+msgstr "إنشاء فاتورة المواد"
+
+#. module: cloth_tailor_manufacturing
+#: model_terms:ir.ui.view,arch_db:cloth_tailor_manufacturing.custom_cloth_request_inherit_bom_line
+msgid "Create Manufacturing Orders"
+msgstr "إنشاء أوامر التصنيع"
+
+#. module: cloth_tailor_manufacturing
+#: model:ir.model.fields,field_description:cloth_tailor_manufacturing.field_custom_mrp_bom_line__create_uid
+msgid "Created by"
+msgstr "انشأ من قبل"
+
+#. module: cloth_tailor_manufacturing
+#: model:ir.model.fields,field_description:cloth_tailor_manufacturing.field_custom_mrp_bom_line__create_date
+msgid "Created on"
+msgstr "تم إنشاؤها على"
+
+#. module: cloth_tailor_manufacturing
+#: model:ir.model.fields,field_description:cloth_tailor_manufacturing.field_custom_mrp_bom_line__display_name
+msgid "Display Name"
+msgstr "اسم العرض"
+
+#. module: cloth_tailor_manufacturing
+#: model:ir.model.fields,field_description:cloth_tailor_manufacturing.field_custom_mrp_bom_line__id
+msgid "ID"
+msgstr "بطاقة تعريف"
+
+#. module: cloth_tailor_manufacturing
+#: model:ir.model.fields,field_description:cloth_tailor_manufacturing.field_cloth_request_details__custom_is_created_bom
+msgid "Is Created BOM"
+msgstr "تم إنشاء قائمة مواد"
+
+#. module: cloth_tailor_manufacturing
+#: model:ir.model.fields,field_description:cloth_tailor_manufacturing.field_cloth_request_details__custom_is_manufacturing_order
+msgid "Is Created Manufacturing Order"
+msgstr "تم إنشاء أمر التصنيع"
+
+#. module: cloth_tailor_manufacturing
+#: model:ir.model.fields,field_description:cloth_tailor_manufacturing.field_custom_mrp_bom_line____last_update
+msgid "Last Modified on"
+msgstr "تاريخ آخر تعديل"
+
+#. module: cloth_tailor_manufacturing
+#: model:ir.model.fields,field_description:cloth_tailor_manufacturing.field_custom_mrp_bom_line__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: cloth_tailor_manufacturing
+#: model:ir.model.fields,field_description:cloth_tailor_manufacturing.field_custom_mrp_bom_line__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث في"
+
+#. module: cloth_tailor_manufacturing
+#: model_terms:ir.ui.view,arch_db:cloth_tailor_manufacturing.custom_cloth_request_inherit_bom_line
+msgid "Manufacturing Orders"
+msgstr "أوامر التصنيع"
+
+#. module: cloth_tailor_manufacturing
+#: model:ir.model.fields,field_description:cloth_tailor_manufacturing.field_custom_mrp_bom_line__custom_product_id
+msgid "Material"
+msgstr "المادة"
+
+#. module: cloth_tailor_manufacturing
+#: model_terms:ir.ui.view,arch_db:cloth_tailor_manufacturing.custom_cloth_request_inherit_bom_line
+msgid "Materials Consumed"
+msgstr "المواد المستهلكة"
+
+#. module: cloth_tailor_manufacturing
+#: model:ir.model,name:cloth_tailor_manufacturing.model_custom_mrp_bom_line
+msgid "Mrp Bom Line"
+msgstr "خط فاتورة المواد"
+
+#. module: cloth_tailor_manufacturing
+#. odoo-python
+#: code:addons/cloth_tailor_manufacturing/models/cloth_request_details.py:0
+#, python-format
+msgid "Please select bom."
+msgstr "الرجاء تحديد قائمة المواد."
+
+#. module: cloth_tailor_manufacturing
+#. odoo-python
+#: code:addons/cloth_tailor_manufacturing/models/cloth_request_details.py:0
+#, python-format
+msgid "Please select product."
+msgstr "الرجاء تحديد المنتج."
+
+#. module: cloth_tailor_manufacturing
+#: model:ir.model.fields,field_description:cloth_tailor_manufacturing.field_cloth_request_details__mrp_product_id
+msgid "Product (Cloth)"
+msgstr "المنتج (القماش)"
+
+#. module: cloth_tailor_manufacturing
+#: model:ir.model.fields,field_description:cloth_tailor_manufacturing.field_custom_mrp_bom_line__custom_product_uom_id
+msgid "Product Unit of Measure"
+msgstr "وحدة قياس المنتج"
+
+#. module: cloth_tailor_manufacturing
+#: model:ir.model,name:cloth_tailor_manufacturing.model_mrp_production
+msgid "Production Order"
+msgstr "أمر الإنتاج"
+
+#. module: cloth_tailor_manufacturing
+#: model:ir.model.fields,field_description:cloth_tailor_manufacturing.field_custom_mrp_bom_line__custom_product_qty
+#: model_terms:ir.ui.view,arch_db:cloth_tailor_manufacturing.custom_cloth_request_inherit_bom_line
+msgid "Quantity"
+msgstr "الكمية"
+
+#. module: cloth_tailor_manufacturing
+#: model:ir.model.fields,field_description:cloth_tailor_manufacturing.field_mrp_production__custom_tailor_request_id
+msgid "Tailor Request"
+msgstr "طلب الخياط"
+
+#. module: cloth_tailor_manufacturing
+#: model:ir.model.fields.selection,name:cloth_tailor_manufacturing.selection__cloth_request_details__custom_bom_type__old_bom
+msgid "Use Existing BOM"
+msgstr "استخدام قائمة المواد الموجودة"
+
+#. module: cloth_tailor_manufacturing
+#: model_terms:ir.ui.view,arch_db:cloth_tailor_manufacturing.custom_cloth_request_inherit_bom_line
+msgid "Work Orders"
+msgstr "طلبات العمل"
