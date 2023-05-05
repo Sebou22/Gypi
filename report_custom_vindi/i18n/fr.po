@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-05 13:24+0000\n"
-"PO-Revision-Date: 2023-05-05 13:24+0000\n"
+"POT-Creation-Date: 2023-05-05 14:56+0000\n"
+"PO-Revision-Date: 2023-05-05 14:56+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -71,9 +71,11 @@ msgid "BANK"
 msgstr "BANQUE"
 
 #. module: report_custom_vindi
+#: model:ir.actions.act_window,name:report_custom_vindi.action_bank_bank
 #: model:ir.model,name:report_custom_vindi.model_bank_bank
 #: model:ir.model.fields,field_description:report_custom_vindi.field_account_payment__bank_id
 #: model:ir.model.fields,field_description:report_custom_vindi.field_account_payment_register__bank_id
+#: model:ir.ui.menu,name:report_custom_vindi.menu_bank_bank
 msgid "Bank"
 msgstr "Banque"
 
@@ -90,7 +92,7 @@ msgstr "Poids brut"
 #. module: report_custom_vindi
 #: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_invoice_document_inherit
 msgid "COURSE"
-msgstr "COURSE"
+msgstr ""
 
 #. module: report_custom_vindi
 #: model:ir.model.fields,field_description:report_custom_vindi.field_product_collection__name
@@ -307,14 +309,14 @@ msgstr "Produit"
 #: model:ir.actions.act_window,name:report_custom_vindi.action_product_collection
 #: model_terms:ir.ui.view,arch_db:report_custom_vindi.view_product_collection_tree
 msgid "Product Collection"
-msgstr "Collecte de produit"
+msgstr "Collection de produit"
 
 #. module: report_custom_vindi
 #: model:ir.actions.act_window,name:report_custom_vindi.action_product_group
 #: model:ir.ui.menu,name:report_custom_vindi.product_group_menu
 #: model_terms:ir.ui.view,arch_db:report_custom_vindi.view_product_group_tree
 msgid "Product Group"
-msgstr "Product Group"
+msgstr "Groupe de produit"
 
 #. module: report_custom_vindi
 #: model:ir.actions.act_window,name:report_custom_vindi.action_product_line_ca
@@ -377,7 +379,7 @@ msgstr "Référence "
 #: model:ir.model.fields,field_description:report_custom_vindi.field_sale_order_line__reference_customer
 #: model:ir.model.fields,field_description:report_custom_vindi.field_stock_move__reference_customer
 msgid "Reference customer"
-msgstr "Reference customer"
+msgstr "Référence client"
 
 #. module: report_custom_vindi
 #: model:ir.model,name:report_custom_vindi.model_account_payment_register
@@ -456,7 +458,7 @@ msgstr "Poids brut total"
 #. module: report_custom_vindi
 #: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_delivery_document
 msgid "Total net weight"
-msgstr "Total net weight"
+msgstr "Poids net total"
 
 #. module: report_custom_vindi
 #: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_invoice_document_inherit
