@@ -145,7 +145,7 @@ class ClothRequestDetails(models.Model):
     @api.constrains('quantity')
     def check_quantity_available(self):
         for rec in self:
-            if rec.mrp_product_id.qty_available <= 15 or rec.quantity > rec.mrp_product_id.qty_available:
+            if rec.mrp_product_id.qty_available < -800:
                 raise ValidationError(
                     _("You are not allowed order more than the available quantity for this product is %s") % (
                         str(rec.mrp_product_id.qty_available)))
