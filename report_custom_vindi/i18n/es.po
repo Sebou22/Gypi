@@ -274,7 +274,7 @@ msgstr ""
 #. module: report_custom_vindi
 #: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_delivery_document
 msgid "Number of packages"
-msgstr ""
+msgstr "Numero de paquetes"
 
 #. module: report_custom_vindi
 #: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_invoice_document_inherit
@@ -446,12 +446,12 @@ msgstr ""
 #. module: report_custom_vindi
 #: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_delivery_document
 msgid "Total brut weight"
-msgstr ""
+msgstr "Peso bruto total"
 
 #. module: report_custom_vindi
 #: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_delivery_document
 msgid "Total net weight"
-msgstr ""
+msgstr "Peso neto total"
 
 #. module: report_custom_vindi
 #: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_invoice_document_inherit
@@ -474,7 +474,7 @@ msgstr "SU REFERENCIA"
 #. module: report_custom_vindi
 #: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_delivery_document
 msgid "Your ref"
-msgstr ""
+msgstr "Su referencia"
 
 #. module: report_custom_vindi
 #: model:ir.model,name:report_custom_vindi.model_article_group
