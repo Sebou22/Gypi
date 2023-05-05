@@ -1,0 +1,513 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* report_custom_vindi
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-05-05 09:09+0000\n"
+"PO-Revision-Date: 2023-05-05 09:09+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: report_custom_vindi
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_delivery_document
+msgid "<strong>Delivered</strong>"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_delivery_document
+msgid "<strong>Ordered</strong>"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_delivery_document
+msgid "<strong>Product</strong>"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_invoice_document_inherit
+msgid "ACCOUNT NO"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_invoice_document_inherit
+msgid "AGENCY"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model.fields,field_description:report_custom_vindi.field_account_payment__agency
+#: model:ir.model.fields,field_description:report_custom_vindi.field_account_payment_register__agency
+msgid "Agency"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_invoice_document_inherit
+msgid "Amount"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.actions.act_window,name:report_custom_vindi.action_article_group
+#: model:ir.ui.menu,name:report_custom_vindi.article_group_menu
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.view_article_group_tree
+msgid "Article Group"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model.fields,field_description:report_custom_vindi.field_article_group__name
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_product__article_group
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_template__article_group
+msgid "Article group"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_invoice_document_inherit
+msgid "BANK"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model,name:report_custom_vindi.model_bank_bank
+#: model:ir.model.fields,field_description:report_custom_vindi.field_account_payment__bank_id
+#: model:ir.model.fields,field_description:report_custom_vindi.field_account_payment_register__bank_id
+msgid "Bank"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model.fields,field_description:report_custom_vindi.field_account_bank_statement_line__brut_weight
+#: model:ir.model.fields,field_description:report_custom_vindi.field_account_bank_statement_line__net_weight
+#: model:ir.model.fields,field_description:report_custom_vindi.field_account_move__brut_weight
+#: model:ir.model.fields,field_description:report_custom_vindi.field_account_move__net_weight
+#: model:ir.model.fields,field_description:report_custom_vindi.field_account_payment__brut_weight
+#: model:ir.model.fields,field_description:report_custom_vindi.field_account_payment__net_weight
+msgid "Brut Weight"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_invoice_document_inherit
+msgid "COURSE"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_collection__name
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_product__collection_id
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_template__collection_id
+#: model:ir.ui.menu,name:report_custom_vindi.product_collection_menu
+msgid "Collection"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model.fields,field_description:report_custom_vindi.field_article_group__create_uid
+#: model:ir.model.fields,field_description:report_custom_vindi.field_bank_bank__create_uid
+#: model:ir.model.fields,field_description:report_custom_vindi.field_payment_mode__create_uid
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_collection__create_uid
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_group__create_uid
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_line_ca__create_uid
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_season__create_uid
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_style__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model.fields,field_description:report_custom_vindi.field_article_group__create_date
+#: model:ir.model.fields,field_description:report_custom_vindi.field_bank_bank__create_date
+#: model:ir.model.fields,field_description:report_custom_vindi.field_payment_mode__create_date
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_collection__create_date
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_group__create_date
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_line_ca__create_date
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_season__create_date
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_style__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_delivery_document
+msgid "Description"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model.fields,field_description:report_custom_vindi.field_article_group__display_name
+#: model:ir.model.fields,field_description:report_custom_vindi.field_bank_bank__display_name
+#: model:ir.model.fields,field_description:report_custom_vindi.field_payment_mode__display_name
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_collection__display_name
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_group__display_name
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_line_ca__display_name
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_season__display_name
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_style__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model.fields,field_description:report_custom_vindi.field_account_payment_register__due_date
+msgid "Due Date"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model.fields,field_description:report_custom_vindi.field_account_payment__due_date
+msgid "Due Date "
+msgstr ""
+
+#. module: report_custom_vindi
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.product_template_only_form_view_inherit_l10n_eg_eta_edi
+msgid "Features"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_invoice_document_inherit
+msgid "Gross weight"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model.fields,field_description:report_custom_vindi.field_article_group__id
+#: model:ir.model.fields,field_description:report_custom_vindi.field_bank_bank__id
+#: model:ir.model.fields,field_description:report_custom_vindi.field_payment_mode__id
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_collection__id
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_group__id
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_line_ca__id
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_season__id
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_style__id
+msgid "ID"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_invoice_document_inherit
+msgid "INVOICE VALUE IN DIRHAMS"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_invoice_document_inherit
+msgid "INVOICE VALUE IN EUROS"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_invoice_document_inherit
+msgid "Intercom"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model.fields,field_description:report_custom_vindi.field_payment_mode__is_cash
+msgid "Is cash"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model,name:report_custom_vindi.model_account_move
+msgid "Journal Entry"
+msgstr "Asiento contable"
+
+#. module: report_custom_vindi
+#: model:ir.model.fields,field_description:report_custom_vindi.field_account_payment__journal_type
+#: model:ir.model.fields,field_description:report_custom_vindi.field_account_payment_register__journal_type
+msgid "Journal type"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model.fields,field_description:report_custom_vindi.field_article_group____last_update
+#: model:ir.model.fields,field_description:report_custom_vindi.field_bank_bank____last_update
+#: model:ir.model.fields,field_description:report_custom_vindi.field_payment_mode____last_update
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_collection____last_update
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_group____last_update
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_line_ca____last_update
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_season____last_update
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_style____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model.fields,field_description:report_custom_vindi.field_article_group__write_uid
+#: model:ir.model.fields,field_description:report_custom_vindi.field_bank_bank__write_uid
+#: model:ir.model.fields,field_description:report_custom_vindi.field_payment_mode__write_uid
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_collection__write_uid
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_group__write_uid
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_line_ca__write_uid
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_season__write_uid
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_style__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model.fields,field_description:report_custom_vindi.field_article_group__write_date
+#: model:ir.model.fields,field_description:report_custom_vindi.field_bank_bank__write_date
+#: model:ir.model.fields,field_description:report_custom_vindi.field_payment_mode__write_date
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_collection__write_date
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_group__write_date
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_line_ca__write_date
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_season__write_date
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_style__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: report_custom_vindi
+#. odoo-python
+#: code:addons/report_custom_vindi/models/account_move_inherit.py:0
+#, python-format
+msgid "Less Payment"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_delivery_document
+msgid "Lot/Serial Number"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model.fields,field_description:report_custom_vindi.field_bank_bank__name
+#: model:ir.model.fields,field_description:report_custom_vindi.field_payment_mode__name
+msgid "Name"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_invoice_document_inherit
+msgid "Net weight"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model.fields,field_description:report_custom_vindi.field_account_bank_statement_line__package_count
+#: model:ir.model.fields,field_description:report_custom_vindi.field_account_move__package_count
+#: model:ir.model.fields,field_description:report_custom_vindi.field_account_payment__package_count
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_invoice_document_inherit
+msgid "Number of boxes"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_delivery_document
+msgid "Number of packages"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_invoice_document_inherit
+msgid "Number of pieces"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.actions.act_window,name:report_custom_vindi.action_payment_mode
+#: model:ir.model,name:report_custom_vindi.model_payment_mode
+#: model:ir.model.fields,field_description:report_custom_vindi.field_account_payment__payment_mode_id
+#: model:ir.model.fields,field_description:report_custom_vindi.field_account_payment_register__payment_mode_id
+#: model:ir.ui.menu,name:report_custom_vindi.menu_payment_mode
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.view_account_payment_search_inherit
+msgid "Payment Mode"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model,name:report_custom_vindi.model_account_payment
+msgid "Payments"
+msgstr "Pagos"
+
+#. module: report_custom_vindi
+#: model:ir.model,name:report_custom_vindi.model_product_template
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_delivery_document
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_purchaseorder_document_inherit
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_saleorder_document_inherit
+msgid "Product"
+msgstr "Producto"
+
+#. module: report_custom_vindi
+#: model:ir.actions.act_window,name:report_custom_vindi.action_product_collection
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.view_product_collection_tree
+msgid "Product Collection"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.actions.act_window,name:report_custom_vindi.action_product_group
+#: model:ir.ui.menu,name:report_custom_vindi.product_group_menu
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.view_product_group_tree
+msgid "Product Group"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.actions.act_window,name:report_custom_vindi.action_product_line_ca
+#: model:ir.ui.menu,name:report_custom_vindi.product_line_ca_menu
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.view_product_line_ca_tree
+msgid "Product Line"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.actions.act_window,name:report_custom_vindi.action_product_season
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.view_product_season_tree
+msgid "Product Season"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model,name:report_custom_vindi.model_product_product
+msgid "Product Variant"
+msgstr "Variantes de producto"
+
+#. module: report_custom_vindi
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_group__name
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_product__product_group
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_template__product_group
+msgid "Product group"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_line_ca__name
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_product__product_line
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_template__product_line
+msgid "Product line"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.actions.act_window,name:report_custom_vindi.action_product_style
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.view_product_style_tree
+msgid "Product style"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model.fields,field_description:report_custom_vindi.field_account_bank_statement_line__qty_count
+#: model:ir.model.fields,field_description:report_custom_vindi.field_account_move__qty_count
+#: model:ir.model.fields,field_description:report_custom_vindi.field_account_payment__qty_count
+msgid "Qty Count"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model.fields,field_description:report_custom_vindi.field_account_payment_register__reference
+msgid "Reference"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model.fields,field_description:report_custom_vindi.field_account_payment__reference
+msgid "Reference "
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_product__reference_customer
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_template__reference_customer
+#: model:ir.model.fields,field_description:report_custom_vindi.field_sale_order_line__reference_customer
+msgid "Reference customer"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model,name:report_custom_vindi.model_account_payment_register
+msgid "Register Payment"
+msgstr "Registrar pago"
+
+#. module: report_custom_vindi
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_invoice_document_inherit
+msgid "SWIFT CODE"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model,name:report_custom_vindi.model_sale_order_line
+msgid "Sales Order Line"
+msgstr "Línea de pedido de venta"
+
+#. module: report_custom_vindi
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_product__season_id
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_season__name
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_template__season_id
+#: model:ir.ui.menu,name:report_custom_vindi.product_season_menu
+msgid "Season"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_style__name
+#: model:ir.ui.menu,name:report_custom_vindi.product_style_menu
+msgid "Style"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_product__style_id
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_template__style_id
+msgid "Style name"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_product__supplier_id
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_template__supplier_id
+msgid "Supplier"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_product__supplier_fabric
+#: model:ir.model.fields,field_description:report_custom_vindi.field_product_template__supplier_fabric
+msgid "Supplier Fabric"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model.fields,field_description:report_custom_vindi.field_account_payment__swift_code
+#: model:ir.model.fields,field_description:report_custom_vindi.field_account_payment_register__swift_code
+msgid "Swift Code"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_invoice_document_inherit
+msgid "This invoice is settled at the sum of :"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_purchaseorder_document_inherit
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_saleorder_document_inherit
+msgid "Time Delivery Request"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_delivery_document
+msgid "Total brut weight"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_delivery_document
+msgid "Total net weight"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_invoice_document_inherit
+msgid "WAY TO PAY"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model.fields,field_description:report_custom_vindi.field_account_bank_statement_line__weight_uom_name
+#: model:ir.model.fields,field_description:report_custom_vindi.field_account_move__weight_uom_name
+#: model:ir.model.fields,field_description:report_custom_vindi.field_account_payment__weight_uom_name
+msgid "Weight unit of measure label"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_purchaseorder_document_inherit
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_saleorder_document_inherit
+msgid "Your Reference"
+msgstr "SU REFERENCIA"
+
+#. module: report_custom_vindi
+#: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_delivery_document
+msgid "Your ref"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model,name:report_custom_vindi.model_article_group
+msgid "article.group"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model.fields,field_description:report_custom_vindi.field_bank_bank__code
+#: model:ir.model.fields,field_description:report_custom_vindi.field_payment_mode__code
+msgid "code"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model,name:report_custom_vindi.model_product_collection
+msgid "product.collection"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model,name:report_custom_vindi.model_product_group
+msgid "product.group"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model,name:report_custom_vindi.model_product_line_ca
+msgid "product.line_ca"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model,name:report_custom_vindi.model_product_season
+msgid "product.season"
+msgstr ""
+
+#. module: report_custom_vindi
+#: model:ir.model,name:report_custom_vindi.model_product_style
+msgid "product.style"
+msgstr ""
