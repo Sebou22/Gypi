@@ -7,4 +7,4 @@ class BankAydoo(models.Model):
     _description = 'Bank'
 
     code = fields.Char(string="code")
-    name = fields.Char(string="Name")
+    name = fields.Char(string="Name", translate=True)

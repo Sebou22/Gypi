@@ -7,5 +7,5 @@ class PaymentModeAydoo(models.Model):
     _description = 'Payment Mode'
 
     code = fields.Char(string="code")
-    name = fields.Char(string="Name")
+    name = fields.Char(string="Name",translate=True)
     is_cash = fields.Boolean("Is cash")
