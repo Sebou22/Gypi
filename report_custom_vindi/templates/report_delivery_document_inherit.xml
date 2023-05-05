@@ -14,7 +14,7 @@
 
         <xpath expr="//tr[@t-as='move']" position="replace">
             <tr t-foreach="lines" t-as="move">
-                <td><span t-field="o.origin"/></td>
+                <td><span t-field="move.reference_customer"/></td>
                 <td><span t-field="move.product_id"/> </td>
                                 <td>
                                    <p>
