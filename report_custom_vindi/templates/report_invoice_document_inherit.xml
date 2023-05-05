@@ -71,7 +71,9 @@
 
 
                                             <t t-foreach="payments_vals" t-as="payment_vals">
-            <div class="col-8">
+                                                <t t-set="number_div" t-value="number_div+1"/>
+                                                <div class="row" t-if="number_div%2==0">
+                                                    <div class="col-4">
                 <table class="table table-sm mt48">
                     <tbody>
                         <tr>
@@ -101,6 +103,40 @@
                     </tbody>
                 </table>
             </div>
+                                                </div>
+                                                <t t-else="">
+                                                    <div class="col-4">
+                <table class="table table-sm mt48">
+                    <tbody>
+                        <tr>
+                            <td>Amount</td>
+                            <td><t t-esc="payment_vals['amount']" t-options="{&quot;widget&quot;: &quot;monetary&quot;, &quot;display_currency&quot;: o.currency_id}"/> </td>
+                        </tr>
+                        <tr>
+                            <td>WAY TO PAY</td>
+                            <td><t t-esc="payment_vals['payment_mode_name']"/></td>
+                        </tr>
+                        <tr>
+                            <td>BANK</td>
+                            <td><t t-esc="payment_vals['bank_name']"/></td>
+                        </tr>
+                        <tr>
+                            <td>AGENCY</td>
+                            <td><t t-esc="payment_vals['agency']"/></td>
+                        </tr>
+                        <tr>
+                            <td>ACCOUNT NO</td>
+                            <td><t t-esc="payment_vals['payment_ref']"/></td>
+                        </tr>
+                        <tr>
+                            <td>SWIFT CODE</td>
+                            <td><t t-esc="payment_vals['swift_code']"/></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+                                                </t>
+
                                             </t>
 
  </t>
