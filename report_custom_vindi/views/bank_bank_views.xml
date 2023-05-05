@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="bank_bank_form_view">
+            <field name="name">bank.bank.form</field>
+            <field name="model">bank.bank</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="code"/>
+                                <field name="name"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="bank_bank_tree_view">
+            <field name="name">bank.bank.tree</field>
+            <field name="model">bank.bank</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="code"/>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_bank_bank">
+            <field name="name">Bank</field>
+            <field name="res_model">bank.bank</field>
+            <field name="binding_view_types">form,tree</field>
+        </record>
+
+        <menuitem
+                name="Bank"
+                id="menu_bank_bank"
+                parent="account.account_banks_menu"
+                action="action_bank_bank"
+                sequence="100"
+        />
+    </data>
+</odoo>

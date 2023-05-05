@@ -17,6 +17,7 @@
         'templates/report_purchaseorder_document_inherit.xml',
         'templates/report_invoice_document_inherit.xml',
         'views/payment_mode_views.xml',
+        'views/bank_bank_views.xml',
         'views/account_payment_view_inherit.xml',
         'wizard/account_payment_register_views_inherit.xml',
 
