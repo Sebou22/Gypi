@@ -7,7 +7,7 @@ class SaleOrderLineInherit(models.Model):
     reference_customer = fields.Text(
         string="Reference customer",
         compute='_compute_reference_customer',
-        store=True, readonly=False, required=True, precompute=True)
+        store=True, readonly=False,)
 
 
     @api.depends('product_id')
