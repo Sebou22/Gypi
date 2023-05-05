@@ -15,7 +15,7 @@
         </xpath>
 
         <xpath expr="//td[@name='td_name']" position="replace">
-            <td>---</td>
+            <td><span t-field="line.reference_customer"/></td>
             <td name="td_name"><span t-field="line.name"/></td>
             <td name="td_date_request"><span t-if="doc.commitment_date" t-esc="doc.commitment_date.strftime('%d/%m/%Y')"/></td>
 
