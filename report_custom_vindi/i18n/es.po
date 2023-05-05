@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-05-05 09:09+0000\n"
-"PO-Revision-Date: 2023-05-05 09:09+0000\n"
+"POT-Creation-Date: 2023-05-05 15:10+0000\n"
+"PO-Revision-Date: 2023-05-05 15:10+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -28,7 +28,7 @@ msgstr "<strong>Ordenado </strong>"
 #. module: report_custom_vindi
 #: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_delivery_document
 msgid "<strong>Product</strong>"
-msgstr "<strong>Producto</strong>"
+msgstr "Producto"
 
 #. module: report_custom_vindi
 #: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_invoice_document_inherit
@@ -71,9 +71,11 @@ msgid "BANK"
 msgstr "BANCO"
 
 #. module: report_custom_vindi
+#: model:ir.actions.act_window,name:report_custom_vindi.action_bank_bank
 #: model:ir.model,name:report_custom_vindi.model_bank_bank
 #: model:ir.model.fields,field_description:report_custom_vindi.field_account_payment__bank_id
 #: model:ir.model.fields,field_description:report_custom_vindi.field_account_payment_register__bank_id
+#: model:ir.ui.menu,name:report_custom_vindi.menu_bank_bank
 msgid "Bank"
 msgstr "Banko"
 
@@ -298,7 +300,6 @@ msgstr "Pagos"
 
 #. module: report_custom_vindi
 #: model:ir.model,name:report_custom_vindi.model_product_template
-#: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_delivery_document
 #: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_purchaseorder_document_inherit
 #: model_terms:ir.ui.view,arch_db:report_custom_vindi.report_saleorder_document_inherit
 msgid "Product"
@@ -308,14 +309,14 @@ msgstr "Producto"
 #: model:ir.actions.act_window,name:report_custom_vindi.action_product_collection
 #: model_terms:ir.ui.view,arch_db:report_custom_vindi.view_product_collection_tree
 msgid "Product Collection"
-msgstr "Colección de productos"
+msgstr "Colección de producto"
 
 #. module: report_custom_vindi
 #: model:ir.actions.act_window,name:report_custom_vindi.action_product_group
 #: model:ir.ui.menu,name:report_custom_vindi.product_group_menu
 #: model_terms:ir.ui.view,arch_db:report_custom_vindi.view_product_group_tree
 msgid "Product Group"
-msgstr "Grupo de productos"
+msgstr "Grupo de producto"
 
 #. module: report_custom_vindi
 #: model:ir.actions.act_window,name:report_custom_vindi.action_product_line_ca
@@ -376,6 +377,7 @@ msgstr "Referencia "
 #: model:ir.model.fields,field_description:report_custom_vindi.field_product_product__reference_customer
 #: model:ir.model.fields,field_description:report_custom_vindi.field_product_template__reference_customer
 #: model:ir.model.fields,field_description:report_custom_vindi.field_sale_order_line__reference_customer
+#: model:ir.model.fields,field_description:report_custom_vindi.field_stock_move__reference_customer
 msgid "Reference customer"
 msgstr "Cliente de referencia"
 
@@ -401,6 +403,11 @@ msgstr "Línea de pedido de venta"
 #: model:ir.ui.menu,name:report_custom_vindi.product_season_menu
 msgid "Season"
 msgstr "Temporada"
+
+#. module: report_custom_vindi
+#: model:ir.model,name:report_custom_vindi.model_stock_move
+msgid "Stock Move"
+msgstr "Movimiento de existencias"
 
 #. module: report_custom_vindi
 #: model:ir.model.fields,field_description:report_custom_vindi.field_product_style__name
