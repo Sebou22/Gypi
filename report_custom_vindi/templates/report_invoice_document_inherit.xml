@@ -69,7 +69,7 @@
             </div>
  <t t-if="o.payment_state != 'invoicing_legacy'">
 
-
+<t t-set="number_div" t-value="0"/>
                                             <t t-foreach="payments_vals" t-as="payment_vals">
                                                 <t t-set="number_div" t-value="number_div+1"/>
                                                 <div class="row" t-if="number_div%2==0">
