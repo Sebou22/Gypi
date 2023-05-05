@@ -4,7 +4,7 @@
     'author': 'KHALLOUT Asmaa',
     "license": "AGPL-3",
     "version": "16.0.1",
-    'depends': ['stock'],
+    'depends': ['stock','sale'],
     'data': [
         'security/ir.model.access.csv',
         'views/product_product_views_inherit.xml',
