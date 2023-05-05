@@ -6,9 +6,9 @@
             <field name="model">product.product</field>
             <field name="inherit_id" ref="product.product_variant_easy_edit_view"/>
             <field name="arch" type="xml">
-                <field name="default_code" position="after">
+                <xpath  expr="//field[@name='default_code']" position="after">
                     <field name="reference_customer"/>
-                </field>
+                </xpath>
 
 
             </field>
@@ -19,9 +19,9 @@
             <field name="model">product.product</field>
             <field name="inherit_id" ref="product.product_template_form_view"/>
             <field name="arch" type="xml">
-                <field name="default_code" position="after">
+                <xpath  expr="//field[@name='default_code']" position="after">
                     <field name="reference_customer"/>
-                </field>
+                </xpath>
 
 
             </field>
