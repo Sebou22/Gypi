@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="product_normal_form_view_inherit" model="ir.ui.view">
+            <field name="name">product.product.view.form.inherit.mps</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='options']" position="inside">
+                    <span class="d-inline-block">
+                        <field name="sync_to_mirakl"/>
+                        <label for="sync_to_mirakl"/>
+                    </span>
+                </xpath>
+                <xpath expr="//header" position="inside">
+                    <button name="export_all_products_to_mirakl" type="object"
+                            string="Export Product to Mirakl" discard="0" class="btn-primary"/>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page name="Mirakl" string="Mirakl">
+                        <group>
+                            <group>
+                                <field name="mirakl_description"/>
+                                <field name="mirakl_color_id"/>
+                                <field name="mirakl_brand_id"/>
+                                <field name="mirakl_state"/>
+                                <field name="mirakl_natureofwheel_id"/>
+                                <field name="mirakl_sport_ids" widget="many2many_tags"/>
+                                <field name="main_image_url"/>
+                                <field name="mirakl_product_title_fr"/>
+                                <field name="mirakl_size_21"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+        <record id="sale_view_inherit1234" model="ir.ui.view">
+            <field name="name">sale.order.form.inherit.sale</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_term_id']" position="after">
+                    <field name="mirakl_order_id"/>
+                </xpath>
+                <xpath expr="//field[@name='date_order']" position="after">
+                    <field name="mirakl_create_date"/>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="view_mirakl_color" model="ir.ui.view">
+            <field name="name">mirakl.product.color.form</field>
+            <field name="model">mirakl.product.color</field>
+            <field name="arch" type="xml">
+                <form string="Bot Run">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="mirakl_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_mirakl_product_colore" model="ir.ui.view">
+            <field name="name">mirakl.product.color.tree</field>
+            <field name="model">mirakl.product.color</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="id"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_mirakl_color" model="ir.actions.act_window">
+            <field name="name">Mirakl Product Color</field>
+            <field name="res_model">mirakl.product.color</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Click to create a new record</p>
+            </field>
+        </record>
+
+
+      <menuitem id="product_product_menu_2" name="Mirakl Color Master" action="action_mirakl_color"
+            parent="sale.menu_sales_config" sequence="21"/>
+
+
+
+        <record id="view_mirakl_brand" model="ir.ui.view">
+            <field name="name">mirakl.product.brand.form</field>
+            <field name="model">mirakl.product.brand</field>
+            <field name="arch" type="xml">
+                <form string="Bot Run">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="mirakl_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_mirakl_product_brand" model="ir.ui.view">
+            <field name="name">mirakl.product.brand.tree</field>
+            <field name="model">mirakl.product.brand</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                     <field name="mirakl_id"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_mirakl_brand" model="ir.actions.act_window">
+            <field name="name">Mirakl Product Brand</field>
+            <field name="res_model">mirakl.product.brand</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Click to create a new record</p>
+            </field>
+        </record>
+
+
+      <menuitem id="product_product_menu_3" name="Mirakl Brand Master" action="action_mirakl_brand"
+            parent="sale.menu_sales_config" sequence="21"/>
+
+
+        <record id="view_mirakl_wheel" model="ir.ui.view">
+            <field name="name">mirakl.product.naturewheel.form</field>
+            <field name="model">mirakl.product.naturewheel</field>
+            <field name="arch" type="xml">
+                <form string="Bot Run">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_mirakl_product_wheel" model="ir.ui.view">
+            <field name="name">mirakl.product.naturewheel.tree</field>
+            <field name="model">mirakl.product.naturewheel</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_mirakl_wheel" model="ir.actions.act_window">
+            <field name="name">Mirakl Product Nature of Wheel</field>
+            <field name="res_model">mirakl.product.naturewheel</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Click to create a new record</p>
+            </field>
+        </record>
+
+
+        <menuitem id="product_product_menu_4" name="Mirakl Product of Wheel Master" action="action_mirakl_wheel"
+                  parent="sale.menu_sales_config" sequence="21"/>
+
+
+                <record id="view_mirakl_sport" model="ir.ui.view">
+            <field name="name">mirakl.product.sport.form</field>
+            <field name="model">mirakl.product.sport</field>
+            <field name="arch" type="xml">
+                <form string="Bot Run">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="mirakl_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_mirakl_product_sport" model="ir.ui.view">
+            <field name="name">mirakl.product.sport.tree</field>
+            <field name="model">mirakl.product.sport</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                      <field name="mirakl_id"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_mirakl_sport" model="ir.actions.act_window">
+            <field name="name">Mirakl Product Sport</field>
+            <field name="res_model">mirakl.product.sport</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Click to create a new record</p>
+            </field>
+        </record>
+
+
+        <menuitem id="product_product_menu_5" name="Mirakl Product Sport Master" action="action_mirakl_sport"
+                  parent="sale.menu_sales_config" sequence="21"/>
+        <record id="product_public_category_form_view_inherit_1" model="ir.ui.view">
+          <field name="name">product.public.category.form.inherit</field>
+          <field name="model">product.public.category</field>
+          <field name="inherit_id" ref="website_sale.product_public_category_form_view"/>
+          <field name="arch" type="xml">
+                 <xpath expr="//field[@name='name']" position="after">
+                     <field name="mirakl_id"/>
+               </xpath>
+          </field>
+        </record>
+        <record id="view_picking_form_inherits" model="ir.ui.view">
+            <field name="name">stock.picking.form.inherit.repair</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='origin']" position="after">
+                    <field name="mirakl_order_id"/>
+                </xpath>
+                <xpath expr="//header" position="inside">
+                    <button name="send_shipping_details_to_mirakl" type="object"
+                            string="Export Shipping Details" discard="0" class="btn-primary"/>
+                </xpath>
+                <xpath expr="//field[@name='carrier_id']" position="after">
+                    <field name="mirakl_tracking_url"/>
+                </xpath>
+            </field>
+        </record>
+    <record id="website_sale_pricelist_form_view_inherit" model="ir.ui.view">
+        <field name="name">website_sale.pricelist.form</field>
+        <field name="inherit_id" ref="product.product_pricelist_view" />
+        <field name="model">product.pricelist</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_id']" position="after">
+                <field name="is_sync_to_mirakl"/>
+            </xpath>
+            <xpath expr="//sheet" position="before">
+                <header>
+                <button name="export_price_list_to_mirakl" type="object"
+                        string="Export Price List to Mirakl" discard="0" class="btn-primary"/>
+                </header>
+            </xpath>
+
+        </field>
+    </record>
+    </data>
+</odoo>

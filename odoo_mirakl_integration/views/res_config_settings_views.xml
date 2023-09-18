@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.hr.fleet</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="90"/>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div class="app_settings_block" data-string="Mirakl Settings" id="odoo_mirakl_integration"
+                     string="Mirakl Settings" data-key="odoo_mirakl_integration">
+                    <h2>Mirakl API Connect</h2>
+                    <div class="row mt16 o_settings_container" id="end_contract_setting">
+                        <div class="col-12 col-lg-12 o_setting_box">
+                            <div class="">
+                                <span style="margin-right: 15px;">Mirakl Api URL</span>
+                                <field name="api_url" widget="url" placeholder="e.g. https://www.odoo.com"/>
+                            </div>
+                            <div>
+                                <span style="margin-right: 15px;">Mirakl Api Key</span>
+                                <field name="api_key" password="True"/>
+                            </div>
+
+                        </div>
+                    </div>
+<!--                    <h2>Import  Export Mirakl</h2>-->
+                    <div class="row mt16 o_settings_container" id="end_contract_setting">
+                        <div class="col-12 col-lg-12 o_setting_box">
+                            <div>
+                                <div class="mt8">
+                                    <button name="call_export_product_product" type="object"
+                                            string="Export Products to Mirakl" discard="0" class="btn-primary"/>
+                                </div>
+                                <div class="mt8">
+                                    <button name="call_function_sale_order" type="object" string="Import Sale Order"
+                                            discard="0" class="btn-primary"/>
+                                </div>
+                                 <div class="mt8">
+                                    <button name="call_export_shipping_details" type="object" string="Export Shipping Details"
+                                            discard="0" class="btn-primary"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="mirakl_config_settings_action" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">res.config.settings</field>
+        <!--        <field name="view_id" ref="res_config_settings_view_form_mirakl"/>-->
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module' : 'odoo_mirakl_integration', 'bin_size': False}</field>
+    </record>
+    <menuitem
+            id="mirakl_config_settings_menu"
+            name="Mirakl Connect"
+            action="mirakl_config_settings_action"
+            groups="base.group_system"
+            web_icon="odoo_mirakl_integration,static/description/icon.png"
+            sequence="0"/>
+    <!--    <record id="mirakl_config_settings_menu" model="ir.ui.menu">-->
+    <!--        <field name="action" ref="odoo_mirakl_integration.mirakl_config_settings_action"/>-->
+    <!--    </record>-->
+
+
+</odoo>

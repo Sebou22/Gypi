@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mirakl_product_color,odoo_mirakl_integration.mirakl_product_color,model_mirakl_product_color,,1,1,1,1
+access_mirakl_product_brand,odoo_mirakl_integration.mirakl_product_brand,model_mirakl_product_brand,,1,1,1,1
+access_mirakl_product_naturewheel,odoo_mirakl_integration.mirakl_product_naturewheel,model_mirakl_product_naturewheel,,1,1,1,1
+access_mirakl_product_sport,odoo_mirakl_integration.mirakl_product_sport,model_mirakl_product_sport,,1,1,1,1
+
+
+
