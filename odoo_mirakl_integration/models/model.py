@@ -184,7 +184,7 @@ class SaleOrder(models.Model):
                     customer_rec = rec['customer']
                     name = customer_rec['firstname'] + ' ' + customer_rec['lastname']
                     customer = self.env['res.partner'].sudo().search(
-                        [('name', '=', name), ('type', '=', 'contact')])
+                        [('name', '=', name), ('type', '=', 'contact')], limit=1)
                     if not customer:
                         customer = self.env['res.partner'].sudo().create({
                             'name': name,
