@@ -321,8 +321,8 @@ class ResConfigSettings(models.TransientModel):
     api_key = fields.Char(string="Mirakl Api Key", store=True)
     user_id = fields.Many2one('res.users', string='Salesperson', store=True)
     team_id = fields.Many2one('crm.team', string='Sales Team', store=True)
-    property_account_receivable_id = fields.Many2one('account.account.template', string='Receivable Account')
-    property_account_payable_id = fields.Many2one('account.account.template', string='Payable Account')
+    property_account_receivable_id = fields.Many2one('account.account', string='Receivable Account')
+    property_account_payable_id = fields.Many2one('account.account', string='Payable Account')
 
 
     def call_export_shipping_details(self):
