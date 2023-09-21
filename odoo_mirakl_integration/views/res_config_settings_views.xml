@@ -10,7 +10,7 @@
             <xpath expr="//div[hasclass('settings')]" position="inside">
                 <div class="app_settings_block" data-string="Mirakl Settings" id="odoo_mirakl_integration"
                      string="Mirakl Settings" data-key="odoo_mirakl_integration">
-                    <h2>Mirakl API Connect</h2>
+                    <h2>Mirakl URL and Key</h2>
                     <div class="row mt16 o_settings_container" id="end_contract_setting">
                         <div class="col-12 col-lg-12 o_setting_box">
                             <div class="">
@@ -22,9 +22,43 @@
                                 <field name="api_key" password="True"/>
                             </div>
 
+
                         </div>
                     </div>
-<!--                    <h2>Import  Export Mirakl</h2>-->
+
+                    <h2>Sales Order</h2>
+                    <div class="row mt16 o_settings_container" id="end_contract_setting">
+                        <div class="col-12 col-lg-12 o_setting_box">
+                            <div>
+                                <div>
+                                    <span style="margin-right: 15px;">Sale Order Salesperson</span>
+                                    <field name="user_id"/>
+                                </div>
+                                <div>
+                                    <span style="margin-right: 15px;">Sale Order Sales Team</span>
+                                    <field name="team_id"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2>Contact</h2>
+                    <div class="row mt16 o_settings_container" id="end_contract_setting">
+                        <div class="col-12 col-lg-12 o_setting_box">
+                            <div>
+                                <div>
+                                    <span style="margin-right: 15px;">Account Receivable</span>
+                                    <field name="property_account_receivable_id"/>
+                                </div>
+                                <div>
+                                    <span style="margin-right: 15px;">Account Payable</span>
+                                    <field name="property_account_payable_id"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2>Import &amp; Export from Mirakl</h2>
                     <div class="row mt16 o_settings_container" id="end_contract_setting">
                         <div class="col-12 col-lg-12 o_setting_box">
                             <div>
@@ -36,8 +70,9 @@
                                     <button name="call_function_sale_order" type="object" string="Import Sale Order"
                                             discard="0" class="btn-primary"/>
                                 </div>
-                                 <div class="mt8">
-                                    <button name="call_export_shipping_details" type="object" string="Export Shipping Details"
+                                <div class="mt8">
+                                    <button name="call_export_shipping_details" type="object"
+                                            string="Export Shipping Details"
                                             discard="0" class="btn-primary"/>
                                 </div>
                             </div>

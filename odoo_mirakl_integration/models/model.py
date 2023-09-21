@@ -165,6 +165,12 @@ class SaleOrder(models.Model):
         Param = self.env['res.config.settings'].sudo().get_values()
         api_url = Param.get('api_url')
         api_key = Param.get('api_key')
+        property_account_receivable_id = Param.get('property_account_receivable_id')
+        property_account_payable_id = Param.get('property_account_payable_id')
+        if not property_account_receivable_id:
+            property_account_receivable_id = False
+        if not property_account_payable_id:
+            property_account_payable_id = False
         if api_url and api_key:
             headers = {"Authorization": str(api_key)}
             url = api_url + "/api/orders"
@@ -188,7 +194,9 @@ class SaleOrder(models.Model):
                     if not customer:
                         customer = self.env['res.partner'].sudo().create({
                             'name': name,
-                            'type': 'contact'
+                            'type': 'contact',
+                            'property_account_receivable_id': property_account_receivable_id,
+                            'property_account_payable_id': property_account_payable_id
                         })
                         _logger.info("\nCustomer created successfully from MIRAKL" + " Created_id:" + str(
                             customer.id))
@@ -208,7 +216,9 @@ class SaleOrder(models.Model):
                             'country_id': self.env['res.country'].search(
                                 [('code', '=', billing_add['country'])]).id,
                             'state_id': self.env['res.country.state'].search(
-                                [('code', '=', billing_add['state'])]).id
+                                [('code', '=', billing_add['state'])]).id,
+                            'property_account_receivable_id': property_account_receivable_id,
+                            'property_account_payable_id': property_account_payable_id
                         })
                         _logger.info(
                             "\nCustomer Billing Address created successfully from MIRAKL" + " Created_id:" + str(
@@ -229,7 +239,9 @@ class SaleOrder(models.Model):
                             'country_id': self.env['res.country'].search(
                                 [('code', '=', shipping_add['country'])]).id,
                             'state_id': self.env['res.country.state'].search(
-                                [('code', '=', shipping_add['state'])]).id
+                                [('code', '=', shipping_add['state'])]).id,
+                            'property_account_receivable_id': property_account_receivable_id,
+                            'property_account_payable_id': property_account_payable_id
                         })
                         _logger.info(
                             "\nCustomer Shipping Address created successfully from MIRAKL" + " Created_id:" + str(
@@ -243,11 +255,23 @@ class SaleOrder(models.Model):
                     order_filter = sale_order.filtered(lambda l: l.mirakl_order_id == order_id)
                     if not order_filter:
                         no_order_flag = True
+                        salesperson = Param.get('user_id')
+                        salesteam = Param.get('team_id')
+                        if salesperson:
+                            pass
+                        else:
+                            salesperson = False
+                        if salesteam:
+                            pass
+                        else:
+                            salesteam = False
                         dict = {'partner_id': customer.id,
                                 'partner_invoice_id': billing.id,
                                 'partner_shipping_id': shipping.id,
                                 'mirakl_create_date': date_mirakl,
-                                'mirakl_order_id': order_id
+                                'mirakl_order_id': order_id,
+                                'user_id': salesperson,
+                                'team_id': salesteam
                                 }
                         order = self.env['sale.order'].sudo().create(dict)
                         _logger.info(
@@ -295,6 +319,10 @@ class ResConfigSettings(models.TransientModel):
 
     api_url = fields.Char(string="Mirakl Api URL", store=True)
     api_key = fields.Char(string="Mirakl Api Key", store=True)
+    user_id = fields.Many2one('res.users', string='Salesperson', store=True)
+    team_id = fields.Many2one('crm.team', string='Sales Team', store=True)
+    property_account_receivable_id = fields.Many2one('account.account.template', string='Receivable Account')
+    property_account_payable_id = fields.Many2one('account.account.template', string='Payable Account')
 
 
     def call_export_shipping_details(self):
@@ -312,7 +340,14 @@ class ResConfigSettings(models.TransientModel):
             'odoo_mirakl_integration.api_url', self.api_url)
         self.env['ir.config_parameter'].set_param(
             'odoo_mirakl_integration.api_key', self.api_key)
-
+        self.env['ir.config_parameter'].set_param(
+            'odoo_mirakl_integration.user_id', self.user_id.id)
+        self.env['ir.config_parameter'].set_param(
+            'odoo_mirakl_integration.team_id', self.team_id.id)
+        self.env['ir.config_parameter'].set_param(
+            'odoo_mirakl_integration.property_account_receivable_id', self.property_account_receivable_id.id)
+        self.env['ir.config_parameter'].set_param(
+            'odoo_mirakl_integration.property_account_payable_id', self.property_account_payable_id.id)
 
     @api.model
     def get_values(self):
@@ -321,7 +356,10 @@ class ResConfigSettings(models.TransientModel):
         res.update(
             api_url=params.get_param('odoo_mirakl_integration.api_url'),
             api_key=params.get_param('odoo_mirakl_integration.api_key'),
-
+            user_id=int(params.get_param('odoo_mirakl_integration.user_id')),
+            team_id=int(params.get_param('odoo_mirakl_integration.team_id')),
+            property_account_receivable_id=int(params.get_param('odoo_mirakl_integration.property_account_receivable_id')),
+            property_account_payable_id=int(params.get_param('odoo_mirakl_integration.property_account_payable_id')),
         )
         return res
 
