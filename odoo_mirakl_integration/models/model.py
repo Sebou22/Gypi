@@ -200,52 +200,6 @@ class SaleOrder(models.Model):
                         })
                         _logger.info("\nCustomer created successfully from MIRAKL" + " Created_id:" + str(
                             customer.id))
-                    billing_add = customer_rec['billing_address']
-                    billing = self.env['res.partner'].sudo().search(
-                        [('name', '=', billing_add['firstname'] + ' ' + billing_add['lastname']),
-                         ('type', '=', 'invoice'), ('zip', '=', billing_add['zip_code']),
-                         ('country_id.code', '=', billing_add['country'])])
-                    if not billing:
-                        billing = self.env['res.partner'].sudo().create({
-                            'name': billing_add['firstname'] + ' ' + billing_add['lastname'],
-                            'type': 'invoice',
-                            'zip': billing_add['zip_code'],
-                            'street': billing_add['street_1'],
-                            'street2': billing_add['street_2'],
-                            'city': billing_add['city'],
-                            'country_id': self.env['res.country'].search(
-                                [('code', '=', billing_add['country'])]).id,
-                            'state_id': self.env['res.country.state'].search(
-                                [('code', '=', billing_add['state'])]).id,
-                            'property_account_receivable_id': property_account_receivable_id,
-                            'property_account_payable_id': property_account_payable_id
-                        })
-                        _logger.info(
-                            "\nCustomer Billing Address created successfully from MIRAKL" + " Created_id:" + str(
-                                billing.id))
-                    shipping_add = customer_rec['shipping_address']
-                    shipping = self.env['res.partner'].sudo().search(
-                        [('name', '=', shipping_add['firstname'] + ' ' + shipping_add['lastname']),
-                         ('type', '=', 'delivery'), ('zip', '=', shipping_add['zip_code']),
-                         ('country_id.code', '=', shipping_add['country'])])
-                    if not shipping:
-                        shipping = self.env['res.partner'].sudo().create({
-                            'name': shipping_add['firstname'] + ' ' + shipping_add['lastname'],
-                            'type': 'delivery',
-                            'zip': shipping_add['zip_code'],
-                            'street': shipping_add['street_1'],
-                            'street2': shipping_add['street_2'],
-                            'city': shipping_add['city'],
-                            'country_id': self.env['res.country'].search(
-                                [('code', '=', shipping_add['country'])]).id,
-                            'state_id': self.env['res.country.state'].search(
-                                [('code', '=', shipping_add['state'])]).id,
-                            'property_account_receivable_id': property_account_receivable_id,
-                            'property_account_payable_id': property_account_payable_id
-                        })
-                        _logger.info(
-                            "\nCustomer Shipping Address created successfully from MIRAKL" + " Created_id:" + str(
-                                shipping.id))
                     date_mirakl = rec['created_date']
                     order_id = rec['order_id']
                     order_date = date_mirakl.split("T")
@@ -266,8 +220,8 @@ class SaleOrder(models.Model):
                         else:
                             salesteam = False
                         dict = {'partner_id': customer.id,
-                                'partner_invoice_id': billing.id,
-                                'partner_shipping_id': shipping.id,
+                                'partner_invoice_id': customer.id,
+                                'partner_shipping_id': customer.id,
                                 'mirakl_create_date': date_mirakl,
                                 'mirakl_order_id': order_id,
                                 'user_id': salesperson,
