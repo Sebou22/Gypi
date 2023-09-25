@@ -188,18 +188,30 @@ class SaleOrder(models.Model):
                 no_order_flag = False
                 for rec in data:
                     customer_rec = rec['customer']
-                    name = customer_rec['firstname'] + ' ' + customer_rec['lastname']
-                    customer = self.env['res.partner'].sudo().search(
-                        [('name', '=', name), ('type', '=', 'contact')], limit=1)
-                    if not customer:
-                        customer = self.env['res.partner'].sudo().create({
-                            'name': name,
+                    shipping_add = customer_rec['shipping_address']
+                    shipping = self.env['res.partner'].sudo().search(
+                        [('name', '=', shipping_add['firstname'] + ' ' + shipping_add['lastname']),
+                          ('zip', '=', shipping_add['zip_code']),
+                         ('country_id.code', '=', shipping_add['country'])])
+                    if not shipping:
+                        shipping = self.env['res.partner'].sudo().create({
+                            'name': shipping_add['firstname'] + ' ' + shipping_add['lastname'],
                             'type': 'contact',
+                            'zip': shipping_add['zip_code'],
+                            'street': shipping_add['street_1'],
+                            'street2': shipping_add['street_2'],
+                            'city': shipping_add['city'],
+                            'mobile': shipping_add['phone'],
+                            'country_id': self.env['res.country'].search(
+                                [('code', '=', shipping_add['country'])]).id,
+                            'state_id': self.env['res.country.state'].search(
+                                [('code', '=', shipping_add['state'])]).id,
                             'property_account_receivable_id': property_account_receivable_id,
                             'property_account_payable_id': property_account_payable_id
                         })
-                        _logger.info("\nCustomer created successfully from MIRAKL" + " Created_id:" + str(
-                            customer.id))
+                        _logger.info(
+                            "\nCustomer Address created successfully from MIRAKL" + " Created_id:" + str(
+                                shipping.id))
                     date_mirakl = rec['created_date']
                     order_id = rec['order_id']
                     order_date = date_mirakl.split("T")
@@ -219,9 +231,9 @@ class SaleOrder(models.Model):
                             pass
                         else:
                             salesteam = False
-                        dict = {'partner_id': customer.id,
-                                'partner_invoice_id': customer.id,
-                                'partner_shipping_id': customer.id,
+                        dict = {'partner_id': shipping.id,
+                                'partner_invoice_id': shipping.id,
+                                'partner_shipping_id': shipping.id,
                                 'mirakl_create_date': date_mirakl,
                                 'mirakl_order_id': order_id,
                                 'user_id': salesperson,
