@@ -207,7 +207,9 @@ class SaleOrder(models.Model):
                             'state_id': self.env['res.country.state'].search(
                                 [('code', '=', shipping_add['state'])]).id,
                             'property_account_receivable_id': property_account_receivable_id,
-                            'property_account_payable_id': property_account_payable_id
+                            'property_account_payable_id': property_account_payable_id,
+                            'email': rec['customer_notification_email'],
+                            'lang': 'fr_FR'
                         })
                         _logger.info(
                             "\nCustomer Address created successfully from MIRAKL" + " Created_id:" + str(
