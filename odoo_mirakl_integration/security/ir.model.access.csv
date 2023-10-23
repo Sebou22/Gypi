@@ -3,6 +3,8 @@ access_mirakl_product_color,odoo_mirakl_integration.mirakl_product_color,model_m
 access_mirakl_product_brand,odoo_mirakl_integration.mirakl_product_brand,model_mirakl_product_brand,,1,1,1,1
 access_mirakl_product_naturewheel,odoo_mirakl_integration.mirakl_product_naturewheel,model_mirakl_product_naturewheel,,1,1,1,1
 access_mirakl_product_sport,odoo_mirakl_integration.mirakl_product_sport,model_mirakl_product_sport,,1,1,1,1
+access_mirakl_product_size,odoo_mirakl_integration.mirakl_product_size,model_mirakl_product_size,,1,1,1,1
+access_mirakl_product_categories,odoo_mirakl_integration.mirakl_product_categories,model_mirakl_product_categories,,1,1,1,1
 
 
 

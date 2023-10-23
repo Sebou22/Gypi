@@ -10,6 +10,25 @@
             <xpath expr="//div[hasclass('settings')]" position="inside">
                 <div class="app_settings_block" data-string="Mirakl Settings" id="odoo_mirakl_integration"
                      string="Mirakl Settings" data-key="odoo_mirakl_integration">
+
+
+                    <h2>Order Import and Shipping Export</h2>
+                    <div class="row mt16 o_settings_container" id="end_contract_setting">
+                        <div class="col-12 col-lg-12 o_setting_box">
+                            <div style="display: flex;justify-content: space-between;width: 40%;">
+                                <div class="mt8">
+                                    <button name="call_function_sale_order" type="object" string="Import Sale Order"
+                                            discard="0" class="btn-primary"/>
+                                </div>
+                                <div class="mt8">
+                                    <button name="call_export_shipping_details" type="object"
+                                            string="Export Shipping Details"
+                                            discard="0" class="btn-primary"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <h2>Mirakl URL and Key</h2>
                     <div class="row mt16 o_settings_container" id="end_contract_setting">
                         <div class="col-12 col-lg-12 o_setting_box">
@@ -61,20 +80,21 @@
                     <h2>Import &amp; Export from Mirakl</h2>
                     <div class="row mt16 o_settings_container" id="end_contract_setting">
                         <div class="col-12 col-lg-12 o_setting_box">
-                            <div>
+                            <div style="width: 75%;display: flex;justify-content: space-between;">
+                                <div class="mt8">
+                                    <button name="call_function_product_category" type="object"
+                                            string="Import Product Categories" discard="0" class="btn-primary"/>
+                                </div>
+                                <div class="mt8">
+                                    <button name="call_function_product_attribute" type="object"
+                                            string="Import Products Attributes" discard="0" class="btn-primary"/>
+                                </div>
                                 <div class="mt8">
                                     <button name="call_export_product_product" type="object"
                                             string="Export Products to Mirakl" discard="0" class="btn-primary"/>
                                 </div>
-                                <div class="mt8">
-                                    <button name="call_function_sale_order" type="object" string="Import Sale Order"
-                                            discard="0" class="btn-primary"/>
-                                </div>
-                                <div class="mt8">
-                                    <button name="call_export_shipping_details" type="object"
-                                            string="Export Shipping Details"
-                                            discard="0" class="btn-primary"/>
-                                </div>
+
+
                             </div>
                         </div>
                     </div>

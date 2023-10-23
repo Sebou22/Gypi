@@ -22,12 +22,13 @@ class ProductTemplate(models.Model):
     mirakl_description = fields.Text("Description")
     mirakl_color_id = fields.Many2one('mirakl.product.color', string="Color")
     mirakl_brand_id = fields.Many2one('mirakl.product.brand', string="Brand")
-    mirakl_natureofwheel_id = fields.Many2one('mirakl.product.naturewheel', string="Nature of Wheel")
+    mirakl_natureofwheel_id = fields.Many2one('mirakl.product.naturewheel', string="Product Type")
     mirakl_sport_ids = fields.Many2many('mirakl.product.sport', string="Sports")
     mirakl_state = fields.Selection([('nine', "Nine"), ('refurbished', "Refurbished")], string="State")
     main_image_url = fields.Char("Mirakl Main Image URL", compute='_create_image_attachment')
     mirakl_product_title_fr = fields.Char("Product Title fr-FR")
-    mirakl_size_21 = fields.Char("SIZE_21")
+    mirakl_size_21_id = fields.Many2one('mirakl.product.size', string="SIZE_21")
+    mirakl_category_id = fields.Many2one('mirakl.product.categories', string="Mirakl Product Category")
 
     def _create_image_attachment(self):
         for rec in self:
@@ -40,6 +41,174 @@ class ProductTemplate(models.Model):
                     res_id=rec.id,
                 ))
                 rec.main_image_url = image.local_url
+
+    def import_category_from_mirakl(self):
+        Param = self.env['res.config.settings'].sudo().get_values()
+        api_url = Param.get('api_url')
+        api_key = Param.get('api_key')
+        flag = False
+        if api_url and api_key:
+            headers = {"Authorization": str(api_key)}
+            url = api_url + "/api/hierarchies"
+            response = requests.get(url, headers=headers)
+            if response.status_code == 201 or response.status_code == 200:
+                response_data = response.json()
+                hierarchy = response_data['hierarchies']
+                for rec in hierarchy:
+                    if rec:
+                        existing = self.env['mirakl.product.categories'].sudo().search(
+                            [('mirakl_code', '=', rec['code'])])
+                        if not existing:
+                            flag = True
+                            parent_code = self.env['mirakl.product.categories'].sudo().search(
+                                [('mirakl_code', '=', rec['parent_code'])])
+                            color = self.env['mirakl.product.categories'].sudo().create({
+                                'mirakl_code': rec['code'],
+                                'name': rec['label'],
+                                'parent_code': parent_code.id if parent_code else None,
+                                'display_name': rec['label'] if not parent_code else None
+                            })
+                            if parent_code:
+                                if parent_code.display_name:
+                                    color.display_name = parent_code.display_name + "/" + color.name
+                                else:
+                                    color.display_name = color.name
+                            _logger.info(
+                                "\nCategories created successfully from MIRAKL" + " Created_id:" + str(
+                                    color.id))
+                if flag == False:
+                    raise UserError(
+                        _("There are no new Categories to sync from Mirakl, Existing  Categories are already synced."))
+
+    def import_attribute_from_mirakl(self):
+        Param = self.env['res.config.settings'].sudo().get_values()
+        api_url = Param.get('api_url')
+        api_key = Param.get('api_key')
+        flag = False
+        if api_url and api_key:
+            headers = {"Authorization": str(api_key)}
+            url = api_url + "/api/values_lists"
+            params = {
+                'code': 'color',
+            }
+            response = requests.get(url, params=params, headers=headers)
+            if response.status_code == 201 or response.status_code == 200:
+                response_data = response.json()
+                value_list = response_data['values_lists']
+                value = value_list[0]
+
+                for rec in value['values']:
+                    if rec:
+                        existing = self.env['mirakl.product.color'].sudo().search(
+                            [('mirakl_id', '=', rec['code'])])
+                        if not existing:
+                            flag = True
+                            color = self.env['mirakl.product.color'].sudo().create({
+                                'mirakl_id': rec['code'],
+                                'name': rec['label'],
+                            })
+                            _logger.info(
+                                "\nColor Attribute created successfully from MIRAKL" + " Created_id:" + str(
+                                    color.id))
+        if api_url and api_key:
+            headers = {"Authorization": str(api_key)}
+            url = api_url + "/api/values_lists"
+            params = {
+                'code': 'brandName',
+            }
+            response = requests.get(url, params=params, headers=headers)
+            if response.status_code == 201 or response.status_code == 200:
+                response_data = response.json()
+                value_list = response_data['values_lists']
+                value = value_list[0]
+                for rec in value['values']:
+                    if rec:
+                        existing = self.env['mirakl.product.brand'].sudo().search(
+                            [('mirakl_id', '=', rec['code'])])
+                        if not existing:
+                            flag = True
+                            brand = self.env['mirakl.product.brand'].sudo().create({
+                                'mirakl_id': rec['code'],
+                                'name': rec['label'],
+                            })
+                            _logger.info(
+                                "\nBrand Attribute created successfully from MIRAKL" + " Created_id:" + str(
+                                    brand.id))
+        if api_url and api_key:
+            headers = {"Authorization": str(api_key)}
+            url = api_url + "/api/values_lists"
+            params = {
+                'code': 'sports-174'
+            }
+            response = requests.get(url, params=params, headers=headers)
+            if response.status_code == 201 or response.status_code == 200:
+                response_data = response.json()
+                value_list = response_data['values_lists']
+                value = value_list[0]
+                for rec in value['values']:
+                    if rec:
+                        existing = self.env['mirakl.product.sport'].sudo().search(
+                            [('mirakl_id', '=', rec['code'])])
+                        if not existing:
+                            flag = True
+                            brand = self.env['mirakl.product.sport'].sudo().create({
+                                'mirakl_id': rec['code'],
+                                'name': rec['label'],
+                            })
+                            _logger.info(
+                                "\nSports Attribute created successfully from MIRAKL" + " Created_id:" + str(
+                                    brand.id))
+        if api_url and api_key:
+            headers = {"Authorization": str(api_key)}
+            url = api_url + "/api/values_lists"
+            params = {
+                'code': 'size-21'
+            }
+            response = requests.get(url, params=params, headers=headers)
+            if response.status_code == 201 or response.status_code == 200:
+                response_data = response.json()
+                value_list = response_data['values_lists']
+                value = value_list[0]
+                for rec in value['values']:
+                    if rec:
+                        existing = self.env['mirakl.product.size'].sudo().search(
+                            [('mirakl_id', '=', rec['code'])])
+                        if not existing:
+                            flag = True
+                            brand = self.env['mirakl.product.size'].sudo().create({
+                                'mirakl_id': rec['code'],
+                                'name': rec['label'],
+                            })
+                            _logger.info(
+                                "\nSize_21 Attribute created successfully from MIRAKL" + " Created_id:" + str(
+                                    brand.id))
+        # if api_url and api_key:
+        #     headers = {"Authorization": str(api_key)}
+        #     url = api_url + "/api/values_lists"
+        #     params = {
+        #         'code': 'Product-Type'
+        #     }
+        #     response = requests.get(url, params=params, headers=headers)
+        #     print(response.status_code, "response.status_code")
+        #     if response.status_code == 201 or response.status_code == 200:
+        #         response_data = response.json()
+        #         print(response_data, "response_dataresponse_data")
+        #     value_list = response_data['values_lists']
+        #     value = value_list[0]
+        #     for rec in value['values']:
+        #         print(rec['code'], "printtttttt")
+        #         if rec:
+        #             existing = self.env['mirakl.product.size'].sudo().search(
+        #                 [('mirakl_id', '=', rec['code'])])
+        #             if not existing:
+        #                 flag = True
+        #                 brand = self.env['mirakl.product.size'].sudo().create({
+        #                     'mirakl_id': rec['code'],
+        #                     'name': rec['label'],
+        #                 })
+        #                 _logger.info(
+        #                     "\nSize_21 Attribute created successfully from MIRAKL" + " Created_id:" + str(
+        #                         brand.id))
 
     def export_all_products_to_mirakl(self):
         Param = self.env['res.config.settings'].sudo().get_values()
@@ -80,7 +249,6 @@ class ProductTemplate(models.Model):
                 for pr in non_existing_products:
                     if pr.sync_to_mirakl == True:
                         flag = True
-                        categ = pr.public_categ_ids.mapped('mirakl_id')
                         Sports_list = pr.mirakl_sport_ids.mapped('mirakl_id')
                         lst2 = '[%s]' % ' / '.join(map(str, Sports_list))
                         resul = str(lst2)[1:-1]
@@ -96,7 +264,7 @@ class ProductTemplate(models.Model):
                         sku = pr.default_code
                         ean = pr.barcode
                         main_image = image_url
-                        category = categ[0]
+                        category = pr.mirakl_category_id.mirakl_code
                         product_identifier = pr.default_code
                         description = pr.mirakl_description
                         color = pr.mirakl_color_id.mirakl_id
@@ -105,7 +273,7 @@ class ProductTemplate(models.Model):
                         PRODUCT_TYPE = pr.mirakl_natureofwheel_id.name
                         Sports = resul
                         producttitlefr = pr.mirakl_product_title_fr
-                        size_21 = pr.mirakl_size_21
+                        size_21 = pr.mirakl_size_21_id.mirakl_id
                         writer.writerow(
                             [name, price, sku, ean, main_image, category, product_identifier, description, color,
                              brand_name, state, PRODUCT_TYPE, Sports, producttitlefr, size_21])
@@ -154,12 +322,28 @@ class ProductProductBrand(models.Model):
     mirakl_id = fields.Char("Mirakl Brand ID", required=True)
 
 
+class ProductProductSize(models.Model):
+    _name = "mirakl.product.size"
+
+    name = fields.Char("Name", required=True)
+    mirakl_id = fields.Char("Mirakl Size ID", required=True)
+
+
+class ProductProductCategories(models.Model):
+    _name = "mirakl.product.categories"
+    _rec_name = "display_name"
+
+    display_name = fields.Char("Display Name")
+    name = fields.Char("Name", required=True)
+    mirakl_code = fields.Char("Mirakl Code", required=True)
+    parent_code = fields.Many2one('mirakl.product.categories')
+
+
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
     mirakl_order_id = fields.Char("Mirakl Order ID", store=True, readonly=True)
     mirakl_create_date = fields.Datetime("Mirakl Order Create Date", readonly=True)
-
 
     def import_orders_from_mirakl(self):
         Param = self.env['res.config.settings'].sudo().get_values()
@@ -188,10 +372,45 @@ class SaleOrder(models.Model):
                 no_order_flag = False
                 for rec in data:
                     customer_rec = rec['customer']
+                    # name = customer_rec['firstname'] + ' ' + customer_rec['lastname']
+                    # customer = self.env['res.partner'].sudo().search(
+                    #     [('name', '=', name), ('type', '=', 'contact')], limit=1)
+                    # if not customer:
+                    #     customer = self.env['res.partner'].sudo().create({
+                    #         'name': name,
+                    #         'type': 'contact',
+                    #         'property_account_receivable_id': property_account_receivable_id,
+                    #         'property_account_payable_id': property_account_payable_id
+                    #     })
+                    #     _logger.info("\nCustomer created successfully from MIRAKL" + " Created_id:" + str(
+                    #         customer.id))
+                    # billing_add = customer_rec['billing_address']
+                    # billing = self.env['res.partner'].sudo().search(
+                    #     [('name', '=', billing_add['firstname'] + ' ' + billing_add['lastname']),
+                    #      ('type', '=', 'contact'), ('zip', '=', billing_add['zip_code']),
+                    #      ('country_id.code', '=', billing_add['country'])])
+                    # if not billing:
+                    #     billing = self.env['res.partner'].sudo().create({
+                    #         'name': billing_add['firstname'] + ' ' + billing_add['lastname'],
+                    #         'type': 'contact',
+                    #         'zip': billing_add['zip_code'],
+                    #         'street': billing_add['street_1'],
+                    #         'street2': billing_add['street_2'],
+                    #         'city': billing_add['city'],
+                    #         'country_id': self.env['res.country'].search(
+                    #             [('code', '=', billing_add['country'])]).id,
+                    #         'state_id': self.env['res.country.state'].search(
+                    #             [('code', '=', billing_add['state'])]).id,
+                    #         'property_account_receivable_id': property_account_receivable_id,
+                    #         'property_account_payable_id': property_account_payable_id
+                    #     })
+                    #     _logger.info(
+                    #         "\nCustomer created successfully from MIRAKL" + " Created_id:" + str(
+                    #             billing.id))
                     shipping_add = customer_rec['shipping_address']
                     shipping = self.env['res.partner'].sudo().search(
                         [('name', '=', shipping_add['firstname'] + ' ' + shipping_add['lastname']),
-                          ('zip', '=', shipping_add['zip_code']),
+                         ('zip', '=', shipping_add['zip_code']),
                          ('country_id.code', '=', shipping_add['country'])])
                     if not shipping:
                         shipping = self.env['res.partner'].sudo().create({
@@ -292,12 +511,17 @@ class ResConfigSettings(models.TransientModel):
     property_account_receivable_id = fields.Many2one('account.account', string='Receivable Account')
     property_account_payable_id = fields.Many2one('account.account', string='Payable Account')
 
-
     def call_export_shipping_details(self):
         self.env['stock.picking'].sudo().send_shipping_details_to_mirakl()
 
     def call_function_sale_order(self):
         self.env['sale.order'].sudo().import_orders_from_mirakl()
+
+    def call_function_product_category(self):
+        self.env['product.product'].sudo().import_category_from_mirakl()
+
+    def call_function_product_attribute(self):
+        self.env['product.product'].sudo().import_attribute_from_mirakl()
 
     def call_export_product_product(self):
         self.env['product.product'].sudo().export_all_products_to_mirakl()
@@ -326,16 +550,11 @@ class ResConfigSettings(models.TransientModel):
             api_key=params.get_param('odoo_mirakl_integration.api_key'),
             user_id=int(params.get_param('odoo_mirakl_integration.user_id')),
             team_id=int(params.get_param('odoo_mirakl_integration.team_id')),
-            property_account_receivable_id=int(params.get_param('odoo_mirakl_integration.property_account_receivable_id')),
+            property_account_receivable_id=int(
+                params.get_param('odoo_mirakl_integration.property_account_receivable_id')),
             property_account_payable_id=int(params.get_param('odoo_mirakl_integration.property_account_payable_id')),
         )
         return res
-
-
-class ProductPublicCategory(models.Model):
-    _inherit = "product.public.category"
-
-    mirakl_id = fields.Char("Mirakl Category ID", required=True)
 
 
 class StockPicking(models.Model):
@@ -363,7 +582,7 @@ class StockPicking(models.Model):
                         "tracking_number": rec.carrier_tracking_ref,
                         "tracking_url": rec.mirakl_tracking_url,
                     }
-                    shipment_lines=[]
+                    shipment_lines = []
                     for res in rec.move_line_ids:
                         line = {
                             "offer_sku": res.product_id.default_code,
@@ -372,9 +591,9 @@ class StockPicking(models.Model):
                         shipment_lines.append(line)
                     shipments = {
                         "order_id": rec.mirakl_order_id,
-                        "tracking":tracking,
-                        "shipment_lines":shipment_lines,
-                        "shipped":'true'
+                        "tracking": tracking,
+                        "shipment_lines": shipment_lines,
+                        "shipped": 'true'
                     }
                     shipping.append(shipments)
                 else:
@@ -387,7 +606,10 @@ class StockPicking(models.Model):
                 response_data = response.json()
                 if response_data['shipment_errors']:
                     shippment_error = response_data['shipment_errors'][0]
-                    raise UserError("Shipping Export Failed Error Message: "+ str(shippment_error['message']) + "Order ID: " + str(shippment_error['order_id']))
+                    raise UserError(
+                        "Shipping Export Failed Error Message: " + str(shippment_error['message']) + "Order ID: " + str(
+                            shippment_error['order_id']))
+
 
 class Pricelist(models.Model):
     _inherit = "product.pricelist"
