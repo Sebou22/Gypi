@@ -183,6 +183,7 @@
                     <sheet>
                         <group>
                             <group>
+                                <field name="mirakl_id"/>
                                 <field name="name"/>
                             </group>
                         </group>
@@ -195,6 +196,7 @@
             <field name="model">mirakl.product.naturewheel</field>
             <field name="arch" type="xml">
                 <tree>
+                    <field name="mirakl_id"/>
                     <field name="name"/>
                 </tree>
             </field>

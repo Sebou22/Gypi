@@ -40,6 +40,7 @@ class ProductTemplate(models.Model):
                     res_model='product.product',
                     res_id=rec.id,
                 ))
+                self.env.cr.commit()
                 rec.main_image_url = image.local_url
 
     def import_category_from_mirakl(self):
@@ -68,6 +69,7 @@ class ProductTemplate(models.Model):
                                 'parent_code': parent_code.id if parent_code else None,
                                 'display_name': rec['label'] if not parent_code else None
                             })
+                            self.env.cr.commit()
                             if parent_code:
                                 if parent_code.display_name:
                                     color.display_name = parent_code.display_name + "/" + color.name
@@ -107,6 +109,7 @@ class ProductTemplate(models.Model):
                                 'mirakl_id': rec['code'],
                                 'name': rec['label'],
                             })
+                            self.env.cr.commit()
                             _logger.info(
                                 "\nColor Attribute created successfully from MIRAKL" + " Created_id:" + str(
                                     color.id))
@@ -131,6 +134,7 @@ class ProductTemplate(models.Model):
                                 'mirakl_id': rec['code'],
                                 'name': rec['label'],
                             })
+                            self.env.cr.commit()
                             _logger.info(
                                 "\nBrand Attribute created successfully from MIRAKL" + " Created_id:" + str(
                                     brand.id))
@@ -155,6 +159,7 @@ class ProductTemplate(models.Model):
                                 'mirakl_id': rec['code'],
                                 'name': rec['label'],
                             })
+                            self.env.cr.commit()
                             _logger.info(
                                 "\nSports Attribute created successfully from MIRAKL" + " Created_id:" + str(
                                     brand.id))
@@ -179,36 +184,47 @@ class ProductTemplate(models.Model):
                                 'mirakl_id': rec['code'],
                                 'name': rec['label'],
                             })
+                            self.env.cr.commit()
                             _logger.info(
                                 "\nSize_21 Attribute created successfully from MIRAKL" + " Created_id:" + str(
                                     brand.id))
-        # if api_url and api_key:
-        #     headers = {"Authorization": str(api_key)}
-        #     url = api_url + "/api/values_lists"
-        #     params = {
-        #         'code': 'Product-Type'
-        #     }
-        #     response = requests.get(url, params=params, headers=headers)
-        #     print(response.status_code, "response.status_code")
-        #     if response.status_code == 201 or response.status_code == 200:
-        #         response_data = response.json()
-        #         print(response_data, "response_dataresponse_data")
-        #     value_list = response_data['values_lists']
-        #     value = value_list[0]
-        #     for rec in value['values']:
-        #         print(rec['code'], "printtttttt")
-        #         if rec:
-        #             existing = self.env['mirakl.product.size'].sudo().search(
-        #                 [('mirakl_id', '=', rec['code'])])
-        #             if not existing:
-        #                 flag = True
-        #                 brand = self.env['mirakl.product.size'].sudo().create({
-        #                     'mirakl_id': rec['code'],
-        #                     'name': rec['label'],
-        #                 })
-        #                 _logger.info(
-        #                     "\nSize_21 Attribute created successfully from MIRAKL" + " Created_id:" + str(
-        #                         brand.id))
+        if api_url and api_key:
+            headerss = {"Authorization": str(api_key)}
+            a_url = api_url + "/api/products/attributes"
+            responsee = requests.get(a_url, headers=headerss)
+            ls = []
+            if responsee.status_code == 201 or responsee.status_code == 200:
+                response_data = responsee.json()
+                response_attribute = response_data['attributes']
+                for rec in response_attribute:
+                    if rec['code'] == 'PRODUCT_TYPE':
+                        headers = {"Authorization": str(api_key)}
+                        url = api_url + "/api/values_lists"
+                        params = {
+                            'code': rec['type_parameter']
+                        }
+                        response = requests.get(url, params=params, headers=headers)
+                        if response.status_code == 201 or response.status_code == 200:
+                            response_data = response.json()
+                            value_li = response_data['values_lists']
+                            dataa = value_li[0]
+                            valuess = dataa['values']
+                            for recs in valuess:
+                                if recs:
+                                    existing = self.env['mirakl.product.naturewheel'].sudo().search(
+                                        [('mirakl_id', '=', recs['code'])])
+                                    if not existing:
+                                        flag = True
+                                        wheel = self.env['mirakl.product.naturewheel'].sudo().create({
+                                            'mirakl_id': recs['code'],
+                                            'name': recs['label'],
+                                        })
+                                        self.env.cr.commit()
+                                        _logger.info(
+                                            "\nPRODUCT_TYPE Attribute created successfully from MIRAKL" + " Created_id:" + str(
+                                                wheel.id))
+
+
 
     def export_all_products_to_mirakl(self):
         Param = self.env['res.config.settings'].sudo().get_values()
@@ -312,6 +328,7 @@ class ProductProductColor(models.Model):
 class ProductNatureofwheel(models.Model):
     _name = "mirakl.product.naturewheel"
 
+    mirakl_id = fields.Char("Mirakl Code", required=True)
     name = fields.Char("Name", required=True)
 
 
@@ -372,41 +389,6 @@ class SaleOrder(models.Model):
                 no_order_flag = False
                 for rec in data:
                     customer_rec = rec['customer']
-                    # name = customer_rec['firstname'] + ' ' + customer_rec['lastname']
-                    # customer = self.env['res.partner'].sudo().search(
-                    #     [('name', '=', name), ('type', '=', 'contact')], limit=1)
-                    # if not customer:
-                    #     customer = self.env['res.partner'].sudo().create({
-                    #         'name': name,
-                    #         'type': 'contact',
-                    #         'property_account_receivable_id': property_account_receivable_id,
-                    #         'property_account_payable_id': property_account_payable_id
-                    #     })
-                    #     _logger.info("\nCustomer created successfully from MIRAKL" + " Created_id:" + str(
-                    #         customer.id))
-                    # billing_add = customer_rec['billing_address']
-                    # billing = self.env['res.partner'].sudo().search(
-                    #     [('name', '=', billing_add['firstname'] + ' ' + billing_add['lastname']),
-                    #      ('type', '=', 'contact'), ('zip', '=', billing_add['zip_code']),
-                    #      ('country_id.code', '=', billing_add['country'])])
-                    # if not billing:
-                    #     billing = self.env['res.partner'].sudo().create({
-                    #         'name': billing_add['firstname'] + ' ' + billing_add['lastname'],
-                    #         'type': 'contact',
-                    #         'zip': billing_add['zip_code'],
-                    #         'street': billing_add['street_1'],
-                    #         'street2': billing_add['street_2'],
-                    #         'city': billing_add['city'],
-                    #         'country_id': self.env['res.country'].search(
-                    #             [('code', '=', billing_add['country'])]).id,
-                    #         'state_id': self.env['res.country.state'].search(
-                    #             [('code', '=', billing_add['state'])]).id,
-                    #         'property_account_receivable_id': property_account_receivable_id,
-                    #         'property_account_payable_id': property_account_payable_id
-                    #     })
-                    #     _logger.info(
-                    #         "\nCustomer created successfully from MIRAKL" + " Created_id:" + str(
-                    #             billing.id))
                     shipping_add = customer_rec['shipping_address']
                     shipping = self.env['res.partner'].sudo().search(
                         [('name', '=', shipping_add['firstname'] + ' ' + shipping_add['lastname']),
@@ -430,6 +412,7 @@ class SaleOrder(models.Model):
                             'email': rec['customer_notification_email'],
                             'lang': 'fr_FR'
                         })
+                        self.env.cr.commit()
                         _logger.info(
                             "\nCustomer Address created successfully from MIRAKL" + " Created_id:" + str(
                                 shipping.id))
@@ -461,6 +444,7 @@ class SaleOrder(models.Model):
                                 'team_id': salesteam
                                 }
                         order = self.env['sale.order'].sudo().create(dict)
+                        self.env.cr.commit()
                         _logger.info(
                             "\nSale Order created successfully from MIRAKL" + " Created_id:" + str(
                                 order.id))
@@ -479,6 +463,7 @@ class SaleOrder(models.Model):
                                     'list_price': res['price'],
                                     'default_code': res['offer_sku'],
                                 })
+                                self.env.cr.commit()
                             if product:
                                 order_lines_dict = {
                                     'product_id': product.id,
@@ -489,6 +474,7 @@ class SaleOrder(models.Model):
                                     'customer_lead': rec['leadtime_to_ship']
                                 }
                                 order_line = self.env['sale.order.line'].sudo().create(order_lines_dict)
+                                self.env.cr.commit()
                                 _logger.info(
                                     "\nSale Order line created successfully from MIRAKL for OrderID" + str(
                                         order.id) + " Created_id Line ID:" + str(
