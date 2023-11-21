@@ -286,7 +286,7 @@ class ProductTemplate(models.Model):
                         color = pr.mirakl_color_id.mirakl_id
                         brand_name = pr.mirakl_brand_id.mirakl_id
                         state = pr.mirakl_state
-                        PRODUCT_TYPE = pr.mirakl_natureofwheel_id.name
+                        PRODUCT_TYPE = pr.mirakl_natureofwheel_id.mirakl_id
                         Sports = resul
                         producttitlefr = pr.mirakl_product_title_fr
                         size_21 = pr.mirakl_size_21_id.mirakl_id
@@ -307,6 +307,7 @@ class ProductTemplate(models.Model):
                         "shop_id": 7860
                     }
                     response = requests.post(url, headers=headers, params=params, files=files)
+                    _logger.info("\nProduct Export Status Code" + str(response.status_code))
                     if response.status_code == 201 or response.status_code == 200:
                         response_data = response.json()
 
