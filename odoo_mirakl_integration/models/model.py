@@ -19,7 +19,7 @@ class ProductTemplate(models.Model):
     _inherit = "product.product"
 
     sync_to_mirakl = fields.Boolean("Sync to Mirakl")
-    mirakl_description = fields.Text("Description")
+    mirakl_description = fields.Text("Description fr-FR")
     mirakl_color_id = fields.Many2one('mirakl.product.color', string="Color")
     mirakl_brand_id = fields.Many2one('mirakl.product.brand', string="Brand")
     mirakl_natureofwheel_id = fields.Many2one('mirakl.product.naturewheel', string="Product Type")
@@ -29,7 +29,8 @@ class ProductTemplate(models.Model):
     mirakl_product_title_fr = fields.Char("Product Title fr-FR")
     mirakl_size_21_id = fields.Many2one('mirakl.product.size', string="SIZE_21")
     mirakl_category_id = fields.Many2one('mirakl.product.categories', string="Mirakl Product Category")
-
+    mirakl_Webcatchline = fields.Text("Webcatchline")
+    mirakl_etat = fields.Char("CHARACTERISTIC_748")
     def _create_image_attachment(self):
         for rec in self:
             if rec.image_1920:
@@ -260,8 +261,8 @@ class ProductTemplate(models.Model):
                 writer = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
                 writer.writerow(
                     ['mainTitle', 'price', 'sku', 'ean_codes', 'main_image', 'category', 'ProductIdentifier',
-                     'description', 'color', 'brandName', 'state', 'PRODUCT_TYPE', 'SPORT_29', 'productTitle fr_FR',
-                     'SIZE_21'])
+                     'longDescription-fr_FR', 'color', 'brandName', 'state', 'PRODUCT_TYPE', 'SPORT_29', 'productTitle-fr_FR',
+                     'SIZE_21','ITEM_QUANTITY','webcatchline-fr_FR','CHARACTERISTIC_748'])
                 for pr in non_existing_products:
                     if pr.sync_to_mirakl == True:
                         flag = True
@@ -290,9 +291,12 @@ class ProductTemplate(models.Model):
                         Sports = resul
                         producttitlefr = pr.mirakl_product_title_fr
                         size_21 = pr.mirakl_size_21_id.mirakl_id
+                        item_quantity = pr.qty_available
+                        webcatchline = pr.mirakl_Webcatchline
+                        characteristic_748 = pr.mirakl_etat
                         writer.writerow(
                             [name, price, sku, ean, main_image, category, product_identifier, description, color,
-                             brand_name, state, PRODUCT_TYPE, Sports, producttitlefr, size_21])
+                             brand_name, state, PRODUCT_TYPE, Sports, producttitlefr, size_21, item_quantity,webcatchline,characteristic_748])
             with open('product.csv', 'r', encoding="utf-8") as f2:
                 # file encode and store in a variable ‘data’
                 data = str.encode(f2.read(), 'utf-8')
