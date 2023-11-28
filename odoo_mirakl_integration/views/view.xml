@@ -26,7 +26,6 @@
                                 <field name="mirakl_category_id"/>
                                 <field name="mirakl_color_id"/>
                                 <field name="mirakl_brand_id"/>
-                                <field name="mirakl_state"/>
                                 <field name="mirakl_natureofwheel_id"/>
                                 <field name="mirakl_sport_ids" widget="many2many_tags"/>
                                 <field name="main_image_url"/>
@@ -96,6 +95,47 @@
 
         <menuitem id="product_product_categories_2" name="Mirakl Categories Master" action="action_mirakl_categories"
                   parent="menu_mirakl_config" sequence="21"/>
+
+
+        <record id="view_mirakl_state" model="ir.ui.view">
+            <field name="name">mirakl.product.state.form</field>
+            <field name="model">mirakl.product.state</field>
+            <field name="arch" type="xml">
+                <form string="Color">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="mirakl_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_mirakl_product_state" model="ir.ui.view">
+            <field name="name">mirakl.product.state.tree</field>
+            <field name="model">mirakl.product.state</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="mirakl_id"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_mirakl_state" model="ir.actions.act_window">
+            <field name="name">Mirakl Product State</field>
+            <field name="res_model">mirakl.product.state</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Click to create a new record</p>
+            </field>
+        </record>
+
+
+        <menuitem id="product_product_menu_state" name="Mirakl State Master" action="action_mirakl_state"
+                  parent="menu_mirakl_config" sequence="21"/>
+
 
         <record id="view_mirakl_color" model="ir.ui.view">
             <field name="name">mirakl.product.color.form</field>

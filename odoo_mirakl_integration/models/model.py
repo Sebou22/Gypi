@@ -24,13 +24,12 @@ class ProductTemplate(models.Model):
     mirakl_brand_id = fields.Many2one('mirakl.product.brand', string="Brand")
     mirakl_natureofwheel_id = fields.Many2one('mirakl.product.naturewheel', string="Product Type")
     mirakl_sport_ids = fields.Many2many('mirakl.product.sport', string="Sports")
-    mirakl_state = fields.Selection([('neuf', "Nine"), ('reconditionné', "Refurbished")], string="State")
     main_image_url = fields.Char("Mirakl Main Image URL", compute='_create_image_attachment')
     mirakl_product_title_fr = fields.Char("Product Title fr-FR")
     mirakl_size_21_id = fields.Many2one('mirakl.product.size', string="SIZE_21")
     mirakl_category_id = fields.Many2one('mirakl.product.categories', string="Mirakl Product Category")
     mirakl_Webcatchline = fields.Text("Webcatchline")
-    mirakl_etat = fields.Char("CHARACTERISTIC_748")
+    mirakl_etat = fields.Many2one('mirakl.product.state', "CHARACTERISTIC_748")
     def _create_image_attachment(self):
         for rec in self:
             if rec.image_1920:
@@ -198,6 +197,41 @@ class ProductTemplate(models.Model):
                 response_data = responsee.json()
                 response_attribute = response_data['attributes']
                 for rec in response_attribute:
+                    if rec['code'] == 'CHARACTERISTIC_748':
+                        headers = {"Authorization": str(api_key)}
+                        url = api_url + "/api/values_lists"
+                        params = {
+                            'code': rec['type_parameter']
+                        }
+                        response = requests.get(url, params=params, headers=headers)
+                        if response.status_code == 201 or response.status_code == 200:
+                            response_data = response.json()
+                            value_li = response_data['values_lists']
+                            dataa = value_li[0]
+                            valuess = dataa['values']
+                            for recs in valuess:
+                                if recs:
+                                    existing = self.env['mirakl.product.state'].sudo().search(
+                                        [('mirakl_id', '=', recs['code'])])
+                                    if not existing:
+                                        flag = True
+                                        wheel = self.env['mirakl.product.state'].sudo().create({
+                                            'mirakl_id': recs['code'],
+                                            'name': recs['label'],
+                                        })
+                                        self.env.cr.commit()
+                                        _logger.info(
+                                            "\nCHARACTERISTIC_748 Attribute created successfully from MIRAKL" + " Created_id:" + str(
+                                                wheel.id))
+        if api_url and api_key:
+            headerss = {"Authorization": str(api_key)}
+            a_url = api_url + "/api/products/attributes"
+            responsee = requests.get(a_url, headers=headerss)
+            ls = []
+            if responsee.status_code == 201 or responsee.status_code == 200:
+                response_data = responsee.json()
+                response_attribute = response_data['attributes']
+                for rec in response_attribute:
                     if rec['code'] == 'PRODUCT_TYPE':
                         headers = {"Authorization": str(api_key)}
                         url = api_url + "/api/values_lists"
@@ -261,7 +295,7 @@ class ProductTemplate(models.Model):
                 writer = csv.writer(file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
                 writer.writerow(
                     ['mainTitle', 'price', 'sku', 'ean_codes', 'main_image', 'category', 'ProductIdentifier',
-                     'longDescription-fr_FR', 'color', 'brandName', 'state', 'PRODUCT_TYPE', 'SPORT_29', 'productTitle-fr_FR',
+                     'longDescription-fr_FR', 'color', 'brandName', 'PRODUCT_TYPE', 'SPORT_29', 'productTitle-fr_FR',
                      'SIZE_21','webcatchline-fr_FR','CHARACTERISTIC_748'])
                 for pr in non_existing_products:
                     if pr.sync_to_mirakl == True:
@@ -286,16 +320,15 @@ class ProductTemplate(models.Model):
                         description = pr.mirakl_description
                         color = pr.mirakl_color_id.mirakl_id
                         brand_name = pr.mirakl_brand_id.mirakl_id
-                        state = pr.mirakl_state
                         PRODUCT_TYPE = pr.mirakl_natureofwheel_id.mirakl_id
                         Sports = resul
                         producttitlefr = pr.mirakl_product_title_fr
                         size_21 = pr.mirakl_size_21_id.mirakl_id
                         webcatchline = pr.mirakl_Webcatchline
-                        characteristic_748 = pr.mirakl_etat
+                        characteristic_748 = pr.mirakl_etat.mirakl_id
                         writer.writerow(
                             [name, price, sku, ean, main_image, category, product_identifier, description, color,
-                             brand_name, state, PRODUCT_TYPE, Sports, producttitlefr, size_21,webcatchline,characteristic_748])
+                             brand_name, PRODUCT_TYPE, Sports, producttitlefr, size_21,webcatchline,characteristic_748])
             with open('product.csv', 'r', encoding="utf-8") as f2:
                 # file encode and store in a variable ‘data’
                 data = str.encode(f2.read(), 'utf-8')
@@ -349,6 +382,11 @@ class ProductProductSize(models.Model):
     name = fields.Char("Name", required=True)
     mirakl_id = fields.Char("Mirakl Size ID", required=True)
 
+class ProductProductState(models.Model):
+    _name = "mirakl.product.state"
+
+    name = fields.Char("Name", required=True)
+    mirakl_id = fields.Char("Mirakl ID", required=True)
 
 class ProductProductCategories(models.Model):
     _name = "mirakl.product.categories"
