@@ -615,10 +615,10 @@ class Pricelist(models.Model):
             headers = {"Authorization": str(api_key), "Content-Type": "application/json"}
             if self.is_sync_to_mirakl == True:
                 for rec in self.item_ids:
-                    price = rec.price
-                    lst_price = rec.product_id.lst_price
+                    price = str(rec.price).replace(',', '.')
+                    lst_price = str(rec.product_id.lst_price).replace(',', '.')
                     price_value = Decimal(sub(r'[^\d.]', '', price))
-                    price_value_1 = Decimal(sub(r'[^\d.]', '', str(lst_price)))
+                    price_value_1 = Decimal(sub(r'[^\d.]', '', lst_price))
                     tmp_dict = {
                         "offers": [
                             {
@@ -640,6 +640,7 @@ class Pricelist(models.Model):
                                 "product_id": rec.product_id.barcode,
                                 "product_id_type": "EAN",
                                 "shop_sku": rec.product_id.default_code,
+                                "quantity": rec.product_id.qty_available,
                                 "state_code": "11",
                                 "update_delete": "update"
                             }
@@ -647,4 +648,6 @@ class Pricelist(models.Model):
                     }
                     response = requests.post(url, json.dumps(tmp_dict), headers=headers)
                     if response.status_code == 201 or response.status_code == 200:
-                        pass
+                        _logger.info(
+                            "\nOffer exported Successfully" + str(response.json()))
+
