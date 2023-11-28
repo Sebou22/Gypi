@@ -29,7 +29,7 @@ class ProductTemplate(models.Model):
     mirakl_size_21_id = fields.Many2one('mirakl.product.size', string="SIZE_21")
     mirakl_category_id = fields.Many2one('mirakl.product.categories', string="Mirakl Product Category")
     mirakl_Webcatchline = fields.Text("Webcatchline")
-    mirakl_etat = fields.Many2one('mirakl.product.state', "CHARACTERISTIC_748")
+    mirakl_etat_id = fields.Many2one('mirakl.product.state', "CHARACTERISTIC_748")
     def _create_image_attachment(self):
         for rec in self:
             if rec.image_1920:
@@ -325,7 +325,7 @@ class ProductTemplate(models.Model):
                         producttitlefr = pr.mirakl_product_title_fr
                         size_21 = pr.mirakl_size_21_id.mirakl_id
                         webcatchline = pr.mirakl_Webcatchline
-                        characteristic_748 = pr.mirakl_etat.mirakl_id
+                        characteristic_748 = pr.mirakl_etat_id.mirakl_id
                         writer.writerow(
                             [name, price, sku, ean, main_image, category, product_identifier, description, color,
                              brand_name, PRODUCT_TYPE, Sports, producttitlefr, size_21,webcatchline,characteristic_748])

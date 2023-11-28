@@ -22,7 +22,7 @@
                             <group>
                                 <field name="mirakl_description"/>
                                 <field name="mirakl_Webcatchline"/>
-                                <field name="mirakl_etat"/>
+                                <field name="mirakl_etat_id"/>
                                 <field name="mirakl_category_id"/>
                                 <field name="mirakl_color_id"/>
                                 <field name="mirakl_brand_id"/>
