@@ -6,6 +6,6 @@ access_mirakl_product_sport,odoo_mirakl_integration.mirakl_product_sport,model_m
 access_mirakl_product_size,odoo_mirakl_integration.mirakl_product_size,model_mirakl_product_size,,1,1,1,1
 access_mirakl_product_state,odoo_mirakl_integration.mirakl_product_state,model_mirakl_product_state,,1,1,1,1
 access_mirakl_product_categories,odoo_mirakl_integration.mirakl_product_categories,model_mirakl_product_categories,,1,1,1,1
-
+access_mirakl_logistics_class,odoo_mirakl_integration.mirakl_logistics_class,model_mirakl_logistics_class,,1,1,1,1
 
 

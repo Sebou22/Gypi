@@ -30,6 +30,15 @@ class ProductTemplate(models.Model):
     mirakl_category_id = fields.Many2one('mirakl.product.categories', string="Mirakl Product Category")
     mirakl_Webcatchline = fields.Text("Webcatchline")
     mirakl_etat_id = fields.Many2one('mirakl.product.state', "CHARACTERISTIC_748")
+
+    def _default_logistic_class(self):
+        return self.env['mirakl.logistics.class'].search([('mirakl_id', '=', 'free shipping')], limit=1).id
+
+    mirakl_logistic_class = fields.Many2one('mirakl.logistics.class', "Mirakl Logistic Class",
+                                            default=_default_logistic_class)
+    mirakl_delivery_time = fields.Integer(default=2, string="Mirakl Delivery Time")
+    mirakl_quantity_alert = fields.Integer(default=2, string="Mirakl Quantity alert")
+
     def _create_image_attachment(self):
         for rec in self:
             if rec.image_1920:
@@ -259,7 +268,9 @@ class ProductTemplate(models.Model):
                                             "\nPRODUCT_TYPE Attribute created successfully from MIRAKL" + " Created_id:" + str(
                                                 wheel.id))
 
-
+        if flag == False:
+            raise UserError(
+                _("There are no Attributes to sync from Mirakl."))
 
     def export_all_products_to_mirakl(self):
         Param = self.env['res.config.settings'].sudo().get_values()
@@ -296,7 +307,7 @@ class ProductTemplate(models.Model):
                 writer.writerow(
                     ['mainTitle', 'price', 'sku', 'ean_codes', 'main_image', 'category', 'ProductIdentifier',
                      'longDescription-fr_FR', 'color', 'brandName', 'PRODUCT_TYPE', 'SPORT_29', 'productTitle-fr_FR',
-                     'SIZE_21','webcatchline-fr_FR','CHARACTERISTIC_748'])
+                     'SIZE_21', 'webcatchline-fr_FR', 'CHARACTERISTIC_748'])
                 for pr in non_existing_products:
                     if pr.sync_to_mirakl == True:
                         flag = True
@@ -328,7 +339,8 @@ class ProductTemplate(models.Model):
                         characteristic_748 = pr.mirakl_etat_id.mirakl_id
                         writer.writerow(
                             [name, price, sku, ean, main_image, category, product_identifier, description, color,
-                             brand_name, PRODUCT_TYPE, Sports, producttitlefr, size_21,webcatchline,characteristic_748])
+                             brand_name, PRODUCT_TYPE, Sports, producttitlefr, size_21, webcatchline,
+                             characteristic_748])
             with open('product.csv', 'r', encoding="utf-8") as f2:
                 # file encode and store in a variable ‘data’
                 data = str.encode(f2.read(), 'utf-8')
@@ -346,6 +358,13 @@ class ProductTemplate(models.Model):
                     _logger.info("\nProduct Export Status Code" + str(response.status_code))
                     if response.status_code == 201 or response.status_code == 200:
                         response_data = response.json()
+
+
+class LogisticsClass(models.Model):
+    _name = "mirakl.logistics.class"
+
+    name = fields.Char("Name", required=True)
+    mirakl_id = fields.Char("Mirakl Logistics ID", required=True)
 
 
 class ProductSport(models.Model):
@@ -382,11 +401,13 @@ class ProductProductSize(models.Model):
     name = fields.Char("Name", required=True)
     mirakl_id = fields.Char("Mirakl Size ID", required=True)
 
+
 class ProductProductState(models.Model):
     _name = "mirakl.product.state"
 
     name = fields.Char("Name", required=True)
     mirakl_id = fields.Char("Mirakl ID", required=True)
+
 
 class ProductProductCategories(models.Model):
     _name = "mirakl.product.categories"
@@ -539,6 +560,9 @@ class ResConfigSettings(models.TransientModel):
     property_account_receivable_id = fields.Many2one('account.account', string='Receivable Account')
     property_account_payable_id = fields.Many2one('account.account', string='Payable Account')
 
+    def call_import_offer_attributes(self):
+        self.env['product.pricelist'].sudo().import_offers_attributes()
+
     def call_export_shipping_details(self):
         self.env['stock.picking'].sudo().send_shipping_details_to_mirakl()
 
@@ -644,6 +668,39 @@ class Pricelist(models.Model):
 
     is_sync_to_mirakl = fields.Boolean("Sync to Mirakl")
 
+    def import_offers_attributes(self):
+        Param = self.env['res.config.settings'].sudo().get_values()
+        api_url = Param.get('api_url')
+        api_key = Param.get('api_key')
+        flag = False
+        if api_url and api_key:
+            headers = {"Authorization": str(api_key)}
+            url = api_url + "/api/shipping/logistic_classes"
+            response = requests.get(url, headers=headers)
+            if response.status_code == 201 or response.status_code == 200:
+                response_data = response.json()
+
+                if response_data:
+                    classses = response_data['logistic_classes']
+                    flag = False
+                    for rec in classses:
+                        if rec:
+                            existing = self.env['mirakl.logistics.class'].sudo().search(
+                                [('mirakl_id', '=', rec['code'])])
+                            if not existing:
+                                flag = True
+                                wheel = self.env['mirakl.logistics.class'].sudo().create({
+                                    'mirakl_id': rec['code'],
+                                    'name': rec['label'],
+                                })
+                                self.env.cr.commit()
+                                _logger.info(
+                                    "\nLogistics Class created successfully from MIRAKL" + " Created_id:" + str(
+                                        wheel.id))
+                    if flag == False:
+                        raise UserError(
+                            _("There are no new Logistics Class to sync from Mirakl."))
+
     def export_price_list_to_mirakl(self):
         Param = self.env['res.config.settings'].sudo().get_values()
         api_url = Param.get('api_url')
@@ -680,7 +737,10 @@ class Pricelist(models.Model):
                                 "shop_sku": rec.product_id.default_code,
                                 "quantity": rec.product_id.qty_available,
                                 "state_code": "11",
-                                "update_delete": "update"
+                                "update_delete": "update",
+                                "leadtime_to_ship": rec.product_id.mirakl_delivery_time,
+                                "logistic_class":str(rec.product_id.mirakl_logistic_class.mirakl_id)
+
                             }
                         ]
                     }

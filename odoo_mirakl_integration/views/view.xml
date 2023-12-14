@@ -19,7 +19,7 @@
                 <xpath expr="//notebook" position="inside">
                     <page name="Mirakl" string="Mirakl">
                         <group>
-                            <group>
+                            <group string="Products Configuration">
                                 <field name="mirakl_description"/>
                                 <field name="mirakl_Webcatchline"/>
                                 <field name="mirakl_etat_id"/>
@@ -31,6 +31,11 @@
                                 <field name="main_image_url"/>
                                 <field name="mirakl_product_title_fr"/>
                                 <field name="mirakl_size_21_id"/>
+                            </group>
+                            <group string="Offers Configuration">
+                                <field name="mirakl_logistic_class"/>
+                                <field name="mirakl_delivery_time"/>
+                                <field name="mirakl_quantity_alert"/>
                             </group>
                         </group>
                     </page>
@@ -94,6 +99,45 @@
 
 
         <menuitem id="product_product_categories_2" name="Mirakl Categories Master" action="action_mirakl_categories"
+                  parent="menu_mirakl_config" sequence="21"/>
+
+        <record id="view_mirakl_logistics" model="ir.ui.view">
+            <field name="name">mirakl.logistics.class.form</field>
+            <field name="model">mirakl.logistics.class</field>
+            <field name="arch" type="xml">
+                <form string="Color">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="mirakl_id"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        <record id="view_mirakl_product_logistics" model="ir.ui.view">
+            <field name="name">mirakl.logistics.class.tree</field>
+            <field name="model">mirakl.logistics.class</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="mirakl_id"/>
+                </tree>
+            </field>
+        </record>
+        <record id="action_mirakl_logistics" model="ir.actions.act_window">
+            <field name="name">Mirakl Offer Logistics</field>
+            <field name="res_model">mirakl.logistics.class</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">Click to create a new record</p>
+            </field>
+        </record>
+
+
+        <menuitem id="product_logistics_class_menu" name="Mirakl Logistics Class Master" action="action_mirakl_logistics"
                   parent="menu_mirakl_config" sequence="21"/>
 
 
