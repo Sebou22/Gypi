@@ -14,7 +14,12 @@ from decimal import Decimal
 
 _logger = logging.getLogger(__name__)
 
+class LogisticsClass(models.Model):
+    _name = "mirakl.logistics.class"
 
+    name = fields.Char("Name", required=True)
+    mirakl_id = fields.Char("Mirakl Logistics ID", required=True)
+    
 class ProductTemplate(models.Model):
     _inherit = "product.product"
 
@@ -360,11 +365,6 @@ class ProductTemplate(models.Model):
                         response_data = response.json()
 
 
-class LogisticsClass(models.Model):
-    _name = "mirakl.logistics.class"
-
-    name = fields.Char("Name", required=True)
-    mirakl_id = fields.Char("Mirakl Logistics ID", required=True)
 
 
 class ProductSport(models.Model):
