@@ -31,7 +31,7 @@ class ProductTemplate(models.Model):
     mirakl_brand_id = fields.Many2one('mirakl.product.brand', string="Brand")
     mirakl_natureofwheel_id = fields.Many2one('mirakl.product.naturewheel', string="Product Type")
     mirakl_sport_ids = fields.Many2many('mirakl.product.sport', string="Sports")
-    main_image_url = fields.Char("Mirakl Main Image URL", compute='_create_image_attachment', store=True)
+    main_image_url = fields.Char("Mirakl Main Image URL", compute='_create_image_attachment')
     mirakl_product_title_fr = fields.Char("Product Title fr-FR")
     mirakl_size_21_id = fields.Many2one('mirakl.product.size', string="SIZE_21")
     mirakl_category_id = fields.Many2one('mirakl.product.categories', string="Mirakl Product Category")
@@ -49,13 +49,16 @@ class ProductTemplate(models.Model):
     def _create_image_attachment(self):
         for rec in self:
             if rec.image_1920:
-                image = self.env['ir.attachment'].create(dict(
-                    name=rec.name,
-                    datas=base64.b64encode(rec.image_1920),
-                    mimetype='image/png',
-                    res_model='product.product',
-                    res_id=rec.id,
-                ))
+                image = self.env['ir.attachment'].search(
+                    [('name', '=', rec.name), ('res_model', '=', 'product.product'), ('res_id', '=', rec.id), ('datas', '=', rec.image_1920)], limit=1)
+                if not image:
+                    image = self.env['ir.attachment'].create(dict(
+                        name=rec.name,
+                        datas=base64.b64encode(rec.image_1920),
+                        mimetype='image/png',
+                        res_model='product.product',
+                        res_id=rec.id,
+                    ))
                 self.env.cr.commit()
                 rec.main_image_url = image.local_url
 
@@ -325,7 +328,7 @@ class ProductTemplate(models.Model):
                         if unique_id:
                             split = unique_id.split('?')[1]
                         base_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
-                        image_model_url = '/web/image?model=product.product&id=6295&field=image_1920&'
+                        image_model_url = '/web/image?model=product.product&id=' + str(pr.id) +'&field=image_1920&'
                         if base_url and image_model_url and split:
                             image_url = base_url + image_model_url + split
                         name = pr.name
