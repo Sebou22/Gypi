@@ -14,12 +14,14 @@ from decimal import Decimal
 
 _logger = logging.getLogger(__name__)
 
+
 class LogisticsClass(models.Model):
     _name = "mirakl.logistics.class"
 
     name = fields.Char("Name", required=True)
     mirakl_id = fields.Char("Mirakl Logistics ID", required=True)
-    
+
+
 class ProductTemplate(models.Model):
     _inherit = "product.product"
 
@@ -29,7 +31,7 @@ class ProductTemplate(models.Model):
     mirakl_brand_id = fields.Many2one('mirakl.product.brand', string="Brand")
     mirakl_natureofwheel_id = fields.Many2one('mirakl.product.naturewheel', string="Product Type")
     mirakl_sport_ids = fields.Many2many('mirakl.product.sport', string="Sports")
-    main_image_url = fields.Char("Mirakl Main Image URL", compute='_create_image_attachment')
+    main_image_url = fields.Char("Mirakl Main Image URL", compute='_create_image_attachment', store=True)
     mirakl_product_title_fr = fields.Char("Product Title fr-FR")
     mirakl_size_21_id = fields.Many2one('mirakl.product.size', string="SIZE_21")
     mirakl_category_id = fields.Many2one('mirakl.product.categories', string="Mirakl Product Category")
@@ -313,7 +315,7 @@ class ProductTemplate(models.Model):
                     ['mainTitle', 'price', 'sku', 'ean_codes', 'main_image', 'category', 'ProductIdentifier',
                      'longDescription-fr_FR', 'color', 'brandName', 'PRODUCT_TYPE', 'SPORT_29', 'productTitle-fr_FR',
                      'SIZE_21', 'webcatchline-fr_FR', 'CHARACTERISTIC_748'])
-                for pr in non_existing_products:
+                for pr in products:
                     if pr.sync_to_mirakl == True:
                         flag = True
                         Sports_list = pr.mirakl_sport_ids.mapped('mirakl_id')
@@ -739,7 +741,7 @@ class Pricelist(models.Model):
                                 "state_code": "11",
                                 "update_delete": "update",
                                 "leadtime_to_ship": rec.product_id.mirakl_delivery_time,
-                                "logistic_class":str(rec.product_id.mirakl_logistic_class.mirakl_id)
+                                "logistic_class": str(rec.product_id.mirakl_logistic_class.mirakl_id)
 
                             }
                         ]
@@ -748,4 +750,3 @@ class Pricelist(models.Model):
                     if response.status_code == 201 or response.status_code == 200:
                         _logger.info(
                             "\nOffer exported Successfully" + str(response.json()))
-
