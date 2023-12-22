@@ -31,7 +31,7 @@ class ProductTemplate(models.Model):
     mirakl_brand_id = fields.Many2one('mirakl.product.brand', string="Brand")
     mirakl_natureofwheel_id = fields.Many2one('mirakl.product.naturewheel', string="Product Type")
     mirakl_sport_ids = fields.Many2many('mirakl.product.sport', string="Sports")
-    main_image_url = fields.Char("Mirakl Main Image URL", compute='_create_image_attachment')
+    main_image_url = fields.Char("Mirakl Main Image URL", compute='_create_image_attachment', store=True)
     mirakl_product_title_fr = fields.Char("Product Title fr-FR")
     mirakl_size_21_id = fields.Many2one('mirakl.product.size', string="SIZE_21")
     mirakl_category_id = fields.Many2one('mirakl.product.categories', string="Mirakl Product Category")
